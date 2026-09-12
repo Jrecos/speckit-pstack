@@ -1,12 +1,22 @@
-# pstack for spec-kit - fallback dispatch config.
-# Installed to .specify/extensions/pstack/pstack-config.yml (edit there).
+# pstack for spec-kit - legacy lane selectors, migration input only.
+# Installed to .specify/extensions/pstack/pstack-config.yml.
 #
-# Consulted when a lane's pstack role is unconfigured or pstack is absent.
-# A non-empty selector can be pushed into the pstack role with
-# /speckit.pstack.roles sync; that write is machine-global and gated.
+# Nothing reads this file at runtime. /speckit.pstack.setup-pstack reads it once,
+# while setting up this project, and hands any non-empty value it finds to
+# `pstack-native.py config-migrate` as a starting point for the role map at
+# .specify/extensions/pstack/pstack-models-config.yml. From then on the role map
+# is the only source of a lane's selector. Both files are project-local; no
+# machine-global file is written.
+#
+# roles.verify seeds `interrogate reviewers` and roles.swarm seeds `swarm workers`.
+# More than one legacy swarm selector is ambiguous: migration rejects it instead
+# of silently truncating the list.
+#
+# Your copy may still carry the header comments an older install wrote. They are
+# historical. Only this file's values are read, and only while setting up.
 
 roles:
-  # Fallback model selectors for harnesses with no pstack. Empty = inline.
+  # Legacy lane selectors. Empty means the role map keeps whatever it holds.
   verify: ""
   swarm: ""
 
