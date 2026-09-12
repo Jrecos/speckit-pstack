@@ -88,4 +88,5 @@ Its `sync` mode pushes non-empty yaml selectors into the mapped pstack roles thr
 - Tested on OMP with bash. Commands render for other agents through spec-kit's token resolution. `[P]` batches need a harness with a subagent facility; without one they run serially in-session.
 
 ## Credits
+
 Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto) (Lauren Tan), MIT licensed, part of the [cursor/plugins](https://github.com/cursor/plugins) collection. This extension ports the task-contract subset of that discipline to [spec-kit](https://github.com/github/spec-kit) by GitHub. See [LICENSE](LICENSE).
