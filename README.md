@@ -1,10 +1,29 @@
-# pstack for spec-kit
+<div align="center">
 
-A [spec-kit](https://github.com/github/spec-kit) extension that brings [pstack](https://github.com/cursor/plugins/tree/main/pstack) rigor to the spec-driven workflow. Spec-kit decides what to build; this extension enforces how the tasks get implemented: every task is a verifiable unit with a named proof, independent tasks fan out to subagents, and no task is done until its check passes against the real artifact.
+<img src="assets/banner.png" alt="speckit-pstack" width="100%"/>
+
+**pstack rigor for [spec-kit](https://github.com/github/spec-kit) tasks**
+
+[![spec-kit](https://img.shields.io/badge/spec--kit-%3E%3D1.0.0-blue)](https://github.com/github/spec-kit)
+[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![extension](https://img.shields.io/badge/type-spec--kit%20extension-8250df)](https://github.com/github/spec-kit/blob/main/extensions/EXTENSION-DEVELOPMENT-GUIDE.md)
+![tests](https://img.shields.io/badge/verified-live%20runs-3fb950)
+
+</div>
+
+---
+
+Spec-kit decides what to build. This extension enforces how the work gets implemented: every task is a verifiable unit with a named proof, independent tasks fan out to subagents, and no task is done until its check passes against the real artifact.
+
+<div align="center">
+<img src="assets/workflow.png" alt="The four commands and how they connect" width="100%"/>
+</div>
+
+## Why
+
+A generated task list says what to do, and nothing holds it to a standard of proof. "Works correctly" is not a check. Parallel markers lie, and a completed checkbox is a claim, not evidence. The [pstack](https://github.com/cursor/plugins/tree/main/pstack) discipline fixes this with verifiable units, named acceptance checks, and evidence-gated completion. This extension ports that discipline into spec-kit as four slash commands, so the rigor survives the whole run: contract in, evidence out.
 
 The extension carries the task-contract subset of pstack rigor. Poteto's playbooks and the remaining principles are out of scope.
-
-Adapted from poteto's pstack (MIT). See LICENSE.
 
 ## Install
 
@@ -59,7 +78,6 @@ Two lanes dispatch work. Each lane resolves in this order:
 |---|---|---|---|
 | verify | `interrogate reviewers` | readonly | `/speckit.pstack.verify` check batches |
 | swarm | `swarm workers` | poteto | `/speckit.pstack.implement` `[P]` batches |
-
 The verify lane is a panel role and needs an index. The canonical table lives in `/speckit.pstack.roles`, which also prints the resolved table for this machine.
 
 Its `sync` mode pushes non-empty yaml selectors into the mapped pstack roles through the pstack plugin's own writer, and it never hand-edits the rule file. It prints the full next map, not only the changed lines, plus one line when a panel role shrinks and a `role: <old> -> <new>` line for each change. The write is global to this machine, so it waits for a separate affirmative message before saving. `/setup-pstack` re-derives recommendations and does not restore the prior map, so the printed pre-sync map is the restore reference. A selector outside the approved pool fails validation and nothing is written.
@@ -68,3 +86,6 @@ Its `sync` mode pushes non-empty yaml selectors into the mapped pstack roles thr
 
 - spec-kit >= 1.0.0
 - Tested on OMP with bash. Commands render for other agents through spec-kit's token resolution. `[P]` batches need a harness with a subagent facility; without one they run serially in-session.
+
+## Credits
+Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto) (Lauren Tan), MIT licensed, part of the [cursor/plugins](https://github.com/cursor/plugins) collection. This extension ports the task-contract subset of that discipline to [spec-kit](https://github.com/github/spec-kit) by GitHub. See [LICENSE](LICENSE).
