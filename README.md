@@ -45,7 +45,7 @@ The commands replace the corresponding core steps. Run them instead of the built
 
 ## Verification
 
-`/speckit.pstack.verify` re-runs every checked task's check in this session against the live artifact and unchecks any task whose proof fails or cannot run. A PASS needs a recorded output excerpt plus an answer to the masking question, what would make the check pass while the task is broken. The re-run catches shared-state regressions; it cannot prove a check's criteria were right. A check that cannot run is VOID, and a checked task with no `**Check:**` line takes VOID immediately. VOID Check lines route to the tasks command for repair, because the implement step cannot fix Check text. All PASS is the only green.
+`/speckit.pstack.verify` re-runs every checked task's check in this session against the live artifact and unchecks any task whose proof fails or cannot run. A PASS needs a recorded output excerpt plus an answer to the masking question, what would make the check pass while the task is broken. The re-run catches shared-state regressions; it cannot prove a check's criteria were right. A check that cannot run is VOID, and a checked task with no `**Check:**` line takes VOID immediately. VOID routes by cause: a missing or unusable Check line goes to the tasks command for repair, a gone target or command goes to implement to rebuild the artifact. All PASS is the only green.
 
 ## Roles and dispatch
 
