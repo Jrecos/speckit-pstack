@@ -27,7 +27,7 @@ $ARGUMENTS
 
 ## Steps
 
-1. **Detect pstack.** The pstack plugin is present when its rule file exists (`~/.omp/agent/rules/pstack-models.md`) or the session resolves pstack roles. Check existence only. Never read or parse the file's contents. Its format is closed and parser-validated, and the sync path goes through the device instead. Note whether each mapped role line is configured. An unconfigured lane falls through to the next precedence level.
+1. **Detect pstack.** The pstack plugin is present when its rule file exists (`~/.omp/agent/rules/pstack-models.md`) or the session resolves pstack roles. Check existence only. Never read or parse the file's contents. Its format is closed and parser-validated, and the sync path goes through the device instead. Whether each lane's role line is configured comes from the pstack agent resolution in this session (`pstack_agent` for the mapped role), never from the file. When the session cannot resolve a lane's role (no agent, an error, or a role the session does not know), treat that lane as unconfigured and fall through to the next precedence level.
 
 2. **Read the fallback config.** Load `.specify/extensions/pstack/pstack-config.yml`. Read `roles.verify`, `roles.swarm`, and `parallel.max_workers`. `max_workers` must be an integer of at least 1. When it is not, report it as invalid and use 3. When the file is missing, create it with exactly the content below and say so:
 

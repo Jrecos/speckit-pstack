@@ -35,7 +35,7 @@ $ARGUMENTS
 
    Do not fix code here. A FAIL routes back to `__SPECKIT_COMMAND_PSTACK_IMPLEMENT__`. A VOID routes to `__SPECKIT_COMMAND_PSTACK_TASKS__` to repair the Check line first; implement cannot fix Check text.
 
-4. **Cross-check the surface.** Sibling tasks are the other tasks under the same phase heading. Run the deduplicated union of the phase's checks once. When any task in a phase ended unchecked, re-run every check in that phase; a FAIL from this pass is a new verdict, uncheck that task too and count it in M. This is where a check that passes only because a sibling masks it shows up.
+4. **Cross-check the surface.** Sibling tasks are the other tasks under the same phase heading. Run the deduplicated union of the phase's checks once. When any task in a phase ended unchecked, re-run every check in that phase; a FAIL from this pass is a new verdict, uncheck that task too and count it in M. For each PASS in a phase with an unchecked task, answer in the note line what would make the check pass while the task is broken. A same-artifact re-run catches shared-state regressions; it cannot prove a check's criteria were right, so record that limit with the verdict.
 
 5. **Report.**
 

@@ -31,7 +31,7 @@ For each unchecked task:
    - **Before dispatch.** Every `[P]` task in the batch must carry a `**Writes:**` line naming the files it will touch. Refuse the batch when a Writes line is missing or when any two lists overlap; that is a contract violation, run `__SPECKIT_COMMAND_PSTACK_TASKS__`. Inside a git work tree the tree must be clean before dispatch; stash or commit unrelated work first.
    - **Dispatch.** One subagent per task, at most `parallel.max_workers` concurrent. Each brief carries the task text verbatim, its Check line, its Writes list, the relevant plan.md and spec.md sections, and these rules: run the Check and report PASS or FAIL with a one-line output excerpt; list every file you touched; never edit tasks.md; never commit; touch nothing outside your Writes list.
    - **No subagent facility.** Run the batch's tasks serially in this session under the same rules, and say so in the report.
-   - **Return.** The parent applies every verdict. Check each report's touched-files list against its Writes list and against `git diff --name-only`; a file changed that no report names is a violation. Only then mark passing tasks `[X]` and write their evidence lines yourself.
+   - **Return.** The parent applies every verdict. Check each report's touched-files list against its Writes list and against `git status --short`; a file in the status output that no report names is a violation. Only then mark passing tasks `[X]` and write their evidence lines yourself.
 
 3. **Prove, then check.** A task may be marked `[X]` only after its Check line was actually executed in this run (or by the subagent that owns it) and passed against the real artifact. Record one evidence line under the task:
 
@@ -43,7 +43,7 @@ For each unchecked task:
 
 4. **Boundary crossings get a design minute.** Before implementing a task that adds a public function/interface consumed by another module, settle the caller's usage and signature in one paragraph (caller, types, failure mode) before code. Do not spawn a design process for single-module tasks. For a boundary crossing, record the settled signature (caller, types, failure mode) in the task's note line alongside the evidence.
 
-5. **Commit per unit.** Inside a git work tree, commit after each task or coherent `[P]` batch passes its check, staging exactly the files the task or batch wrote (the union of its Writes lists), never `git add -A` or `git add .`. Use a conventional title naming the task ids. Outside a work tree, skip committing and say so once in the report.
+5. **Commit per unit.** Inside a git work tree, commit after each task or coherent `[P]` batch passes its check, staging exactly the task or batch's own files: the union of its Writes lists plus the tasks.md lines this parent just wrote (marks and evidence). Never stage by glob (`git add -A`, `git add .`). Use a conventional title naming the task ids. Outside a work tree, skip committing and say so once in the report.
 
 ## Stop conditions
 
