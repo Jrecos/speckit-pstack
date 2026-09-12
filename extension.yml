@@ -4,7 +4,7 @@ extension:
   id: pstack
   name: "Pstack Workflow"
   version: "0.1.0"
-  description: "Enforces pstack rigor on spec-kit: verifiable-unit tasks, principle-driven implementation, evidence-gated verification, subagent fan-out"
+  description: "Task-contract rigor for spec-kit: verifiable-unit tasks with named acceptance checks, disjoint-write parallel batches, evidence-gated completion, independent re-proof"
   author: jreco
   repository: https://github.com/jreco/speckit-pstack
   license: MIT
@@ -16,13 +16,13 @@ provides:
   commands:
     - name: speckit.pstack.roles
       file: commands/speckit.pstack.roles.md
-      description: "Resolve pstack dispatch lanes: plugin roles, yaml fallback, inline; sync via the pstack writer"
+      description: "Resolve pstack dispatch lanes (verify, swarm): pstack roles, yaml fallback, inline; gated sync via the pstack writer"
     - name: speckit.pstack.tasks
       file: commands/speckit.pstack.tasks.md
-      description: "Apply the pstack task contract to tasks.md: verifiable units, data-shape-first, honest parallel markers"
+      description: "Apply the pstack task contract to tasks.md: verifiable units, data-shape-first, honest parallel markers with declared writes"
     - name: speckit.pstack.implement
       file: commands/speckit.pstack.implement.md
-      description: "Implement tasks.md with pstack rigor: data shape first, subagent fan-out for independent tasks, evidence-gated completion"
+      description: "Implement tasks.md with pstack rigor: shape first, disjoint-write [P] batches, parent-applied verdicts, evidence-gated completion"
     - name: speckit.pstack.verify
       file: commands/speckit.pstack.verify.md
       description: "Re-prove every completed task from live artifacts and uncheck phantom completions"
