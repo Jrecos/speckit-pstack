@@ -1,0 +1,3361 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/cursor/plugins",
+  "commit": "889ec4b68fa5aab0e867dad71ec3fdf386ae48f3",
+  "version": "0.2.0",
+  "generated_by": "tools/import_upstream.py",
+  "inventory": "tools/source-inventory.json",
+  "counts": {
+    "sources": 162,
+    "upstream": 158,
+    "companions": 4,
+    "commands": 47,
+    "playbooks": 23,
+    "agents": 2,
+    "dormant_skills": 3,
+    "principles": 23
+  },
+  "files": [
+    {
+      "source": "pstack/.cursor-plugin/plugin.json",
+      "source_mode": "100644",
+      "source_blob": "19402321c3ac7272b941757838c24b1694c03545",
+      "target": "resources/upstream/cursor-plugin.json",
+      "target_sha256": "dd2170282d5b3c0e4cba33948b5294bb58ab561bee5de0011e7713c70f28d6bd",
+      "classification": "provenance",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/.gitignore",
+      "source_mode": "100644",
+      "source_blob": "aafcb345668bd80cbb256b066898d4df8988da0e",
+      "target": "resources/upstream/pstack.gitignore",
+      "target_sha256": "8ffe9de56bd30c1a95cd945262d6e3ac355ada4111551dde41f67851b9f1fc55",
+      "classification": "provenance",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/LICENSE",
+      "source_mode": "100644",
+      "source_blob": "6b5400237fdf6545be0b8fae370d6f2fcff8fb25",
+      "target": "resources/LICENSE",
+      "target_sha256": "bc957ca6bee02792566a1a028d105e02e247c6e77cf057061674273da77b200e",
+      "classification": "asset",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/README.md",
+      "source_mode": "100644",
+      "source_blob": "6b77b0087d5fe0c39164fcac65a2731c22864216",
+      "target": "resources/upstream/README.md",
+      "target_sha256": "9a323a1227b60f8914f96fbb01f8f152d44a9af3e98a9d87287a1984c052c160",
+      "classification": "provenance",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/agents/comment-sicko.md",
+      "source_mode": "100644",
+      "source_blob": "9a688b8c5b5734ee80f782d4616a78c4c59b0946",
+      "target": "resources/agents/comment-sicko.md",
+      "target_sha256": "2a1f6dcacede417b8498c0b1d4e53e81146859d269108ed82e0f2c55a4dd1604",
+      "classification": "agent",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/agents/poteto-agent.md",
+      "source_mode": "100644",
+      "source_blob": "91d53b85918f842c703758e66352b956ee80feb7",
+      "target": "resources/agents/poteto-agent.md",
+      "target_sha256": "417e61ddfa11648f25a155a512ecefb693e39e11d9594397c152d141aebca2a8",
+      "classification": "agent",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/agents/poteto-agent.md",
+          "reason": "the agent contract is read as a resource and mounted from the role map"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/assets/logo.png",
+      "source_mode": "100644",
+      "source_blob": "3754e87cb0e1362f17428bc84c661166ee145156",
+      "target": "resources/assets/logo.png",
+      "target_sha256": "672f6791589ef758b0ced2c4c477913fa2758623c438e265639a0d539ce90695",
+      "classification": "asset",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/FOR_AGENTS.md",
+      "source_mode": "100644",
+      "source_blob": "e732156e9b88b463e4a40c0f51596bca4aedcdb4",
+      "target": "resources/automations/benny/FOR_AGENTS.md",
+      "target_sha256": "af602e274b368bcae5d98aa2e72b066331603419b80d845e7ad11c771574012d",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/automations/benny/FOR_AGENTS.md",
+          "reason": "the dormant pack activates through Spec Kit and hands jobs to a supplied native scheduler"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/README.md",
+      "source_mode": "100644",
+      "source_blob": "76804c8c566aae1a70734725416ae2f251a7ae30",
+      "target": "resources/automations/benny/README.md",
+      "target_sha256": "65a6691792b26ff3ab49ba129de261c60fdc8e6418cb42c3a98b77e51d9f8c4d",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "benny gives you two cursor automations for slack issue reports.",
+          "to": "benny gives you two scheduled agents for slack issue reports, on a host that provides scheduling.",
+          "reason": "the runtime is the host's scheduler where one exists"
+        },
+        {
+          "op": "edit",
+          "from": "1. point cursor at [`FOR_AGENTS.md`](./FOR_AGENTS.md) and name the target repository.",
+          "to": "1. point the host agent at [`FOR_AGENTS.md`](./FOR_AGENTS.md) and name the target repository.",
+          "reason": "the host agent is what reads the pack entry point"
+        },
+        {
+          "op": "edit",
+          "from": "2. let setup merge this whole directory into the target at `.cursor/automations/benny/`.",
+          "to": "2. let setup merge this whole directory into the target at `.specify/pstack/automations/benny/`.",
+          "reason": "the pack installs into a project-owned path"
+        },
+        {
+          "op": "edit",
+          "from": "3. let setup enable pstack in the target repository's `.cursor/settings.json` for shared dependencies:",
+          "to": "3. let setup install the pstack spec-kit extension in the target repository (`specify extension add pstack`) for shared dependencies.",
+          "reason": "activation is the installed Spec Kit extension"
+        },
+        {
+          "op": "edit",
+          "from": "4. keep user-owned configuration outside the copied pack, for example in `.cursor/benny/`.",
+          "to": "4. keep user-owned configuration outside the copied pack, for example in `.specify/pstack/benny/`.",
+          "reason": "user-owned data stays outside the copied pack"
+        },
+        {
+          "op": "edit",
+          "from": "5. commit `.cursor/settings.json`, `.cursor/automations/benny/`, and any secret-free configuration before enabling either automation.",
+          "to": "5. commit `.specify/pstack/automations/benny/` and any secret-free configuration before enabling either job.",
+          "reason": "the committed artifacts are the pack and its config"
+        },
+        {
+          "op": "edit",
+          "from": "6. review each new automation draft or update existing automations in their editors. then send a harmless test report and verify every source-channel post stays in the original thread.",
+          "to": "6. review each new scheduler job request or update the existing jobs through the supplied scheduler. then use its run-once operation with a harmless test report and verify every source-channel post stays in the original thread.",
+          "reason": "job review and canary execution use the supplied scheduler rather than an editor"
+        },
+        {
+          "op": "edit",
+          "from": "```json\n{\n\t\"plugins\": {\n\t\t\"pstack\": { \"enabled\": true }\n\t}\n}\n```\n\n",
+          "to": "",
+          "reason": "pstack activation is the native Spec Kit install, not an editor settings fragment"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/reproduce-and-fix-issues/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "effa5f0a38d2cfe7d948a71ff51827e2e2017257",
+      "target": "resources/automations/benny/skills/reproduce-and-fix-issues/SKILL.md",
+      "target_sha256": "11ae2dc58724ba1eee1f91c3f107bcadf6152260ca064db5cf10ba0787082339",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Prefer configured Cursor Slack actions. Use `BENNY_SLACK_BOT_TOKEN` only when the user configured it for a narrow missing capability such as editing this one status message. Never expose the token to a worker.",
+          "to": "Prefer the Slack tool the user configured. Use `BENNY_SLACK_BOT_TOKEN` only when the user configured it, for a narrow missing capability such as editing this one status message, and read it from the host's secret store. Never expose the token to a worker.",
+          "reason": "Slack access is user-supplied and its credential stays server-side"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/reproduce-and-fix-issues/references/control-adapter.md",
+      "source_mode": "100644",
+      "source_blob": "3399491eddbc458f3a7ceb6fd62b8f89266b07ef",
+      "target": "resources/automations/benny/skills/reproduce-and-fix-issues/references/control-adapter.md",
+      "target_sha256": "5536cb18b4e969e55deeb51e722a7276e5ea0cdecf491c45e53e4163953edc0b",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Copy and fill [`feature-map.example.md`](./feature-map.example.md) outside `.cursor/automations/benny/` instead of editing the copied example.",
+          "to": "Copy and fill [`feature-map.example.md`](./feature-map.example.md) outside `.specify/pstack/automations/benny/` instead of editing the copied example.",
+          "reason": "user-owned copies live outside the pack"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/reproduce-and-fix-issues/references/feature-map.example.md",
+      "source_mode": "100644",
+      "source_blob": "620ddedba3c13d603974b1d78754e36946dacf81",
+      "target": "resources/automations/benny/skills/reproduce-and-fix-issues/references/feature-map.example.md",
+      "target_sha256": "1effa3558f8a692d98b8a688854a30bfdbf18a0dceec31c20688be4924551d24",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Copy this file outside `.cursor/automations/benny/`, for example to `.cursor/benny/feature-map.md`, and set `control.feature_map_path` to the copy.",
+          "to": "Copy this file outside `.specify/pstack/automations/benny/`, for example to `.specify/pstack/benny/feature-map.md`, and set `control.feature_map_path` to the copy.",
+          "reason": "user-owned copies live outside the pack"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/reproduce-and-fix-issues/references/verify-existing-fix.md",
+      "source_mode": "100644",
+      "source_blob": "e3cda3c06a48432fd932b32318ade4e6178ef4ed",
+      "target": "resources/automations/benny/skills/reproduce-and-fix-issues/references/verify-existing-fix.md",
+      "target_sha256": "c90eae00abcdec71a58fa8d60f2c495b082a526ad50b8e8e494837609129bf29",
+      "classification": "dormant",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/setup-benny/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "b05c26f4d4a39c16559f5ef2bbdd380adc923fda",
+      "target": "resources/automations/benny/skills/setup-benny/SKILL.md",
+      "target_sha256": "df557e1e5ef23435227b37c4fc19c85a4e8b7c7124cdbf9da04355d44c3b2177",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/automations/benny/skills/setup-benny/SKILL.md",
+          "reason": "scheduler creation and update use a supplied native runner instead of Cursor automation"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/triage-issue-reports/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "d691672d00fb8f8f07fc17290d00ae49d1fd119b",
+      "target": "resources/automations/benny/skills/triage-issue-reports/SKILL.md",
+      "target_sha256": "216a758b8711e64d19a55e6032c496527daac6364d010611040f3c04ef1a448f",
+      "classification": "dormant",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/skills/triage-issue-reports/references/routing.example.md",
+      "source_mode": "100644",
+      "source_blob": "d71aea768c7d9452270ca4f11091a47e5750038c",
+      "target": "resources/automations/benny/skills/triage-issue-reports/references/routing.example.md",
+      "target_sha256": "ca8c096454c97d2b2a3e10b9fde98b83226cc8fdc3ffff5d625eacbfb912f90d",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Copy this file outside `.cursor/automations/benny/`, for example to `.cursor/benny/routing.md`, and replace every placeholder.",
+          "to": "Copy this file outside `.specify/pstack/automations/benny/`, for example to `.specify/pstack/benny/routing.md`, and replace every placeholder.",
+          "reason": "user-owned copies live outside the pack"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/templates/configuration.example.yaml",
+      "source_mode": "100644",
+      "source_blob": "8616f5fcced0ac57964467dd537a6ba80560a271",
+      "target": "resources/automations/benny/templates/configuration.example.yaml",
+      "target_sha256": "f40b62fbb6f35af72fc94be9e082e4317b82e37dbef91354d5038ee52c355fb3",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "  map_path: \".cursor/benny/routing.md\"",
+          "to": "  map_path: \".specify/pstack/benny/routing.md\"",
+          "reason": "benny user configuration is project-owned"
+        },
+        {
+          "op": "edit",
+          "from": "  feature_map_path: \".cursor/benny/feature-map.md\"",
+          "to": "  feature_map_path: \".specify/pstack/benny/feature-map.md\"",
+          "reason": "benny user configuration is project-owned"
+        },
+        {
+          "op": "edit",
+          "from": "  prefer_cursor_actions: true",
+          "to": "  prefer_host_actions: true",
+          "reason": "the key names the host's configured actions, not a Cursor-specific surface"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/templates/reproduce-automation-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "5c66c922d69f7323d0c78461480baaf45d7b1284",
+      "target": "resources/automations/benny/templates/reproduce-automation-prompt.md",
+      "target_sha256": "ec513076f5d1546fb40b6384407a0197d7e34124151e971562d88feecb59bbc0",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Read and follow `.cursor/automations/benny/skills/reproduce-and-fix-issues/SKILL.md` for this run.",
+          "to": "Read and follow `.specify/pstack/automations/benny/skills/reproduce-and-fix-issues/SKILL.md` for this run.",
+          "reason": "the operational files are in the project-owned pack path"
+        },
+        {
+          "op": "edit",
+          "from": "> Source material for the copied setup workflow. Paraphrase this intent into a built-in `automate` draft after `automate` confirms that the copied pack is committed in the repository where the automation will run.",
+          "to": "> Source material for the copied setup workflow. Turn this intent into a job request for the supplied scheduler only after proving the pack is committed in the repository and revision the job will run.",
+          "reason": "job creation uses the supplied native scheduler rather than a nonexistent built-in"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/automations/benny/templates/triage-automation-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "939e5e15c09f57d17cee00c9ed58b3679a268e0f",
+      "target": "resources/automations/benny/templates/triage-automation-prompt.md",
+      "target_sha256": "3070624dc7b5cf9d2174f7c0bf053a6e425f1e382116153e0cd865fbe501f1f0",
+      "classification": "dormant",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Read and follow `.cursor/automations/benny/skills/triage-issue-reports/SKILL.md` for this run.",
+          "to": "Read and follow `.specify/pstack/automations/benny/skills/triage-issue-reports/SKILL.md` for this run.",
+          "reason": "the operational files are in the project-owned pack path"
+        },
+        {
+          "op": "edit",
+          "from": "> Source material for the copied setup workflow. Paraphrase this intent into a built-in `automate` draft after `automate` confirms that the copied pack is committed in the repository where the automation will run.",
+          "to": "> Source material for the copied setup workflow. Turn this intent into a job request for the supplied scheduler only after proving the pack is committed in the repository and revision the job will run.",
+          "reason": "job creation uses the supplied native scheduler rather than a nonexistent built-in"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/01-setup.md",
+      "source_mode": "100644",
+      "source_blob": "21dc4a4fc837ec2ee29c8edb94c9169008fe886f",
+      "target": "resources/docs/guide/01-setup.md",
+      "target_sha256": "ee525e6bb7c7cb06184199b816cf103ba6e52867770ce8386548bea5182006e1",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "In this page you install the plugin, pick which models pstack uses, and run your first task.",
+          "to": "In this page you install the extension, pick which models pstack uses, and run your first task.",
+          "reason": "pstack installs through the native Spec Kit extension command"
+        },
+        {
+          "op": "edit",
+          "from": "## Install the plugin",
+          "to": "## Install the extension",
+          "reason": "pstack installs as a Spec Kit extension"
+        },
+        {
+          "op": "edit",
+          "from": "In a Cursor chat, run:",
+          "to": "In a terminal at the project root, run:",
+          "reason": "installation uses the native Spec Kit CLI"
+        },
+        {
+          "op": "edit",
+          "from": "```text\n/add-plugin pstack\n```",
+          "to": "```bash\nspecify extension add pstack\n```",
+          "reason": "installation uses the native Spec Kit CLI instead of a Cursor command"
+        },
+        {
+          "op": "edit",
+          "from": "Cursor confirms the plugin is installed.",
+          "to": "Confirm the extension with `specify extension list`.",
+          "reason": "installation is a Spec Kit extension install"
+        },
+        {
+          "op": "edit",
+          "from": "You only override what you care about. A role with no line in the rule keeps the skill's default. To restore a default later, delete that role's line, or just run `/setup-pstack` again.",
+          "to": "Every one of the 17 roles must have a non-empty selector list: `feature, refactoring`; `bug-fix`; `perf-issue`; `hillclimb`; `judgment and prose`; `hardest tasks`; `how explorer`; `how explainer`; `why investigators`; `why synthesizer`; `reflect tooling`; `reflect judgment, divergent, synthesizer`; `arena runners`; `arena cross-judge pool`; `swarm workers`; `architect runners`; and `interrogate reviewers`. A missing or empty role is an error, never a request for a hidden default. Most panel entries spawn one worker each; `arena cross-judge pool` selects exactly one judge from a different model family. To inherit the current model, set `inherit-parent` or `auto` explicitly. Run `/setup-pstack` again to change the map.",
+          "reason": "the native role map is strict and has no per-skill fallback defaults"
+        },
+        {
+          "op": "edit",
+          "from": "After setup, start a new chat. The model rule applies to new sessions.",
+          "to": "Every dispatch reads the saved role map, so changes apply without starting a new chat.",
+          "reason": "the project role map is resolved for each native dispatch"
+        },
+        {
+          "op": "edit",
+          "from": "Watch the todo list. Its first items are the matched playbook's steps copied in, the Feature playbook for this prompt. If `/poteto-mode` skips a step, the step stays in the list with `skip: <reason>`, so you can see what it chose not to do.",
+          "to": "Watch the ordered checklist. Its first items are the matched Feature playbook steps. If `/poteto-mode` skips one, it stays in the checklist with `skip: <reason>`.",
+          "reason": "the visible contract is an ordered checklist, not a host-specific todo device"
+        },
+        {
+          "op": "edit",
+          "from": "You might be wondering what happens if you use Auto. Set a role to `inherit-parent` or `auto` and pstack omits the subagent `model` field, so the subagent inherits your parent chat model. Both values mean the same thing, and neither is a model slug. For a panel role the value is a list, and one subagent runs per entry, so the list length sets the panel size. Setup also configures `swarm workers`, the default model for every `/swarm` worker unless a race names a model for each arm.",
+          "to": "You might be wondering what happens if you use Auto. Set a role to `inherit-parent` or `auto` and pstack omits the subagent `model` field, so the subagent inherits your parent chat model. Both values mean the same thing, and neither is a model slug. For most panel roles, one subagent runs per configured entry. `arena cross-judge pool` is the exception: the arena selects exactly one configured judge from a different model family. Setup also configures `swarm workers`, the default model for every `/swarm` worker; a model race may override it per arm, and only with a concrete model already in `pool`.",
+          "reason": "the setup guide states the one-judge cross-family arena contract"
+        },
+        {
+          "op": "edit",
+          "from": "Say yes and it writes `.cursor/skills/verify-<app>/`, a project-local skill that teaches agents to drive your app the way a user does.",
+          "to": "Say yes and it writes `verify-<app>/` into a project skill directory your host discovers, the list `skills_dirs` in the `pstack-native.py paths` report, a project-local skill that teaches agents to drive your app the way a user does.",
+          "reason": "the guide points at the one host-discovered skill directory instead of a fixed project copy"
+        },
+        {
+          "op": "rewrite",
+          "from": "~/\\.cursor/rules/pstack-models\\.mdc",
+          "to": ".specify/extensions/pstack/pstack-models-config.yml",
+          "reason": "role map is project-local, not a machine-global Cursor rule file"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/02-poteto-mode.md",
+      "source_mode": "100644",
+      "source_blob": "403cbe8cc9dbc5204c6f9399abcced228f8e76f7",
+      "target": "resources/docs/guide/02-poteto-mode.md",
+      "target_sha256": "b137d14e2ba03812dce8a5b99f0ea5efe852cc80450141731011475c7e4ae2e1",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/03-understand.md",
+      "source_mode": "100644",
+      "source_blob": "af985988c2ac9babbabf6e9b4447c2f22a346ee7",
+      "target": "resources/docs/guide/03-understand.md",
+      "target_sha256": "e7376b2b0f75e5d861f924bcc13cef1824115eff36430c99858b89ab5248c460",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/04-design.md",
+      "source_mode": "100644",
+      "source_blob": "681d39cff22438b4feb3d40a8d97017af026bc3d",
+      "target": "resources/docs/guide/04-design.md",
+      "target_sha256": "4c7acd290c1947373edca405017360518ba09417e7248302fd65f9ddc8d05abb",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/05-build-and-clean.md",
+      "source_mode": "100644",
+      "source_blob": "c38bc44a39fe5e6ace2cd228f631c7eb57ecccf3",
+      "target": "resources/docs/guide/05-build-and-clean.md",
+      "target_sha256": "005d7b69c9fceb73515da1b38c5ba88e461364cc55ab30fe0eeb1a0edcf7a324",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "The [Opening a PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) runs `/deslop` on the diff before each commit",
+          "to": "The [Opening a PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) applies the packaged deslop reference to the diff before each commit",
+          "reason": "deslop is a packaged reference, not a registered command"
+        },
+        {
+          "op": "edit",
+          "from": "`/deslop` ships in the `cursor-team-kit` plugin, not in pstack.",
+          "to": "The deslop reference ships inside this extension, at `.specify/extensions/pstack/resources/dependencies/deslop.md`.",
+          "reason": "the dependency is packaged with the extension instead of a separate Cursor plugin"
+        },
+        {
+          "op": "edit",
+          "from": "[`typescript-best-practices`](../../skills/typescript-best-practices/SKILL.md) has no slash command in your workflow. It loads whenever the agent touches a `.ts` or `.tsx` file and turns the type-system principles into concrete rules: discriminated unions, `unknown` at boundaries, exhaustive variants, schema-derived types.",
+          "to": "[`typescript-best-practices`](../../skills/typescript-best-practices/SKILL.md) preserves its `.ts`/`.tsx` path metadata for hosts that honor it. Hosts are not assumed to do so: Poteto mode explicitly loads the packaged `type-system-discipline` principle and then this skill before reading or editing TypeScript.",
+          "reason": "the guide states the metadata caveat and the explicit TypeScript trigger"
+        },
+        {
+          "op": "edit",
+          "from": "The division of labor is worth keeping straight. `/deslop` cleans slop out of the code, `/unslop` cleans it out of prose, and `/no-comments` hands the comments to a reviewer who didn't write them.",
+          "to": "The division of labor is worth keeping straight. The packaged deslop reference cleans slop out of code, `/unslop` cleans prose, and `/no-comments` hands comments to a reviewer who did not write them.",
+          "reason": "deslop is a packaged reference, not a registered command"
+        },
+        {
+          "op": "edit",
+          "from": "## Let the TypeScript rules load themselves",
+          "to": "## Load the TypeScript rules reliably",
+          "reason": "path metadata is advisory, so the active mode also has an explicit trigger"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/06-verify-and-ship.md",
+      "source_mode": "100644",
+      "source_blob": "d96c76612c647bfd33270d510440991946c508ed",
+      "target": "resources/docs/guide/06-verify-and-ship.md",
+      "target_sha256": "81e12ab4a0229e45f81a1a1c56a1d3dd7c1a08d997e38b05ee04e70d9716a42a",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "It writes `.cursor/skills/verify-<app>/`, agent-facing instructions with exact Launch, Doctor, Drive, Evidence, and Cleanup sections,",
+          "to": "It writes `verify-<app>/` into a project skill directory your host discovers (`skills_dirs` from `pstack-native.py paths`), agent-facing instructions with exact Launch, Doctor, Drive, Evidence, and Cleanup sections,",
+          "reason": "the guide points at the one host-discovered skill directory instead of a fixed project copy"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/07-overnight.md",
+      "source_mode": "100644",
+      "source_blob": "43c46529c0a468065854dd9c65bb57f1c0334705",
+      "target": "resources/docs/guide/07-overnight.md",
+      "target_sha256": "9011698f0bf135257e9e87f2218d9356792f2918cf80adf4d0b705673d088c50",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- `/loop` is Cursor's built-in wake mechanism, not a pstack skill. The [Autonomous run playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) uses it to re-check the finish condition on events or a heartbeat.",
+          "to": "- The wake mechanism is whatever the host provides: `pstack-native.py capability-report` reports it. The [Autonomous run playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) re-checks the finish condition on events or a heartbeat where a supervised loop exists, and one pass per turn where it does not.",
+          "reason": "the durable wakeup is a checked host capability, not a Cursor built-in command"
+        },
+        {
+          "op": "edit",
+          "from": "Give `/loop` a predicate that can pass or fail.",
+          "to": "Give the run a predicate that can pass or fail.",
+          "reason": "the predicate belongs to the run, not a specific host command"
+        },
+        {
+          "op": "edit",
+          "from": "/loop until done. if you're truly stuck after a few hours, stop and write up why.",
+          "to": "run until it is done. if you're truly stuck after a few hours, stop and write up why.",
+          "reason": "the overnight instruction no longer names a Cursor command"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/08-principles.md",
+      "source_mode": "100644",
+      "source_blob": "be1102d678a9748b396f829e29fb3dfdd60ba205",
+      "target": "resources/docs/guide/08-principles.md",
+      "target_sha256": "c5aa340fe256325ba04a2e31c874bc33f8c29c943bd5ed9a7828d2540274a1da",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/09-make-it-yours.md",
+      "source_mode": "100644",
+      "source_blob": "6723069b5108f586575fe5353272ee6567a49b02",
+      "target": "resources/docs/guide/09-make-it-yours.md",
+      "target_sha256": "ed2acb1c0dfa8e98b9a91e94eedbbf246420403d2da366bb12200eacd4510ffa",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "It drafts `.cursor/skills/<your-name>-mode/SKILL.md` through Cursor's built-in `create-skill` flow,",
+          "to": "It drafts `<your-name>-mode/SKILL.md` into a project skill directory your host discovers (`skills_dirs` from `pstack-native.py paths`) through the packaged create-skill guide's flow,",
+          "reason": "project skills are project-owned and the authoring guide ships with the extension"
+        },
+        {
+          "op": "edit",
+          "from": "which routes through Cursor's built-in `create-skill`,",
+          "to": "which routes through the packaged create-skill guide,",
+          "reason": "the authoring guide ships with the extension"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/10-recipes-and-pitfalls.md",
+      "source_mode": "100644",
+      "source_blob": "da0af5e6f7984d24818ef1cd28f518d0014da788",
+      "target": "resources/docs/guide/10-recipes-and-pitfalls.md",
+      "target_sha256": "9bb80e3cb6cdd91c94d5c37bf883c5384d31bb34480c99b7e29f6ed58d74da5c",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- **A vague finish condition.** \"make it better\" gives `/loop` nothing to check.",
+          "to": "- **A vague finish condition.** \"make it better\" gives a long run nothing to check.",
+          "reason": "the finish condition belongs to the run, not a host command"
+        },
+        {
+          "op": "edit",
+          "from": "with pinned cards reading /how, /tdd, and /loop above the counter.",
+          "to": "with pinned cards reading /how, /tdd, and the run instruction above the counter.",
+          "reason": "image alt text no longer names a Cursor command"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/README.md",
+      "source_mode": "100644",
+      "source_blob": "b8b1b079456d6f2b2c536937d21180ba5c21f733",
+      "target": "resources/docs/guide/README.md",
+      "target_sha256": "a4582c06a0bd30c8a3066e9f12c1e7153a9f49585acf845be8224bfab074071e",
+      "classification": "doc",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Install the plugin and pick your models.",
+          "to": "Install the Spec Kit extension and pick your models.",
+          "reason": "the guide describes the native Spec Kit package"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/design.jpg",
+      "source_mode": "100644",
+      "source_blob": "f86909437f8b5a83da3cba7bc35a018c9d4887c8",
+      "target": "resources/docs/guide/images/design.jpg",
+      "target_sha256": "b8ed07427f6a0c37dd8ba97961fc0eb5071efeee6c4a230648bdb7547f6f2a8f",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/overnight.jpg",
+      "source_mode": "100644",
+      "source_blob": "d64e1c63066c9f088da909160f5e136049e9a512",
+      "target": "resources/docs/guide/images/overnight.jpg",
+      "target_sha256": "4b4405e4df8925c5b3abbe702f681af0f3b1f5f32271b599f95717f578f1a0c8",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/recipes.jpg",
+      "source_mode": "100644",
+      "source_blob": "69fe992fdb9fb8e7baacc144ea140f9c93b262fb",
+      "target": "resources/docs/guide/images/recipes.jpg",
+      "target_sha256": "9fa2d51b476635712737795ddef81806efaa0086bb3bfa9f9f45695d9ab0f8e8",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/router.jpg",
+      "source_mode": "100644",
+      "source_blob": "c8fba6a266505caf406d5185d7a4cc6e34be98a4",
+      "target": "resources/docs/guide/images/router.jpg",
+      "target_sha256": "525843055a4efd2b10acc50a8652fd02b0834ea733a8a2f895c1eb89036017da",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/understanding.jpg",
+      "source_mode": "100644",
+      "source_blob": "bb1b1ac15dd11da9ad047d203049a1a24abb2b46",
+      "target": "resources/docs/guide/images/understanding.jpg",
+      "target_sha256": "b60587e9a9bbe2550e93be9819cf0cd4acf77d90fac769a0c43d82bd8e34e279",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/docs/guide/images/verification.jpg",
+      "source_mode": "100644",
+      "source_blob": "a252ae0b5e14cb6fcef2e3b806bbd66316242446",
+      "target": "resources/docs/guide/images/verification.jpg",
+      "target_sha256": "2a76b52007a1cd2866ba67fd47d7d9ef3e1118bb5a09c4665eee8c3f161bd09a",
+      "classification": "doc",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/architect/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "923ffc55e8f3f760c80b7ff8a9992fd848c56614",
+      "target": "resources/skills/architect/SKILL.md",
+      "target_sha256": "10514a3b3068524a86b86cce0689e23858f06804adfc44f3f5157cfec723e420",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Use your configured architect runners (defaults `claude-fable-5-1-thinking-max`, `gpt-5.6-sol-max`, `grok-4.6-fast-xhigh`, `claude-opus-5-thinking-xhigh`).",
+          "to": "Resolve role `architect runners` from the project role map (`pstack-native.py role-plan --role \"architect runners\"`), one runner per configured entry, duplicates preserved. An empty role is a setup error, not a reason to pick a model yourself.",
+          "reason": "runner models come from the project role map, not vendor defaults"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.architect.md"
+    },
+    {
+      "source": "pstack/skills/architect/references/design-red-flags.md",
+      "source_mode": "100644",
+      "source_blob": "32cb24083f308fd67ab4c431b44e1d7d3563435a",
+      "target": "resources/skills/architect/references/design-red-flags.md",
+      "target_sha256": "905066f9bbac81c573c2b325be47751d2c0f9325e0a0772bd4384e82dafe9336",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/architect/references/rationale-template.md",
+      "source_mode": "100644",
+      "source_blob": "a10f77f59510c532cd909faaf3bfeee5ffbfd588",
+      "target": "resources/skills/architect/references/rationale-template.md",
+      "target_sha256": "0cedfccdc7b47fc881febd5a8293eecbc542c20f8df825639904a8102d2eb5d3",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/architect/references/runner-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "580ec47a5df4259a6a9ace5c452e33092053bb90",
+      "target": "resources/skills/architect/references/runner-prompt.md",
+      "target_sha256": "983bf2820cc14ed8ecab6e448e1033e5cfe6031967d0a9287b48c7fa9c33d925",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/arena/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "d1aec509a2b3aeee58b88c25eb6933db57d4a029",
+      "target": "resources/skills/arena/SKILL.md",
+      "target_sha256": "484253ab062bac961d109af738e16cea0a0c5eb6a0d470a9afc9b8cd1f22556d",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Spawn all N subagents in one message with `run_in_background: true`, each with the task,",
+          "to": "Spawn all N subagents in one batch, dispatched in the background, each with the task,",
+          "reason": "the arena's fan-out sentence must read as one instruction after background dispatch becomes host-neutral"
+        },
+        {
+          "op": "edit",
+          "from": "3. Pick the runners. Use `arena runners` from `~/.cursor/rules/pstack-models.mdc` when present. Otherwise default to one each on `claude-fable-5-1-thinking-max`, `gpt-5.6-sol-max`, `grok-4.6-fast-xhigh`, `claude-opus-5-thinking-xhigh`. Spawn more when the arena covers multiple design directions. Same model N times when the work is generation-bound rather than judgment-sensitive.",
+          "to": "3. Pick the runners. Resolve role `arena runners` from the project role map (`pstack-native.py role-plan --role \"arena runners\"`), one runner per configured entry, duplicates preserved. An empty role is a setup error, not a reason to pick a model yourself. Spawn more when the arena covers multiple design directions. Same model N times when the work is generation-bound rather than judgment-sensitive.",
+          "reason": "runner models come from the project role map, not vendor defaults"
+        },
+        {
+          "op": "edit",
+          "from": "After all Phase B candidates complete, choose one model from the `arena cross-judge pool` in `~/.cursor/rules/pstack-models.mdc` when present. Otherwise use `claude-fable-5-1-thinking-max`, `gpt-5.6-sol-max`, `grok-4.6-fast-xhigh`, `claude-opus-5-thinking-xhigh`. Prefer a different model family from the parent's. Spawn one readonly judge subagent on that model.",
+          "to": "After all Phase B candidates complete, read the `arena cross-judge pool` with `config-show` and select one index from it: `interrogate`-style panels allocate every entry, but this role is choose-one and must never allocate the whole list. Require an explicit index whenever the pool holds more than one candidate, and pass that same index to `role-plan --role \"arena cross-judge pool\" --index <n>` (or to `run-new --index` and the dispatch request's `--index`). Prefer a different model family from the parent's. Spawn one read-only judge subagent on that model.",
+          "reason": "a choose-one judge takes an explicit configured index and never fans out like a panel"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.arena.md"
+    },
+    {
+      "source": "pstack/skills/automate-me/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "cd3636e9a53c7c782cf15254204dccfc854086b5",
+      "target": "resources/skills/automate-me/SKILL.md",
+      "target_sha256": "3d4e86bb3767b1cf3a3475dcfbd1aa1187c5259fcf0b350bed01b83e4bb0e1c1",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "This skill orchestrates three others: an inline mining pass (see step 1), Cursor's built-in `create-skill` (authoring), and the **unslop** skill (prose discipline).",
+          "to": "This skill orchestrates three others: an inline mining pass (see step 1), the packaged create-skill guide (`.specify/extensions/pstack/resources/dependencies/create-skill.md`, authoring), and the **unslop** skill (prose discipline).",
+          "reason": "the authoring guide ships with this extension"
+        },
+        {
+          "op": "edit",
+          "from": "Look recursively for `.cursor/skills/**/*-mode/SKILL.md` and `~/.cursor/skills/*-mode/SKILL.md` matching the user's handle. Mode skills can live in a personal category directory (`.cursor/skills/<handle>/`), not only at the top level.",
+          "to": "Search every directory `skills_dirs` names in the `pstack-native.py paths` report for `**/*-mode/SKILL.md` matching the user's handle, and search `.specify/pstack/skills/**/*-mode/SKILL.md` only when that list is empty. A mode skill can sit in a category directory (`<skills_dir>/<handle>/`), not only at the top level.",
+          "reason": "project skill locations are project- and host-owned"
+        },
+        {
+          "op": "edit",
+          "from": "Locate the active workspace's transcripts before fanning out. The system prompt names the workspace's `agent-transcripts/` directory. Use only that path. Don't glob across `~/.cursor/projects/*/`.",
+          "to": "Locate this workspace's transcripts before fanning out: `pstack-native.py capability-report` says whether the host exposes them, and `PSTACK_TRANSCRIPTS_DIR` carries the path. Use only that path. Don't search another project's store.",
+          "reason": "session history location is reported by the host, not assumed from a Cursor store"
+        },
+        {
+          "op": "edit",
+          "from": "Mining misses intent that hasn't come up yet. Use the `AskQuestion` tool (structured multi-choice) rather than asking the user to type from scratch.",
+          "to": "Mining misses intent that hasn't come up yet. Use the host's question prompt with structured choices rather than asking the user to type from scratch.",
+          "reason": "the question tool is a host facility"
+        },
+        {
+          "op": "edit",
+          "from": "Use Cursor's built-in `create-skill` skill to author the skill. Placement:",
+          "to": "Use the packaged create-skill guide (`.specify/extensions/pstack/resources/dependencies/create-skill.md`) to author the skill. Placement:",
+          "reason": "the authoring guide ships with this extension"
+        },
+        {
+          "op": "edit",
+          "from": "- Path: preserve an existing mode skill's category. For a new mode, use `.cursor/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle. Otherwise default to `.cursor/skills/<handle>-mode/SKILL.md` in the project (or `~/.cursor/skills/<handle>-mode/` if the user prefers a personal skill).",
+          "to": "- Path: preserve an existing mode skill's category. Otherwise write the new mode skill into exactly one directory from `skills_dirs` in the `pstack-native.py paths` report, the first unless the user names another, keeping the category directory when the repo has an established one for that handle. Only when `skills_dirs` is empty does it go under `.specify/pstack/skills/<handle>-mode/`, and then the instruction file or brief has to point at it. One file, one location: no second copy and no symlink. Then confirm discovery with that report's `discovery_check`.",
+          "reason": "project skill locations are project- and host-owned"
+        },
+        {
+          "op": "rewrite",
+          "from": "`AskQuestion`",
+          "to": "the host's question prompt",
+          "reason": "the question tool is a host facility with a host-specific name"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.automate-me.md"
+    },
+    {
+      "source": "pstack/skills/blast-radius/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "298d030cb606b051ca57e89c7b39a12f7fad75a0",
+      "target": "resources/skills/blast-radius/SKILL.md",
+      "target_sha256": "20cb2945f5fe62055166f745107274af5f19428ca033e53a9b8bc69650d3ded1",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.blast-radius.md"
+    },
+    {
+      "source": "pstack/skills/bro/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "b1701b778639c08bfc306291d70170c525c66a68",
+      "target": "resources/skills/bro/SKILL.md",
+      "target_sha256": "aa329d0ceeeecb6822a7174ad76bb07a7826a3c52ceb6a588dec4138815084bb",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.bro.md"
+    },
+    {
+      "source": "pstack/skills/create-verification-skill/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "f869e26122991252373d5b8f6357e5b9ff195a00",
+      "target": "resources/skills/create-verification-skill/SKILL.md",
+      "target_sha256": "5304465913cd97917fe101bbb080dbd966d9aa8a20b1edf133b2565134ea9b75",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "This skill generates that as a project-local skill (`.cursor/skills/verify-<app>/`) tailored to the repo.",
+          "to": "This skill generates that as one project-local skill (`verify-<app>/`) tailored to the repo, written into a single project skill directory this host discovers.",
+          "reason": "a generated project skill has one canonical host-discovered location"
+        },
+        {
+          "op": "edit",
+          "from": "Write `.cursor/skills/verify-<app>/SKILL.md` with YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it — without frontmatter the skill never registers)",
+          "to": "Run `pstack-native.py paths` and take `skills_dirs`. Write `verify-<app>/SKILL.md` into exactly one of those directories, the first unless the user names another; do not also keep a copy under `.specify/pstack/skills/` and do not link the two. Only when `skills_dirs` lists nothing does the skill go under `.specify/pstack/skills/verify-<app>/`, and then the instruction file or the task brief must point at that path, because nothing discovers it. Either way it carries YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it), and without frontmatter it never registers",
+          "reason": "the skill is written into one host-discovered directory, with the fallback only when the host discovers none"
+        },
+        {
+          "op": "edit",
+          "from": "Create `.cursor/skills/verify-<app>/features/README.md` plus one file per user-facing feature you can identify",
+          "to": "Create `features/README.md` in that same skill directory plus one file per user-facing feature you can identify",
+          "reason": "the feature map lives inside the one canonical skill directory"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.create-verification-skill.md"
+    },
+    {
+      "source": "pstack/skills/create-verification-skill/references/feature-map-example/README.md",
+      "source_mode": "100644",
+      "source_blob": "fb64570cfab3bbe672fe80925651933ebd57aa33",
+      "target": "resources/skills/create-verification-skill/references/feature-map-example/README.md",
+      "target_sha256": "cb7bd782cf89968a4ba3d58a5151db837430db92d19a6f52a906973b77b516ba",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/create-verification-skill/references/feature-map-example/create-note.md",
+      "source_mode": "100644",
+      "source_blob": "21357566b69223a503d6780a04fb90ce540eae22",
+      "target": "resources/skills/create-verification-skill/references/feature-map-example/create-note.md",
+      "target_sha256": "644a44c74f35d38c2feb7cd05a0121fdebbb623e8dc376c185b565a581d1ccf7",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/create-verification-skill/references/feature-map-example/search.md",
+      "source_mode": "100644",
+      "source_blob": "1f8e57d3aaf19cf27a9464d55fa72e46bcbc8b0f",
+      "target": "resources/skills/create-verification-skill/references/feature-map-example/search.md",
+      "target_sha256": "6e87b9e7f2791a7776ba1bb83f371cd285c306c67f19d245cc4dd6ca3015c823",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/figure-it-out/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "aa6967aa4bba8a51ada469310e356df02d47916e",
+      "target": "resources/skills/figure-it-out/SKILL.md",
+      "target_sha256": "70c4a7586cc4dbbdd6358ba2cdfc276cae7c2c69675e156c977cef4f4d4ee9e8",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.figure-it-out.md"
+    },
+    {
+      "source": "pstack/skills/how/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "7d4627c3bec8a6a994a3cf9bb5686ab33c39ac8f",
+      "target": "resources/skills/how/SKILL.md",
+      "target_sha256": "8dad9154dc4ee1b592e15eef8caad56ee62bb5a549d27eb90e12d40906293785",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- `subagent_type`: `generalPurpose`\n- `model`: your configured how-explorer model (default `grok-4.6-fast-xhigh`)\n- `readonly`: `true`",
+          "to": "- subagent: the host's general-purpose subagent\n- `model`: role `how explorer` from the project role map (`pstack-native.py role-plan --role \"how explorer\"`); omit the model when the leg inherits the current one\n- `readonly`: `true` (read-only where the host supports it)",
+          "reason": "explorer model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "edit",
+          "from": "- `subagent_type`: `generalPurpose`\n- `model`: your configured how-explainer model (default `claude-fable-5-1-thinking-max`)\n- `readonly`: `true`",
+          "to": "- subagent: the host's general-purpose subagent\n- `model`: role `how explainer` from the project role map (`pstack-native.py role-plan --role \"how explainer\"`); omit the model when the leg inherits the current one\n- `readonly`: `true` (read-only where the host supports it)",
+          "reason": "explainer model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "edit",
+          "from": "Spawn one Task subagent that explores and explains in one pass:",
+          "to": "Spawn one subagent that explores and explains in one pass:",
+          "reason": "delegation uses the host subagent facility"
+        },
+        {
+          "op": "edit",
+          "from": "spawn one Task subagent to synthesize their findings into one explanation:",
+          "to": "spawn one subagent to synthesize their findings into one explanation:",
+          "reason": "delegation uses the host subagent facility"
+        },
+        {
+          "op": "edit",
+          "from": "Present the explainer's output to the user. Light edits for clarity or context from the conversation are fine. Do not substantially rewrite it.",
+          "to": "Present the explainer's output to the user. For workflow dispatch, that output is the validated report's non-empty `result`, not its evidence excerpt. Light edits for clarity or context from the conversation are fine. Do not substantially rewrite it.",
+          "reason": "research consumers read the report result channel rather than verification metadata"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.how.md"
+    },
+    {
+      "source": "pstack/skills/how/references/explainer-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "3a36fb6736c5b74ac2774350841e332a019dec94",
+      "target": "resources/skills/how/references/explainer-prompt.md",
+      "target_sha256": "ddb89cebefc24e2b54517a331aedfe045b6971e101f45c71b8cef4cccff45bff",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/how/references/explorer-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "8b898d9e729e5d5fa41e95720e44f23a4204de43",
+      "target": "resources/skills/how/references/explorer-prompt.md",
+      "target_sha256": "3a6965276d23be7d8da6c305bfd5d7bf29d2aef09e5dae4119463ac72022a02d",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/interrogate/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "b59dff74c3f665cf82fabd9d197d814df8115531",
+      "target": "resources/skills/interrogate/SKILL.md",
+      "target_sha256": "1aa9d90d240a1693c5eb56d6daa0802aea1cf4fa2ee9d51c0d51071480a8f1aa",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Launch all reviewers in a single message using the Task tool. Use the `interrogate reviewers` list from `~/.cursor/rules/pstack-models.mdc` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C/D labels below to the configured entry count. Otherwise use the table defaults.",
+          "to": "Launch all reviewers in one batch with the host subagent tool. Resolve role `interrogate reviewers` from the project role map (`pstack-native.py role-plan --role \"interrogate reviewers\"`), one reviewer per configured entry, duplicates preserved, extending or shrinking the Reviewer A/B/C/D labels below to the configured entry count. An empty role is a setup error, not a reason to reuse stale labels.",
+          "reason": "reviewer models come from the project role map, not vendor defaults"
+        },
+        {
+          "op": "edit",
+          "from": "| Subagent | Default model |\n|----------|---------------|\n| Reviewer A | `claude-fable-5-1-thinking-max` |\n| Reviewer B | `gpt-5.6-sol-max` |\n| Reviewer C | `grok-4.6-fast-xhigh` |\n| Reviewer D | `claude-opus-5-thinking-xhigh` |",
+          "to": "| Subagent | Model |\n|----------|-------|\n| Reviewer A | the role map's `interrogate reviewers` entry 1 |\n| Reviewer B | the role map's `interrogate reviewers` entry 2 |\n| Reviewer C | the role map's `interrogate reviewers` entry 3 |\n| Reviewer D | the role map's `interrogate reviewers` entry 4, when the role defines one |\n\nThe labels are a naming convention for a panel of at least one. With fewer configured entries, extend or shrink the labels to the configured count.",
+          "reason": "the panel comes from the role map, so the table cannot name vendor defaults"
+        },
+        {
+          "op": "edit",
+          "from": "- `subagent_type`: `generalPurpose`\n- `model`: the configured `interrogate reviewers` entry, or the table default with no configured line\n- `readonly`: `true`",
+          "to": "- subagent: the host's general-purpose subagent, read-only\n- `model`: this reviewer's `interrogate reviewers` entry from the role map; omit it for an inherit-parent entry",
+          "reason": "reviewer dispatch uses the role map's panel entries"
+        },
+        {
+          "op": "edit",
+          "from": "If a model slug is rejected as unresolvable when you try to spawn the subagent, check the valid slugs in the Task tool's error message, pick the closest equivalent (prefer the highest-reasoning tier of the same family), spawn with the valid slug, and open a separate PR to update the configured value or default table. Do not block the review on the slug issue. If the configured value is `inherit-parent` or `auto`, omit `model` instead. Never treat those aliases as broken slugs or enter this fallback for them.",
+          "to": "If the role map names a selector the host rejects, stop and report it. That is a configuration error to fix in the role map, not a licence to substitute a different model: a substituted model makes the diversity claim false. If the entry is `inherit-parent` or `auto`, omit `model`; never treat those aliases as broken selectors.",
+          "reason": "silent model substitution would falsify the panel's diversity and is now refused"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.interrogate.md"
+    },
+    {
+      "source": "pstack/skills/interrogate/references/code-quality-review.md",
+      "source_mode": "100644",
+      "source_blob": "50230358f9b6138caf66065b1084be595d453d81",
+      "target": "resources/skills/interrogate/references/code-quality-review.md",
+      "target_sha256": "623d3d8122d075c303b562783b471a732992e84166b318f85ab6d6c118b13304",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/interrogate/references/lead-judgment.md",
+      "source_mode": "100644",
+      "source_blob": "5ce526097fdd3dfeaf4cd3b126a3f486c3ee36ae",
+      "target": "resources/skills/interrogate/references/lead-judgment.md",
+      "target_sha256": "6e5bdf5670eb34017692e9b6c546f36ac7552e6bb9f3f2f3429164fcc46a9361",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/interrogate/references/reviewer-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "53ffa747ff6af72ed24cc00e2622b2c14dd564a9",
+      "target": "resources/skills/interrogate/references/reviewer-prompt.md",
+      "target_sha256": "a397cc61102add709803d917fb23d726920525bf23e7c06dc4ed0b5cbeb00e54",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/interrogate/references/rubric.md",
+      "source_mode": "100644",
+      "source_blob": "04bd4ca6d31a17694071c415c349128a3b404006",
+      "target": "resources/skills/interrogate/references/rubric.md",
+      "target_sha256": "59e9b7cc4556e735e1b859a7dd1f7637b013a2426a84825ac1c51979942c158a",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/maintain-verification-skill/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "a2680b91fead45a0b4963d8c367a854956bea59d",
+      "target": "resources/skills/maintain-verification-skill/SKILL.md",
+      "target_sha256": "faea2b4330a5e8b22ad7f98d56b6fa4f24cc6ffcbcf6c83d8f1aa064121dea39",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Find the verification skill to maintain: the project-local skill whose body has launch/drive sections and a feature map (usually `.cursor/skills/verify-*/`). Several candidates → ask which one; none → stop and point at `/create-verification-skill` instead of inventing a target.",
+          "to": "Find the verification skill to maintain: the project-local skill whose body has launch/drive sections and a feature map, in one of the directories `skills_dirs` names in the `pstack-native.py paths` report, or under `.specify/pstack/skills/` when that list is empty. Several candidates → ask which one; none → stop and point at `speckit.pstack.create-verification-skill` instead of inventing a target.",
+          "reason": "the target is located through the host's discovered directories and the native command name"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.maintain-verification-skill.md"
+    },
+    {
+      "source": "pstack/skills/make-bot-ui/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "285df7569758a70e62e9f3596a1f829a5b6ba80e",
+      "target": "resources/skills/make-bot-ui/SKILL.md",
+      "target_sha256": "5c5c7fd98c3bd6eefe7c3bc748fd57920e51390efce2e90172a41f7c312157a9",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/skills/make-bot-ui/SKILL.md",
+          "reason": "webhook routine, secret request, and wake handling are gated external capabilities"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.make-bot-ui.md"
+    },
+    {
+      "source": "pstack/skills/no-comments/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "3b3e76295a7ad66806dcc683e4de92fb25690f8b",
+      "target": "resources/skills/no-comments/SKILL.md",
+      "target_sha256": "91f912e6360d17c196a21143e9247884fb0e070821d8fa2a01f54ab2b67dafd9",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "1. Spawn `Task` with `subagent_type: \"Comment Sicko\"`. Pass the scope. Do not restate its rules.",
+          "to": "1. Dispatch a subagent on the Comment Sicko contract at `.specify/extensions/pstack/resources/agents/comment-sicko.md`. Pass the scope. Do not restate its rules.",
+          "reason": "the agent contract ships as a resource because Spec Kit registers no extension agents"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.no-comments.md"
+    },
+    {
+      "source": "pstack/skills/poteto-mode/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "7559dea02e890c3e72db4dfcd226facae0779576",
+      "target": "resources/skills/poteto-mode/SKILL.md",
+      "target_sha256": "0e831018bb5159cdb37b794795ef117ade235f83defa61efab844a33883d7983",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/skills/poteto-mode/SKILL.md",
+          "reason": "mode entry, dispatch contract, and model defaults are host-native"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.poteto-mode.md"
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/authoring-a-skill.md",
+      "source_mode": "100644",
+      "source_blob": "8c5a55a44f5e95bba92f652da0ac87e941c49538",
+      "target": "resources/skills/poteto-mode/playbooks/authoring-a-skill.md",
+      "target_sha256": "ca765f5d343ce5090a73afc23cf699d665933c15fff4b407ad28d3d1e3c2cb65",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "1. Use the **create-skill** skill (Cursor's built-in for authoring SKILL.md files).",
+          "to": "1. Use the packaged create-skill guide (`.specify/extensions/pstack/resources/dependencies/create-skill.md`).",
+          "reason": "the authoring guide ships with this extension"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/autonomous-run.md",
+      "source_mode": "100644",
+      "source_blob": "12c3a7d84effcacf3550cb893be67498d7b28a4a",
+      "target": "resources/skills/poteto-mode/playbooks/autonomous-run.md",
+      "target_sha256": "a792d0ac86475889bd5ba54cda4bea500cf955fb878337fb6637445861f650c0",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "2. Pick the wake mechanism using Cursor's `/loop` command (a built-in, not a pstack skill). An event to watch (CI, a merge, a ref advancing) gets a watcher subagent that wakes you on the event, with a long time-based heartbeat as fallback. No event gets a fixed-interval heartbeat sized to when the result is worth re-checking.",
+          "to": "2. Pick the wake mechanism from what the host actually has. `pstack-native.py capability-report` decides it: a host with a supervised long-lived process or loop facility gets a watcher that wakes on the event (CI, a merge, a ref advancing), with a long time-based heartbeat as fallback; a host with none gets one iteration per turn, driven by the user or by a supervised process the user started. No event gets a fixed-interval heartbeat sized to when the result is worth re-checking, and no run claims survival past the process that holds it.",
+          "reason": "the durable wakeup is a checked host capability, not a Cursor built-in command"
+        },
+        {
+          "op": "edit",
+          "from": "Do not park reversible work for the human or use `AskQuestion`.",
+          "to": "Do not park reversible work for the human or use the host's question prompt.",
+          "reason": "the question tool is a host facility"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/autopilot-full.md",
+      "source_mode": "100644",
+      "source_blob": "78532504732ce78cc4d0ed95f3b7581fe177c090",
+      "target": "resources/skills/poteto-mode/playbooks/autopilot-full.md",
+      "target_sha256": "4087a09aa8a114f29cc3070c46603ba90541cd4c7da77e4c8797d9b31f3def68",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "On that go, arm a `/goal` with the full program objective. The goal continues across turns until the queue is done.",
+          "to": "On that go, record the full program objective as the standing predicate in the trail and in every owner brief. It continues across turns until the queue is done.",
+          "reason": "there is no `/goal` facility; the objective lives in durable state"
+        },
+        {
+          "op": "edit",
+          "from": "One Cursor cloud agent per PR owns build, the first push, a ready PR, self-proof on the real artifact",
+          "to": "One isolated local worker per PR owns build, the first push, a ready PR, self-proof on the real artifact",
+          "reason": "cloud workers map to isolated local workers"
+        },
+        {
+          "op": "edit",
+          "from": "A local root arms each tick as a real terminal `/loop`. The loop uses a monitored-shell 30-minute sleep and emits an output-notification sentinel. A cloud root uses the existing cloud-sleeper wake chain instead. Never leave the cadence to memory or lossy completion notifications.",
+          "to": "A host with a supervised long-lived process or loop facility (`pstack-native.py capability-report`) arms each tick as a real terminal process with a monitored 30-minute sleep. Without one, the tick runs when the operator next addresses the root. Never leave the cadence to memory or lossy completion notifications.",
+          "reason": "the wake facility is capability-checked; cloud wake chains do not exist here"
+        },
+        {
+          "op": "edit",
+          "from": "re-read this playbook from trunk with `git show origin/main:pstack/skills/poteto-mode/playbooks/autopilot-full.md`",
+          "to": "re-read this playbook directly at `.specify/extensions/pstack/resources/skills/poteto-mode/playbooks/autopilot-full.md`",
+          "reason": "the runtime resource is the installed file, not a blob on the target repository's trunk"
+        },
+        {
+          "op": "edit",
+          "from": "then re-read the armed `/goal`.",
+          "to": "then re-read the recorded program objective.",
+          "reason": "there is no `/goal` facility; the objective lives in durable state"
+        },
+        {
+          "op": "rewrite",
+          "from": "`cursor-team-kit` plugin \\(`/deslop`\\)",
+          "to": "packaged deslop reference (`.specify/extensions/pstack/resources/dependencies/deslop.md`)",
+          "reason": "the dependency ships inside this extension instead of a separate Cursor plugin"
+        },
+        {
+          "op": "rewrite",
+          "from": "from `cursor-team-kit`",
+          "to": "from the packaged dependency references (`.specify/extensions/pstack/resources/dependencies/`)",
+          "reason": "the dependency ships inside this extension instead of a separate Cursor plugin"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/autopilot-stack.md",
+      "source_mode": "100644",
+      "source_blob": "f5b6e1df88f815af1add0a0a3eecd12a318719fe",
+      "target": "resources/skills/poteto-mode/playbooks/autopilot-stack.md",
+      "target_sha256": "380500cd56d37faac713c8f2f8a4d94e2a4fc070b039c265681c0baf8dc8e210",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "One Cursor cloud agent per PR owns its change end to end:",
+          "to": "One isolated local worker per PR owns its change end to end:",
+          "reason": "cloud workers map to isolated local workers"
+        },
+        {
+          "op": "edit",
+          "from": "A local root arms each tick as a real terminal `/loop`. The loop uses a monitored-shell 30-minute sleep and emits an output-notification sentinel. A cloud root uses the existing cloud-sleeper wake chain instead.",
+          "to": "A host with a supervised long-lived process or loop facility (`pstack-native.py capability-report`) arms each tick as a real terminal process with a monitored 30-minute sleep. Without one, the tick runs when the operator next addresses the root.",
+          "reason": "the wake facility is capability-checked; cloud wake chains do not exist here"
+        },
+        {
+          "op": "edit",
+          "from": "re-read this playbook from trunk with `git show origin/main:pstack/skills/poteto-mode/playbooks/autopilot-stack.md`, then re-read the armed `/goal`.",
+          "to": "re-read `.specify/extensions/pstack/resources/skills/poteto-mode/playbooks/autopilot-stack.md` directly, then re-read the recorded program objective.",
+          "reason": "the runtime resource is the installed file and the objective lives in the trail"
+        },
+        {
+          "op": "edit",
+          "from": "On the operator's explicit go, arm a `/goal` with the full program objective. The goal continues across turns until the chain is done.",
+          "to": "On the operator's explicit go, record the full program objective as the standing predicate in the trail. It continues across turns until the chain is done.",
+          "reason": "there is no `/goal` facility; the objective lives in durable state"
+        },
+        {
+          "op": "rewrite",
+          "from": "`cursor-team-kit` plugin \\(`/deslop`\\)",
+          "to": "packaged deslop reference (`.specify/extensions/pstack/resources/dependencies/deslop.md`)",
+          "reason": "the dependency ships inside this extension instead of a separate Cursor plugin"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/babysit.md",
+      "source_mode": "100644",
+      "source_blob": "73eddb732ad9d4a4c27c16e3cc6c41f78becc3e1",
+      "target": "resources/skills/poteto-mode/playbooks/babysit.md",
+      "target_sha256": "c233660fc7ccafc65b531ac8ec2ef626e465db8a1ef9fb2e1733c8b340c5ed45",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Run `drive` and `background` under `/loop` in dynamic mode.",
+          "to": "Run `drive` and `background` under the host's supervised loop when the capability report finds one, and one watch pass per turn when it does not.",
+          "reason": "the watch loop is a capability-checked host facility, not a Cursor command"
+        },
+        {
+          "op": "edit",
+          "from": "On GitHub, status comes from `scripts/watch-pr/watch-pr`.",
+          "to": "On GitHub, status comes from `.specify/extensions/pstack/resources/skills/poteto-mode/scripts/watch-pr/watch-pr`.",
+          "reason": "the watcher executable is invoked from its installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "Cursor's built-in babysit skill",
+          "to": "any host-provided skill whose description matches the same words",
+          "reason": "no Cursor built-in is assumed to exist on the host"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/bug-fix.md",
+      "source_mode": "100644",
+      "source_blob": "c58289708610217f015387e61c14539b736f7274",
+      "target": "resources/skills/poteto-mode/playbooks/bug-fix.md",
+      "target_sha256": "00d26e41ea536dcca2603fdfe66b6afeadeddbf7daf5636a39e08c6f32b1bf05",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Drive a long or stubborn hunt with Cursor's `/loop` command.",
+          "to": "Drive a long or stubborn hunt with the wake mechanism the capability report found: a supervised loop on hosts that have one, otherwise one iteration per turn.",
+          "reason": "the loop facility is capability-checked, not a Cursor built-in"
+        },
+        {
+          "op": "edit",
+          "from": "using your configured bug-fix model (default `grok-4.6-fast-xhigh`)",
+          "to": "on role `bug-fix` from the project role map (`pstack-native.py role-plan --role \"bug-fix\"`); omit the model when the leg inherits the current one",
+          "reason": "the delegate model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/eval.md",
+      "source_mode": "100644",
+      "source_blob": "3dae34e2ef0cbdd9bafa5ab372da5ea143d48452",
+      "target": "resources/skills/poteto-mode/playbooks/eval.md",
+      "target_sha256": "42f5a994feb7399ed94e72baafe624e2e72dab12b5d1bbc7a60beb3829d18c8e",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Read each candidate's local transcript under the active workspace's `agent-transcripts/` directory (the system prompt names this path). Do not glob across `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.",
+          "to": "Read each candidate's transcript from this workspace's transcript directory (`pstack-native.py capability-report` says whether the host exposes it; `PSTACK_TRANSCRIPTS_DIR` carries the path). Do not search another project's store: that crosses workspace boundaries and reads private chats from unrelated projects.",
+          "reason": "session history location is host-reported, not a Cursor store path"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/feature.md",
+      "source_mode": "100644",
+      "source_blob": "6cab21817e0f97e1c707d7c47ef82aa4f3ea99cd",
+      "target": "resources/skills/poteto-mode/playbooks/feature.md",
+      "target_sha256": "85eab576cdd754cb3ef45766aa96a294b22f28be97f861b1cc3e068a4381dcf3",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "using your configured feature model (default `grok-4.6-fast-xhigh`)",
+          "to": "on role `feature, refactoring` from the project role map (`pstack-native.py role-plan --role \"feature, refactoring\"`); omit the model when the leg inherits the current one",
+          "reason": "the delegate model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/hillclimb.md",
+      "source_mode": "100644",
+      "source_blob": "edb6edc26e9890a327d25e2d748d4824d9906c03",
+      "target": "resources/skills/poteto-mode/playbooks/hillclimb.md",
+      "target_sha256": "e8925ba8615bce638220da8f6fc087d152a658ad4e9e7d02902b3b8dc6d3c391",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "using your configured hillclimb model (default `grok-4.6-fast-xhigh`)",
+          "to": "on role `hillclimb` from the project role map (`pstack-native.py role-plan --role \"hillclimb\"`); omit the model when the leg inherits the current one",
+          "reason": "the delegate model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/investigation.md",
+      "source_mode": "100644",
+      "source_blob": "cd119f04f23e0b7acb3f8cc5ba13ce4ab7aa6c7d",
+      "target": "resources/skills/poteto-mode/playbooks/investigation.md",
+      "target_sha256": "dc66bcf6af3a074fc7f67aa5e12b93ef571a4fb4d8e17f2f1af5ae5359f42e46",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/multi-phase-plan.md",
+      "source_mode": "100644",
+      "source_blob": "1fd40dd3f6cd539cd7cc420e2e364282a05a73cf",
+      "target": "resources/skills/poteto-mode/playbooks/multi-phase-plan.md",
+      "target_sha256": "62e4131b7b2a08d67ad0ff236f3260ef37d7329e38a52539f2151b835ffe9c52",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "The live block is mandatory.",
+          "to": "The live block is mandatory. Resolve role `swarm workers` before writing the plan, resolve an inheritance alias to the current concrete model, and replace every `<resolved swarm workers model>` placeholder with that selector.",
+          "reason": "the plan validator needs the concrete model that will run each live lane"
+        },
+        {
+          "op": "edit",
+          "from": "Ten lanes on `grok-4.6-fast-xhigh` at the PR head",
+          "to": "Ten lanes on `<resolved swarm workers model>` at the PR head",
+          "reason": "the plan author fills a concrete model from the project role map"
+        },
+        {
+          "op": "edit",
+          "from": "3. Explore in subagents with `subagent_type: \"poteto-agent\"` and an explicit model",
+          "to": "3. Explore in subagents on the poteto-agent contract (`.specify/extensions/pstack/resources/agents/poteto-agent.md`) with the concrete model resolved from the role map",
+          "reason": "the agent contract ships as a resource and the model comes from the role map"
+        },
+        {
+          "op": "edit",
+          "from": "5. Write under `/technical-writing` in full, then `/unslop`.",
+          "to": "5. Write under the packaged `technical-writing` skill in full, then apply the packaged `unslop` skill.",
+          "reason": "resources name packaged skills instead of a host invocation form"
+        },
+        {
+          "op": "edit",
+          "from": "6. Run `node pstack/skills/poteto-mode/scripts/check-plan.mjs <plan.md>`",
+          "to": "6. Run `node .specify/extensions/pstack/resources/skills/poteto-mode/scripts/check-plan.mjs <plan.md>`",
+          "reason": "the executable is read from its installed extension path"
+        },
+        {
+          "op": "edit",
+          "from": "**Control skill.** Pick it by surface. Browser, Electron, and web UIs use `control-ui` from `cursor-team-kit`. CLIs and TUIs use `control-cli` from `cursor-team-kit`.",
+          "to": "**Control skill.** Pick it by surface. Browser, Electron, and web UIs use the packaged `control-ui` reference (`.specify/extensions/pstack/resources/dependencies/control-ui.md`). CLIs and TUIs use the packaged `control-cli` reference (`.specify/extensions/pstack/resources/dependencies/control-cli.md`).",
+          "reason": "the dependency ships inside this extension instead of a separate Cursor plugin"
+        },
+        {
+          "op": "edit",
+          "from": "The program runs `pstack/skills/poteto-mode/playbooks/<execution playbook>.md`.",
+          "to": "The program runs `.specify/extensions/pstack/resources/skills/poteto-mode/playbooks/<execution playbook>.md`.",
+          "reason": "the plan names the installed playbook path"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] On the operator's go, arm a `/goal` with this exact text.",
+          "to": "- [ ] On the operator's go, record the program objective as the standing predicate, in the trail and in the coordinator's brief header, with this exact text.",
+          "reason": "there is no `/goal` facility; the predicate lives in durable state"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] Read these from trunk at program start. Re-read them at every tick.\n  - [ ] `git show origin/main:pstack/skills/poteto-mode/playbooks/<execution playbook>.md`\n  - [ ] `git show origin/main:pstack/skills/swarm/SKILL.md`\n  - [ ] `git show origin/main:<control skill path>`\n  - [ ] `git show origin/main:pstack/skills/poteto-mode/playbooks/opening-a-pr.md`\n  - [ ] `git show origin/main:pstack/skills/<each other leaf skill the program uses>`",
+          "to": "- [ ] Read these from the installed extension at program start. Re-read them at every tick.\n  - [ ] `.specify/extensions/pstack/resources/skills/poteto-mode/playbooks/<execution playbook>.md`\n  - [ ] `.specify/extensions/pstack/resources/skills/swarm/SKILL.md`\n  - [ ] `.specify/extensions/pstack/resources/dependencies/<control skill>.md`\n  - [ ] `.specify/extensions/pstack/resources/skills/poteto-mode/playbooks/opening-a-pr.md`\n  - [ ] `.specify/extensions/pstack/resources/skills/<each other leaf skill>/SKILL.md`",
+          "reason": "installed extension resources are runtime files, not blobs on the target repository's trunk"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] Arm the 30-minute audit tick. In a local session, a real terminal `/loop`. In a cloud root, a cloud-sleeper wake chain. Never leave the cadence to memory.",
+          "to": "- [ ] Arm the 30-minute audit tick only on a host that reports a supervised long-lived process or loop facility (`pstack-native.py capability-report`). Without one, the tick runs when the operator next addresses the coordinator, and the trail says so. Never leave the cadence to memory.",
+          "reason": "the wake facility is capability-checked; cloud wake chains do not exist here"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] Use this tick prompt, verbatim. \"Re-read the execution playbook from trunk and the armed /goal.",
+          "to": "- [ ] Use this tick prompt, verbatim. \"Re-read the execution playbook from the installed extension and the recorded program objective.",
+          "reason": "the runtime contract comes from the installed resource and the objective from the trail"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] Run `/deslop` before each commit and `/no-comments` before review.",
+          "to": "- [ ] Apply `.specify/extensions/pstack/resources/dependencies/deslop.md` before each commit and the packaged `no-comments` skill before review.",
+          "reason": "the plan names packaged resources instead of Cursor command forms"
+        },
+        {
+          "op": "edit",
+          "from": "- [ ] At the merge-ready head SHA, run the swarm per `pstack/skills/swarm/SKILL.md`.",
+          "to": "- [ ] At the merge-ready head SHA, run the swarm per `.specify/extensions/pstack/resources/skills/swarm/SKILL.md`.",
+          "reason": "the plan names the installed swarm resource"
+        },
+        {
+          "op": "edit",
+          "from": "Each live lane runs on its own cloud VM at the PR head. Drive through `control-ui` or `control-cli` from `cursor-team-kit`.",
+          "to": "Each live lane runs in its own isolated local worktree at the PR head, and stops when the machine stops. Drive through the packaged `control-ui` or `control-cli` reference (`.specify/extensions/pstack/resources/dependencies/`).",
+          "reason": "cloud VMs map to isolated local worktrees with no survival claim"
+        },
+        {
+          "op": "edit",
+          "from": "<Docs to read before editing. Which PRs get `pstack/skills/how/SKILL.md` and `pstack/skills/interrogate/SKILL.md`. The trail per `pstack/skills/show-me-your-work/SKILL.md`.>",
+          "to": "<Docs to read before editing. Which PRs get `.specify/extensions/pstack/resources/skills/how/SKILL.md` and `.specify/extensions/pstack/resources/skills/interrogate/SKILL.md`. The trail per `.specify/extensions/pstack/resources/skills/show-me-your-work/SKILL.md`.>",
+          "reason": "the reading list names installed resource paths"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/opening-a-pr.md",
+      "source_mode": "100644",
+      "source_blob": "a5c65a0959d0c37ebd12d5636710c4e0f91fba88",
+      "target": "resources/skills/poteto-mode/playbooks/opening-a-pr.md",
+      "target_sha256": "2117fe7ef7faf7a25a0d45addc97fa9ad87fc2249c142e54e9eb461ad2673b4a",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Run `/deslop` from `cursor-team-kit` over the diff before commit.",
+          "to": "Run the packaged deslop reference (`.specify/extensions/pstack/resources/dependencies/deslop.md`) over the diff before commit.",
+          "reason": "the dependency ships in the extension and the host resolves no Cursor plugin"
+        },
+        {
+          "op": "edit",
+          "from": "Multiple `Task` calls on the same branch each get their own worktree, or `git fetch && git reset --hard origin/<branch>` between them.",
+          "to": "Multiple subagent dispatches on the same branch each get their own worktree, or `git fetch && git reset --hard origin/<branch>` between them.",
+          "reason": "delegation uses the host subagent facility"
+        },
+        {
+          "op": "edit",
+          "from": "A subagent that opens a PR runs `interrogate`, `/deslop`, and `/no-comments`.",
+          "to": "A subagent that opens a PR runs the packaged `interrogate` skill, the deslop reference at `.specify/extensions/pstack/resources/dependencies/deslop.md`, and `/no-comments`.",
+          "reason": "the active playbook names packaged resources instead of an unregistered deslop command"
+        },
+        {
+          "op": "edit",
+          "from": "Cloud-agent PR tools default to draft, so set `draft: false` on every PR creation call. ",
+          "to": "",
+          "reason": "the native playbook uses the selected local forge CLI and assumes no cloud-agent API"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/orchestrate.md",
+      "source_mode": "100644",
+      "source_blob": "d5b6d008026ff0177f52e22a6fb4b2edae5c87e2",
+      "target": "resources/skills/poteto-mode/playbooks/orchestrate.md",
+      "target_sha256": "d89ea4d6fd317cf9b935d1ea9d0acbc168c4367df990c3453801a08068ca1c26",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "The loop is agentic end to end. Agents are spawned, resumed, and drained only through the Task tool.",
+          "to": "The loop is agentic end to end. Agents are spawned and drained only through the host's subagent facility, and a resume is a fresh dispatch with the stored brief plus current state.",
+          "reason": "delegation uses the host subagent facility, and native workers have no resume channel"
+        },
+        {
+          "op": "edit",
+          "from": "- **Worker / verifier.** Always `environment: \"cloud\"` unless the task needs this machine: `control-ui` or `control-cli` runtime verification (from `cursor-team-kit`). Reading local transcripts under `agent-transcripts/`. Simulators and local IDE state. Auth that exists only here. Cloud agents cannot read the local store, so their briefs inline what they need or point at repo paths. Prefer fewer, broader workers.",
+          "to": "- **Worker / verifier.** There is no cloud environment here. Every worker is a native subagent in an isolated local worktree, and it stops when the machine or the process stops, so nothing survives an interrupted host. Work that needs this machine's runtime (the packaged `control-ui` or `control-cli` reference, local transcripts under the workspace transcript directory, simulators, local IDE state, or auth that exists only here) always runs locally. Because no worker can read another's session, every brief inlines what the worker needs or points at repo paths. Prefer fewer, broader workers.",
+          "reason": "cloud workers map to isolated local workers, with the lost survival stated explicitly"
+        },
+        {
+          "op": "edit",
+          "from": "(nesting works to depth 3, and a nested spawn has the full Task schema including `environment`)",
+          "to": "(the host may cap nesting depth; check it and flatten when it is capped, and a nested spawn carries the same contract as a top-level one)",
+          "reason": "nesting depth and the spawn schema are host properties, not Cursor's"
+        },
+        {
+          "op": "edit",
+          "from": "- After a Cursor restart: local agents are dead, cloud work is not.",
+          "to": "- After a host restart: every native worker is dead. Only side effects that reached durable state (commits, pushed branches, PRs, store files) survive.",
+          "reason": "no cloud workers exist to outlive a restart"
+        },
+        {
+          "op": "edit",
+          "from": "- Never resume an agent to check on it. A resume restarts an idle agent. Probe read-only: the ledger, `units.tsv`, `gh`, pushed branches, the cloud agent's status in the Cursor dashboard. Transcript mtime is not liveness.",
+          "to": "- Never resume an agent to check on it; a resume restarts an idle worker and costs a full brief. Probe read-only: the ledger, `units.tsv`, the forge CLI, pushed branches, and the process table. Transcript mtime is not liveness.",
+          "reason": "there is no cloud dashboard to poll; liveness comes from durable state and the process table"
+        },
+        {
+          "op": "edit",
+          "from": "- Exactly one stacker per stack may run `gt`, serialized within its stack. Record the holder in the standing orders. Restacks run in cloud. A local restack at this scale takes the laptop down.",
+          "to": "- Exactly one stacker per stack may run `gt`, serialized within its stack. Record the holder in the standing orders. Restacks run in a local isolated worktree, serialized. A restack at this scale on the live checkout takes the machine down.",
+          "reason": "cloud execution maps to isolated local worktrees"
+        },
+        {
+          "op": "edit",
+          "from": "Verbatim paste is for cloud spawns and every resume.",
+          "to": "Verbatim paste is for every dispatch, and every resume is a fresh dispatch with the standing orders pasted.",
+          "reason": "there are no cloud spawns; a native resume is a new dispatch"
+        },
+        {
+          "op": "edit",
+          "from": "**Reply:** at checkpoints and close: the predicate and the count against it from `units.tsv` and `ledger.tsv`",
+          "to": "**Reply:** at checkpoints and close: the predicate and the count against it from `units.tsv` and `ledger.tsv`. Name the worker environment each unit used, since only local environments exist",
+          "reason": "the reply states the local-only worker environment"
+        },
+        {
+          "op": "edit",
+          "from": "Use `bun scripts/orch/orch.ts` for bookkeeping",
+          "to": "Use `bun .specify/extensions/pstack/resources/skills/poteto-mode/scripts/orch/orch.ts` for bookkeeping",
+          "reason": "the orchestration executable is invoked from its installed extension path"
+        },
+        {
+          "op": "edit",
+          "from": "State reads and writes go through `scripts/orch/orch.ts` at drain points",
+          "to": "State reads and writes go through `.specify/extensions/pstack/resources/skills/poteto-mode/scripts/orch/orch.ts` at drain points",
+          "reason": "every executable orch reference uses its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/pause-safely.md",
+      "source_mode": "100644",
+      "source_blob": "ad61122202763e96b59af9aae48afe3e242a751e",
+      "target": "resources/skills/poteto-mode/playbooks/pause-safely.md",
+      "target_sha256": "7d5fc10e144265f1b35f8157926541e738c1de64b6a85b3e61b51cf268c3dffd",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/perf-issue.md",
+      "source_mode": "100644",
+      "source_blob": "e153c343190c97b2a34e50c7dd7a8063b9d2cb08",
+      "target": "resources/skills/poteto-mode/playbooks/perf-issue.md",
+      "target_sha256": "a6988bb70765d70afe721114782bcb709781aab34ffb6a6b9f473f46a3b67597",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "using your configured perf-issue model (default `grok-4.6-fast-xhigh`)",
+          "to": "on role `perf-issue` from the project role map (`pstack-native.py role-plan --role \"perf-issue\"`); omit the model when the leg inherits the current one",
+          "reason": "the delegate model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/prototype.md",
+      "source_mode": "100644",
+      "source_blob": "18bedc7e9249d180f9198d5b4b13e3817d41d281",
+      "target": "resources/skills/poteto-mode/playbooks/prototype.md",
+      "target_sha256": "7aa1f52c691c3d46d5afc527b23f90977fce869ce33573c73c81a4c7f0cde962",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/refactoring.md",
+      "source_mode": "100644",
+      "source_blob": "dfc5d480f450f1b28d70099650f0d12822ac4b6e",
+      "target": "resources/skills/poteto-mode/playbooks/refactoring.md",
+      "target_sha256": "5b0fbdddae0a7990cc7489a8ec9b8083dcdcdd664f478b9ec61ecce4edfb00eb",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "using your configured refactoring model (default `grok-4.6-fast-xhigh`)",
+          "to": "on role `feature, refactoring` from the project role map (`pstack-native.py role-plan --role \"feature, refactoring\"`); omit the model when the leg inherits the current one",
+          "reason": "the delegate model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/runtime-forensics.md",
+      "source_mode": "100644",
+      "source_blob": "ba659bfe1c4c2f956f3285974bfdc941120f9948",
+      "target": "resources/skills/poteto-mode/playbooks/runtime-forensics.md",
+      "target_sha256": "594f02c40c243a346e1f57b688ecf2ed5e882f21b3d24ed2204d1ac6f1c24a8a",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/session-pickup.md",
+      "source_mode": "100644",
+      "source_blob": "9b2ed06e0ff8b01bf03b7a0d6a4cbb8ba3a46720",
+      "target": "resources/skills/poteto-mode/playbooks/session-pickup.md",
+      "target_sha256": "948b949f74354070ae6b9d0b656cca6913c37398517238566223dac99bdefee4",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "A local transcript under the active workspace's `agent-transcripts/` directory (the system prompt names the path. Do not glob across `~/.cursor/projects/*/`, that crosses workspace boundaries and reads private chats from unrelated projects), a cloud-agent URL, or a pushed branch.",
+          "to": "A transcript from this workspace's transcript directory (`pstack-native.py capability-report` says whether the host exposes it; `PSTACK_TRANSCRIPTS_DIR` carries the path. Do not search another project's store, that crosses workspace boundaries and reads private chats from unrelated projects), a pushed branch, or a handed-off brief from another agent.",
+          "reason": "the source is a host-owned transcript or a branch, not a Cursor cloud-agent URL"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/shipping.md",
+      "source_mode": "100644",
+      "source_blob": "4c83fa3ef3b3457d55ce4b9b3bfd0dd6c12745cd",
+      "target": "resources/skills/poteto-mode/playbooks/shipping.md",
+      "target_sha256": "5758f4e488231ae246855f1dc13a6f6eb8f0b9e137a77b9823a6fc1c4843f23b",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Hold the watch under `/loop` in dynamic mode.",
+          "to": "Hold the watch under the host's supervised loop when the capability report finds one, and one watch pass per turn when it does not.",
+          "reason": "the watch loop is a capability-checked host facility, not a Cursor command"
+        },
+        {
+          "op": "edit",
+          "from": "One subagent per PR, not batched, each a Cursor cloud agent, each exercising the real surface (`control-ui` or `control-cli` from `cursor-team-kit` as the change demands) against parent versus head.",
+          "to": "One subagent per PR, not batched, each an isolated local worker, each exercising the real surface (the packaged `control-ui` or `control-cli` reference as the change demands) against parent versus head.",
+          "reason": "cloud workers map to isolated local workers and the dependency ships in the extension"
+        },
+        {
+          "op": "edit",
+          "from": "With GitHub, use `scripts/watch-pr/watch-pr --queued-stack --stack-prs <bottom>`",
+          "to": "With GitHub, use `.specify/extensions/pstack/resources/skills/poteto-mode/scripts/watch-pr/watch-pr --queued-stack --stack-prs <bottom>`",
+          "reason": "the watcher executable is invoked from its installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/trace-forensics.md",
+      "source_mode": "100644",
+      "source_blob": "48ed6b2f690215027eda96a1897ed98212bbd07a",
+      "target": "resources/skills/poteto-mode/playbooks/trace-forensics.md",
+      "target_sha256": "137ce3984fb96e45971fdff4d3c79fa4ccc647c5b30ae4945783b9fb23f8cec7",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
+      "source_mode": "100644",
+      "source_blob": "248830ec74a593fc22143a842026388f92f1b9f4",
+      "target": "resources/skills/poteto-mode/playbooks/visual-parity.md",
+      "target_sha256": "b0f557c6422430313bdf0248d85f3c9c714b6c542cc9eb7df6f5b1baa02887fb",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "`/loop` per component until the diff is zero.",
+          "to": "Iterate per component until the diff is zero, using the host's loop facility when the capability report finds one and one pass per turn when it does not.",
+          "reason": "the loop facility is capability-checked, not a Cursor built-in"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/playbooks/worktree-cleanup.md",
+      "source_mode": "100644",
+      "source_blob": "39c9ef9f368ac63b0e4245503302a4c174e846d6",
+      "target": "resources/skills/poteto-mode/playbooks/worktree-cleanup.md",
+      "target_sha256": "4eca0edfb3927b6ef65c28ba78c5b86454abb094adad44edceccc3ec984f763a",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "since a hand-typed `myrepo-worktrees/x` misses one that lives at `.cursor/worktrees/myrepo/x`",
+          "to": "since a hand-typed `myrepo-worktrees/x` misses one that lives at `.worktrees/myrepo/x`",
+          "reason": "the example worktree path is project-relative"
+        },
+        {
+          "op": "edit",
+          "from": "`~/Library/Application Support/Cursor` (`state.vscdb.backup`, and `snapshots/roots/<root>` where a `<root>` named for a folder you opened as a workspace balloons)",
+          "to": "editor state caches (for example the host editor's own workspace storage), naming whichever exists on this machine",
+          "reason": "the reclaim list must name caches that exist on the current machine"
+        },
+        {
+          "op": "edit",
+          "from": "then run `scripts/worktree-audit.sh`",
+          "to": "then run `.specify/extensions/pstack/resources/skills/poteto-mode/scripts/worktree-audit.sh`",
+          "reason": "the audit executable is invoked from its installed extension path"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/references/bugbot-triage.md",
+      "source_mode": "100644",
+      "source_blob": "b2fc7d35712783707607cf2f39752885c8d5105c",
+      "target": "resources/skills/poteto-mode/references/bugbot-triage.md",
+      "target_sha256": "b2d146c770d8d3593e1ef3d77b668039b8e1f78093ea1a86f1d45d7f99614309",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/bootstrap.ts",
+      "source_mode": "100644",
+      "source_blob": "d9c63e2007449a80000abe75ecaf7f2a0bd5826b",
+      "target": "resources/skills/poteto-mode/scripts/bootstrap.ts",
+      "target_sha256": "ccd2ed08fd9da9d0d942e5f2491cfc74bb92d8a08fa51755e0da1ac8de287361",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/bun.lock",
+      "source_mode": "100644",
+      "source_blob": "65f0c662f300a0f72b319ca93ea18f56219c2581",
+      "target": "resources/skills/poteto-mode/scripts/bun.lock",
+      "target_sha256": "667d9cf7222e9aae3fa42a4be383e657784216e9df115da02227fbc5ac7bbe46",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/check-plan.mjs",
+      "source_mode": "100755",
+      "source_blob": "21d350ac155928bbcf8d29dce193a97974f12748",
+      "target": "resources/skills/poteto-mode/scripts/check-plan.mjs",
+      "target_sha256": "32294f68b1b8b27798bb63156e09142dee9638dfddc66062182c7cc7be63a11b",
+      "classification": "script",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "const LANES = \"Ten lanes on `grok-4.6-fast-xhigh` at the PR head\";",
+          "to": "const LANES = /Ten lanes on `([^`\\n]+)` at the PR head/;\nconst LIVE_MODEL = process.env.PSTACK_LIVE_MODEL || \"\";",
+          "reason": "the plan supplies a concrete resolved live-lane model, optionally pinned by the caller"
+        },
+        {
+          "op": "edit",
+          "from": "const PROGRAM_MARKERS = [\"/goal\", \"git show origin/main:\", /30[- ]minute/, \"status message\"];",
+          "to": "const PROGRAM_MARKERS = [\"standing predicate\", \"installed extension\", /30[- ]minute/, \"status message\"];",
+          "reason": "the program check matches the native standing predicate and installed-resource instructions"
+        },
+        {
+          "op": "edit",
+          "from": "if (!live.rest.includes(LANES)) fail(live.n, `${pr.title}: Verify, live lacks \"${LANES}\"`);",
+          "to": "const liveHeader = live.rest.match(LANES);\n\tif (!liveHeader) fail(live.n, `${pr.title}: Verify, live lacks the ten-lane header`);\n\telse if (\n\t\t/[<>]/.test(liveHeader[1]) ||\n\t\tliveHeader[1] !== liveHeader[1].trim() ||\n\t\t/^(?:auto|default|parent|inherit[-_]parent)$/i.test(liveHeader[1])\n\t)\n\t\tfail(live.n, `${pr.title}: Verify, live must name a concrete resolved model`);\n\telse if (LIVE_MODEL && liveHeader[1] !== LIVE_MODEL)\n\t\tfail(live.n, `${pr.title}: Verify, live names ${liveHeader[1]}, expected ${LIVE_MODEL}`);",
+          "reason": "requires the native ten-lane header and a concrete model, then checks an optional pin"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/orch/orch.test.ts",
+      "source_mode": "100644",
+      "source_blob": "9c234de724991083b4644e906a5f1358f8ef8dcc",
+      "target": "resources/skills/poteto-mode/scripts/orch/orch.test.ts",
+      "target_sha256": "174b86d21ff51ccd28d1a8c938cb2e0c6fa287b209d4ca6c03932fcb1b53372e",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/orch/orch.ts",
+      "source_mode": "100755",
+      "source_blob": "219ac17bd8805b45140eca7c429834be9ded1b7d",
+      "target": "resources/skills/poteto-mode/scripts/orch/orch.ts",
+      "target_sha256": "f091687df627a0b75fabd54af58945a9cd6c7039ef0622012ac9ed60cd8ec434",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/orch/store.ts",
+      "source_mode": "100644",
+      "source_blob": "5e6c602fb670a6b5598977f5bf85d717cf797ef7",
+      "target": "resources/skills/poteto-mode/scripts/orch/store.ts",
+      "target_sha256": "0eae7cf69282e827b1227166f2e32cee3560f2f3e65b3f1f2faf6fb83d3b4c5b",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/package.json",
+      "source_mode": "100644",
+      "source_blob": "8a3dfe27c2d0221a786e1ce61963d51c55260725",
+      "target": "resources/skills/poteto-mode/scripts/package.json",
+      "target_sha256": "d1f815091209d49763775cc188e8e06ff32d5fec648bffd2272bc25a165e87c3",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/cli.test.ts",
+      "source_mode": "100644",
+      "source_blob": "0656b413e6c180858ca42981105944c45caf9dca",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/cli.test.ts",
+      "target_sha256": "a35592b4c6da96caf8d47987e9cd503fab6c7774ab87d11a43f24b4b5df2a9d1",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/cli.ts",
+      "source_mode": "100644",
+      "source_blob": "ec8a2f27c5ac24866b699e6395e7d1f32e595068",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/cli.ts",
+      "target_sha256": "89c08863089181a232be782c4b2ed90a1552f44aeecb0dcb7aac2c623620e680",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/fakes.test-helper.ts",
+      "source_mode": "100644",
+      "source_blob": "2312522cd7399334115a5f39fd6438aab7fc5aa5",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/fakes.test-helper.ts",
+      "target_sha256": "e53e31b7f03068063f53a99a3591b052aaed66e4e2b196b3a364980f60324ab1",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/github.test.ts",
+      "source_mode": "100644",
+      "source_blob": "87f4048f08a63a54975c4ef2de8065375e751683",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/github.test.ts",
+      "target_sha256": "0cbce011050522938523e36bb42a260e92b812dcd2076930fa681672ad316b24",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/github.ts",
+      "source_mode": "100644",
+      "source_blob": "79bc06fb682c5d99de7d48338b0a6ecd27a518da",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/github.ts",
+      "target_sha256": "d1bbbafbe8e2c703c84da2029de7f2c4011412512f8cf65a42100f46bcb92c8a",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/policy.test.ts",
+      "source_mode": "100644",
+      "source_blob": "0620ddedde46da8e763ab2a55ebceaad2aa6d0a7",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/policy.test.ts",
+      "target_sha256": "a9fedb25feefd1f57ef6a662f80c99018690170a3a8070773a08eaf694d1d3d9",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/policy.ts",
+      "source_mode": "100644",
+      "source_blob": "4665be37e8f9afff1c9e1f5dd60d98e0d70c8c6c",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/policy.ts",
+      "target_sha256": "68d240505852cf23c9b2dea463342e9e61243f486b3cc86c735d140f9ee7be49",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/render.ts",
+      "source_mode": "100644",
+      "source_blob": "0e935839357335f24ab1bbc193d761495646ea99",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/render.ts",
+      "target_sha256": "2b709e86628d5b8fdb61f860e60ababc342b0626c67576305442cf548283a604",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/tsconfig.json",
+      "source_mode": "100644",
+      "source_blob": "477af90b05cbd24fcf974fd73cf331d5ac7379cc",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/tsconfig.json",
+      "target_sha256": "1ecccc72320b086c63ce3f73c959896fd747363e63553b3b1136296ea4069e45",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/types.compile.ts",
+      "source_mode": "100644",
+      "source_blob": "1b53279c7f3e5da55703ed17d6ad0616254c5751",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/types.compile.ts",
+      "target_sha256": "621af4c9a664fbf699a9737efccdc248abb416df8819c9dc5f824beae2b9b1d6",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/types.ts",
+      "source_mode": "100644",
+      "source_blob": "b67144e0d757e0b61ff079f981ced0a98555ea9d",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/types.ts",
+      "target_sha256": "64ba6221e3bfe61bbb292337d199cdec6309455477280efb060203dba34e0e91",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/watch-pr/watch-pr",
+      "source_mode": "100755",
+      "source_blob": "99807d577c3b006cfe6ee9e149cf2914bfd4afd6",
+      "target": "resources/skills/poteto-mode/scripts/watch-pr/watch-pr",
+      "target_sha256": "d955603be6cc0e8b8ffcec722f635192b2261410b1f2929abea94480e47eb5d4",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/poteto-mode/scripts/worktree-audit.sh",
+      "source_mode": "100755",
+      "source_blob": "b9af08160032aeb17143248f2a3648e98f5a75b3",
+      "target": "resources/skills/poteto-mode/scripts/worktree-audit.sh",
+      "target_sha256": "feb80bba63dbe659ad4b9cc2557c004d16e2b2448fe7a9cc07c9f309f04c2cd3",
+      "classification": "script",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "# Transcripts dir: ~/.cursor/projects/<slugified-repo-path>/agent-transcripts.\nslug=$(printf '%s' \"$main_wt\" | sed 's#^/##; s#/#-#g')\ntranscripts=\"$HOME/.cursor/projects/$slug/agent-transcripts\"\nnow=$(date +%s)",
+          "to": "# Transcripts dir: this workspace only, named by PSTACK_TRANSCRIPTS_DIR. When it\n# is unset or missing, the last-chat column stays empty and no worktree is called\n# safe on transcript evidence (see the bucket rule below).\ntranscripts=\"${PSTACK_TRANSCRIPTS_DIR:-}\"\nnow=$(date +%s)\n\n# stat and date differ between GNU and BSD; try GNU first, then BSD.\nmtime_of() {\n\tstat -c '%Y' \"$1\" 2>/dev/null || stat -f '%m' \"$1\" 2>/dev/null\n}\nformat_mtime() {\n\tdate -d \"@$1\" '+%Y-%m-%d' 2>/dev/null || date -r \"$1\" '+%Y-%m-%d' 2>/dev/null\n}",
+          "reason": "the transcript source is this workspace's explicit path and stat/date work on GNU and BSD"
+        },
+        {
+          "op": "edit",
+          "from": "\tlast=\"-\"; last_ts=0\n\tif [ -d \"$transcripts\" ]; then\n\t\tf=$(rg -l -e \"${wt}/\" -e \"${wt}\\\"\" \"$transcripts\" 2>/dev/null \\\n\t\t\t| xargs stat -f '%m %N' 2>/dev/null | sort -rn | head -1)\n\t\tif [ -n \"$f\" ]; then last_ts=$(echo \"$f\" | awk '{print $1}')\n\t\t\tlast=$(date -r \"$last_ts\" '+%Y-%m-%d' 2>/dev/null); fi\n\tfi\n\trecent=$([ \"$last_ts\" -gt 0 ] 2>/dev/null && [ $(( (now - last_ts) / 86400 )) -le 4 ] && echo yes || echo no)\n\n\tcase \"$dirty\" in wip:*) bucket=hold-wip ;; *)\n\t\tcase \"$pr\" in *OPEN*) bucket=hold-open-pr ;; *)\n\t\t\tif [ \"$recent\" = yes ]; then bucket=verify-recent-chat\n\t\t\telif [ \"$merged\" = YES ] || [ \"$pr\" != \"-\" ]; then bucket=safe\n\t\t\telse bucket=review; fi ;;\n\t\tesac ;;\n\tesac",
+          "to": "\tlast=\"-\"; last_ts=0; transcripts_available=no\n\tif [ -n \"$transcripts\" ] && [ -d \"$transcripts\" ]; then\n\t\tscan=$(mktemp 2>/dev/null) || scan=\"\"\n\t\tif [ -n \"$scan\" ]; then\n\t\t\ttranscripts_available=yes\n\t\t\trg_status=0\n\t\t\trg -F -0 -l -e \"${wt}/\" -e \"${wt}\\\"\" \"$transcripts\" > \"$scan\" 2>/dev/null || rg_status=$?\n\t\t\tif [ \"$rg_status\" -gt 1 ]; then\n\t\t\t\ttranscripts_available=no\n\t\t\telse\n\t\t\t\twhile IFS= read -r -d '' transcript; do\n\t\t\t\t\tts=$(mtime_of \"$transcript\") || { transcripts_available=no; last_ts=0; break; }\n\t\t\t\t\tif ! [[ \"$ts\" =~ ^[0-9]+$ ]]; then\n\t\t\t\t\t\ttranscripts_available=no; last_ts=0; break\n\t\t\t\t\tfi\n\t\t\t\t\tif [ \"$ts\" -gt \"$last_ts\" ]; then last_ts=$ts; fi\n\t\t\t\tdone < \"$scan\"\n\t\t\tfi\n\t\t\trm -f \"$scan\"\n\t\tfi\n\tfi\n\tif [ \"$last_ts\" -gt 0 ]; then last=$(format_mtime \"$last_ts\") || last=\"?\"; fi\n\trecent=$([ \"$transcripts_available\" = yes ] && [ \"$last_ts\" -gt 0 ] 2>/dev/null && [ $(( (now - last_ts) / 86400 )) -le 4 ] && echo yes || echo no)\n\n\t# Conservative bucket: without transcript evidence the audit can only say a\n\t# worktree is worth a look, never that it is safe to prune.\n\tcase \"$dirty\" in wip:*) bucket=hold-wip ;; *)\n\t\tcase \"$pr\" in *OPEN*) bucket=hold-open-pr ;; *)\n\t\t\tif [ \"$transcripts_available\" = no ]; then bucket=review-no-transcripts\n\t\t\telif [ \"$recent\" = yes ]; then bucket=verify-recent-chat\n\t\t\telif [ \"$merged\" = YES ] || [ \"$pr\" != \"-\" ]; then bucket=safe\n\t\t\telse bucket=review; fi ;;\n\t\tesac ;;\n\tesac",
+          "reason": "no worktree is bucketed safe on absent transcript evidence, and the mtime helpers are portable"
+        },
+        {
+          "op": "edit",
+          "from": "main_wt=$(git worktree list --porcelain | awk '/^worktree /{print $2; exit}')",
+          "to": "main_wt=$(git worktree list --porcelain | awk '/^worktree /{sub(/^worktree /, \"\"); print; exit}')",
+          "reason": "porcelain worktree paths may contain spaces and must not be split into fields"
+        },
+        {
+          "op": "edit",
+          "from": "git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt; do",
+          "to": "git worktree list --porcelain | awk '/^worktree /{sub(/^worktree /, \"\"); print}' | while IFS= read -r wt; do",
+          "reason": "the audit preserves the complete porcelain path and disables read trimming"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/principle-attack-the-premise/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "f9785ff9fdcf37d1c689e4468da7d611f3b76d4b",
+      "target": "resources/skills/principle-attack-the-premise/SKILL.md",
+      "target_sha256": "c87bd7536f772f8a403ad8155535ee17a1bbec9a353156693eb3bb1520c87ae3",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-attack-the-premise.md"
+    },
+    {
+      "source": "pstack/skills/principle-boundary-discipline/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "dfe9a6fb0e5acd6ae43a41437ee0951adfe839cb",
+      "target": "resources/skills/principle-boundary-discipline/SKILL.md",
+      "target_sha256": "62ac2862c2caa22dd14531f51c9c6bb445ceb198ca98a687e25b4d47c1f10a28",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-boundary-discipline.md"
+    },
+    {
+      "source": "pstack/skills/principle-build-the-lever/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "277189a10b00fddc7cbb63fcf2323c7341abb0df",
+      "target": "resources/skills/principle-build-the-lever/SKILL.md",
+      "target_sha256": "458b269eab8e95a1573276955312f7d2a13ae8599879a9efc748248f6bc34b56",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-build-the-lever.md"
+    },
+    {
+      "source": "pstack/skills/principle-encode-lessons-in-structure/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "df9cd5ff2fb3c18267349cc6aecd8121848ef834",
+      "target": "resources/skills/principle-encode-lessons-in-structure/SKILL.md",
+      "target_sha256": "77044c83a9ac6df78fc643887ea5f1f11f082adaf14b717c060cdaed03cce863",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-encode-lessons-in-structure.md"
+    },
+    {
+      "source": "pstack/skills/principle-exhaust-the-design-space/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "85dd16f1312f3427e2dddcfc8e7deb89e2555bb3",
+      "target": "resources/skills/principle-exhaust-the-design-space/SKILL.md",
+      "target_sha256": "8583310d7297b7823d75494faa57b003564d436807febecdecbd8321abe5cf6e",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-exhaust-the-design-space.md"
+    },
+    {
+      "source": "pstack/skills/principle-experience-first/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "5ea51741302cf3af4cc0b90ec70815bd3208dbf2",
+      "target": "resources/skills/principle-experience-first/SKILL.md",
+      "target_sha256": "58903529d733b1c1a7c9ccf127d45ef3c7d0d9f0b81164a4dc6b80efe6f2912b",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-experience-first.md"
+    },
+    {
+      "source": "pstack/skills/principle-fix-root-causes/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "7e5a419aeec97b4076fa517865013677428a9fa3",
+      "target": "resources/skills/principle-fix-root-causes/SKILL.md",
+      "target_sha256": "ba4cd38da1dcc8fe5432feb64457cba95594736a9b21b2ebf8f8c52aee068707",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-fix-root-causes.md"
+    },
+    {
+      "source": "pstack/skills/principle-foundational-thinking/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "19cc6c0eaa6fcbc2863fb73d1d25ca196c6a46e0",
+      "target": "resources/skills/principle-foundational-thinking/SKILL.md",
+      "target_sha256": "864b827e8199d946ce58beca0f89c4ed4099ed6e426fb698a3aaa45de2a9eea2",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-foundational-thinking.md"
+    },
+    {
+      "source": "pstack/skills/principle-guard-the-context-window/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "eb2cecc40f9d830dc077009f93a467be69f195a2",
+      "target": "resources/skills/principle-guard-the-context-window/SKILL.md",
+      "target_sha256": "9f60e2c79b35f865cb103462f9128c6760b70f603475d1e535e5930f61840f66",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-guard-the-context-window.md"
+    },
+    {
+      "source": "pstack/skills/principle-laziness-protocol/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "e5bc77e62aa96ae13e482a84df61b3c711c5d828",
+      "target": "resources/skills/principle-laziness-protocol/SKILL.md",
+      "target_sha256": "9006579e9e3f33955d17569733db688ae65f22577dc3b21803d219a5a8445aff",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-laziness-protocol.md"
+    },
+    {
+      "source": "pstack/skills/principle-make-operations-idempotent/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "a0834247ca99b09c11441747717a8034d4c22d7c",
+      "target": "resources/skills/principle-make-operations-idempotent/SKILL.md",
+      "target_sha256": "540738217c3da7bf513b9886924ad6a2bc77e58be867f5bd2e1831c74bf2ce70",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-make-operations-idempotent.md"
+    },
+    {
+      "source": "pstack/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "06c7cfd87becc62d614d0af075b792f8ec6eb21d",
+      "target": "resources/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md",
+      "target_sha256": "09978915a4a11990cf0a9a02d9c08cc59e0b7a04c5c24b83aa560fbe4146f75b",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-migrate-callers-then-delete-legacy-apis.md"
+    },
+    {
+      "source": "pstack/skills/principle-minimize-reader-load/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "64541d963123e344078d82fd3977e857e76129df",
+      "target": "resources/skills/principle-minimize-reader-load/SKILL.md",
+      "target_sha256": "42551c5dc74cd578163c148da552db3ff67d29b78600ef216bfd311fb828fe69",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-minimize-reader-load.md"
+    },
+    {
+      "source": "pstack/skills/principle-model-the-domain/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "e1d664a19243c90a84e5e7a816e9e05146c88720",
+      "target": "resources/skills/principle-model-the-domain/SKILL.md",
+      "target_sha256": "bbadbb9a723fac3f76e782ae45665eb94058ec10993e4bae36d4dc6b0e4eac07",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-model-the-domain.md"
+    },
+    {
+      "source": "pstack/skills/principle-never-block-on-the-human/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "46d410715c0f36cc43f6774dac9f89b3404e9aa4",
+      "target": "resources/skills/principle-never-block-on-the-human/SKILL.md",
+      "target_sha256": "d82bce9ab9193249d1ec0d514202d89602f0fd3d312174d622c2dd222bae5a2e",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-never-block-on-the-human.md"
+    },
+    {
+      "source": "pstack/skills/principle-outcome-oriented-execution/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "4c2ed4695b4ca15ea5a98468c13bfe5de97f16df",
+      "target": "resources/skills/principle-outcome-oriented-execution/SKILL.md",
+      "target_sha256": "beedcaed75572a6a1662d47f16da203c2bd2c9dbffbbd678d4ba187d67b7e670",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-outcome-oriented-execution.md"
+    },
+    {
+      "source": "pstack/skills/principle-prove-it-works/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "4563023d4d9f22e10e33cbf0ae94da156be30618",
+      "target": "resources/skills/principle-prove-it-works/SKILL.md",
+      "target_sha256": "ae13d287984a5864312b6286899d4ee2b60f8272b5e5e8fcc586a7c3ea51020b",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-prove-it-works.md"
+    },
+    {
+      "source": "pstack/skills/principle-redesign-from-first-principles/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "090a4325f43a96080cce3895f0e932b62c39146a",
+      "target": "resources/skills/principle-redesign-from-first-principles/SKILL.md",
+      "target_sha256": "a1c7fd0a96b40e12a74bceb0e6bb20a9666dd844dcabfb624acb27da23b929fe",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-redesign-from-first-principles.md"
+    },
+    {
+      "source": "pstack/skills/principle-separate-before-serializing-shared-state/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "ff93b4a2032c08e2232992a9a24f2891ee14e58f",
+      "target": "resources/skills/principle-separate-before-serializing-shared-state/SKILL.md",
+      "target_sha256": "05294b40448e927c5da1c7b6f5c6b9fed3744637e3833d2d948b9154a9dd00bb",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-separate-before-serializing-shared-state.md"
+    },
+    {
+      "source": "pstack/skills/principle-sequence-verifiable-units/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "dd008c371ee803decaa1964b72081a646d95d9b9",
+      "target": "resources/skills/principle-sequence-verifiable-units/SKILL.md",
+      "target_sha256": "761390804ee36c32f5338d8db47ec54463d40ff96dbb296dfafabcd5f2593eec",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-sequence-verifiable-units.md"
+    },
+    {
+      "source": "pstack/skills/principle-subtract-before-you-add/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "d28770cf47a5798d0250a25ad494aedfecad154e",
+      "target": "resources/skills/principle-subtract-before-you-add/SKILL.md",
+      "target_sha256": "a983a50e732c1ed315eba7aaf47a61329e31c4794eb1ab9d25d9945265b31e03",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-subtract-before-you-add.md"
+    },
+    {
+      "source": "pstack/skills/principle-test-behavior-not-implementation/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "42de6f8f7cab01b9f67aa28bd59b128f7574fbab",
+      "target": "resources/skills/principle-test-behavior-not-implementation/SKILL.md",
+      "target_sha256": "87e40efe4e486f7ea639d2ed1fc0abe6c93b8fd0e89a81218086909d2470a52e",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-test-behavior-not-implementation.md"
+    },
+    {
+      "source": "pstack/skills/principle-type-system-discipline/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "6030f171bee0d1902cf7ca91f06225e09f0f5433",
+      "target": "resources/skills/principle-type-system-discipline/SKILL.md",
+      "target_sha256": "c83da8031ffb4c86410030d3e261f659598fca2b7d8158fd9dc269d70a3a025e",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.principle-type-system-discipline.md"
+    },
+    {
+      "source": "pstack/skills/recall/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "a70062a3f89a8d68b3391bc71fc4c6cc2dfcf6a4",
+      "target": "resources/skills/recall/SKILL.md",
+      "target_sha256": "11fae8dd79f50da11a4309498b949a12d4948ed8feeedd5f518b6ce78d702371",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Transcripts live at `~/.cursor/projects/<slug>/agent-transcripts/<uuid>/<uuid>.jsonl`, where `<slug>` is the workspace path with the leading slash dropped and each \"/\" turned into \"-\" (so `/Users/you/proj` becomes `Users-you-proj`). Every line is one chat message.",
+          "to": "Transcripts live in this workspace's transcript directory, named by the host and reported by `pstack-native.py capability-report`. The layout varies by host and version, and every line is one chat message. `PSTACK_TRANSCRIPTS_DIR` carries the path when the host stores sessions outside the project.",
+          "reason": "session history is host-owned; the Cursor store path and its slug rule no longer exist"
+        },
+        {
+          "op": "edit",
+          "from": "Tell every subagent to order candidates by real modification time (`ls -t`) and never by UUID name,",
+          "to": "Tell every subagent to order candidates by real modification time (`ls -t`) and never by session id,",
+          "reason": "session ids are host-specific identifiers, not UUIDs everywhere"
+        },
+        {
+          "op": "edit",
+          "from": "5. Verify against live state. Take the PRs, branches, and tickets that the mining and the sweep surfaced and check them with `git` and `gh`.",
+          "to": "5. Verify against live state. Take the PRs, branches, and tickets that the mining and the sweep surfaced and check them with `git` and the forge CLI the capability report found (`gh`, or `origin` where it resolves).",
+          "reason": "forge access is capability-checked rather than assumed"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.recall.md"
+    },
+    {
+      "source": "pstack/skills/reflect/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "d004951789602ea16430f9de5a542bf80b419cdb",
+      "target": "resources/skills/reflect/SKILL.md",
+      "target_sha256": "d8708e8b0631e526bbc3f89167566da91422206f73bfca551b23a20c97573a02",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "The parent finds its own transcript file before fanning out. The system prompt names the active workspace's `agent-transcripts/` directory. Use that path. Do not glob across `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.",
+          "to": "The parent finds its own transcript before fanning out. `pstack-native.py paths` and `capability-report` say whether this host exposes session history and where. Read only this workspace's transcripts: never search another project's store, because that crosses workspace boundaries and reads private chats from unrelated projects.",
+          "reason": "session history is read through the host's workspace-scoped location, not a Cursor store"
+        },
+        {
+          "op": "edit",
+          "from": "```bash\nls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcripts>/*/subagents/*.jsonl 2>/dev/null | head -10\n```\n\nThree transcript layouts: legacy flat (`<id>.jsonl`), current nested (`<id>/<id>.jsonl`), and subagent (`<parent>/subagents/<child>.jsonl`).",
+          "to": "```bash\nls -t \"$PSTACK_TRANSCRIPTS_DIR\"/*.jsonl \"$PSTACK_TRANSCRIPTS_DIR\"/*/*.jsonl 2>/dev/null | head -10\n```\n\nLayouts vary by host and version: flat (`<id>.jsonl`), nested (`<id>/<id>.jsonl`), and host-specific subagent files. Read what the directory actually holds rather than assuming a layout.",
+          "reason": "the transcript layout is host-specific; the resource stops hard-coding Cursor's"
+        },
+        {
+          "op": "edit",
+          "from": "One message, three `Task` calls, `subagent_type: generalPurpose`, explicit `model:` on each, agent mode (`readonly: false`). Reviewers need MCP access for context lookups (tickets, chat threads, observability traces referenced in the transcript). Readonly strips MCPs.",
+          "to": "One batch, three subagent dispatches on the host's general-purpose subagent, each with its resolved role model, in agent mode rather than read-only. Reviewers need MCP access for context lookups (tickets, chat threads, observability traces referenced in the transcript), and read-only mode strips MCPs on hosts that make MCP conditional.",
+          "reason": "reviewer dispatch follows the host contract and the role map"
+        },
+        {
+          "op": "edit",
+          "from": "| Lens | `model` | Prompt template |\n|---|---|---|\n| Judgment | your configured reflect-judgment model (default `claude-fable-5-1-thinking-max`) | `references/judgment-reviewer.md` |\n| Tooling | your configured reflect-tooling model (default `gpt-5.6-sol-max`) | `references/tooling-reviewer.md` |\n| Divergent | your configured reflect-judgment model (default `claude-fable-5-1-thinking-max`) | `references/divergent-reviewer.md` |",
+          "to": "| Lens | `model` | Prompt template |\n|---|---|---|\n| Judgment | role `reflect judgment, divergent, synthesizer` | `references/judgment-reviewer.md` |\n| Tooling | role `reflect tooling` | `references/tooling-reviewer.md` |\n| Divergent | role `reflect judgment, divergent, synthesizer` | `references/divergent-reviewer.md` |\n\nResolve each role with `pstack-native.py role-plan --role \"<role>\"`; when the leg inherits the parent model, omit the model on native dispatch.",
+          "reason": "reflect lens models come from the project role map, not vendor defaults"
+        },
+        {
+          "op": "edit",
+          "from": "Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the `Task` response body.",
+          "to": "Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the subagent report.",
+          "reason": "delegation returns through the host subagent facility"
+        },
+        {
+          "op": "edit",
+          "from": "One `Task` call, `subagent_type: generalPurpose`, using your configured reflect-judgment model (default `claude-fable-5-1-thinking-max`), agent mode (`readonly: false`). The synthesizer's quality check includes spot-verifying citations, which can require MCP access. Readonly strips MCPs.",
+          "to": "One subagent dispatch on the host's general-purpose subagent, on role `reflect judgment, divergent, synthesizer`, in agent mode rather than read-only. The synthesizer's quality check includes spot-verifying citations, which can require MCP access, and read-only mode strips MCPs on hosts that make MCP conditional.",
+          "reason": "synthesizer dispatch follows the role map and the host contract"
+        },
+        {
+          "op": "edit",
+          "from": "- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): hand to Cursor's built-in `create-skill` skill and run its draft / test / iterate loop.",
+          "to": "- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): hand to the packaged create-skill guide (`.specify/extensions/pstack/resources/dependencies/create-skill.md`) and run its draft / test / iterate loop.",
+          "reason": "the authoring guide ships with this extension"
+        },
+        {
+          "op": "edit",
+          "from": "Before applying any Accepted edit, present the synthesizer's full Accepted/Rejected/Backlog output to the user and wait for explicit approval.",
+          "to": "Before applying any Accepted edit, present the synthesizer's full Accepted/Rejected/Backlog output to the user and wait for explicit approval. For workflow dispatch, read that output from the validated report's non-empty `result`, not its evidence excerpt.",
+          "reason": "synthesis consumers read the report result channel rather than verification metadata"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.reflect.md"
+    },
+    {
+      "source": "pstack/skills/reflect/references/divergent-reviewer.md",
+      "source_mode": "100644",
+      "source_blob": "73969d847dd97f2d714df20d27359ce98ad0f7cc",
+      "target": "resources/skills/reflect/references/divergent-reviewer.md",
+      "target_sha256": "4d8d545659ea6b50b76c53d9f095ef4ba4f1864de434d68b1527654697fdb8ff",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- `Read` tool calls against any `SKILL.md` file (workspace `.cursor/skills/`, user-level `~/.cursor/skills/`, or plugin-installed paths under `~/.cursor/plugins/`)\n- `Task` prompts that name a skill path",
+          "to": "- reads of any `SKILL.md` file the session can reach (project skills under `.specify/pstack/skills/`, packaged skills under `.specify/extensions/pstack/resources/skills/`)\n- subagent prompts that name a skill path",
+          "reason": "skill locations are host- and project-owned, not Cursor store paths"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/reflect/references/judgment-reviewer.md",
+      "source_mode": "100644",
+      "source_blob": "830213aedff81c5b27462988201663e1f0229a72",
+      "target": "resources/skills/reflect/references/judgment-reviewer.md",
+      "target_sha256": "2dc4c428f74f35081aac294f9024f18777c61c680b1e78dff3836da7d9502b6b",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- `Read` tool calls against any `SKILL.md` file (workspace `.cursor/skills/`, user-level `~/.cursor/skills/`, or plugin-installed paths under `~/.cursor/plugins/`)\n- `Task` prompts that name a skill path",
+          "to": "- reads of any `SKILL.md` file the session can reach (project skills under `.specify/pstack/skills/`, packaged skills under `.specify/extensions/pstack/resources/skills/`)\n- subagent prompts that name a skill path",
+          "reason": "skill locations are host- and project-owned, not Cursor store paths"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/reflect/references/synthesizer.md",
+      "source_mode": "100644",
+      "source_blob": "d0e78195186c0dd6cfdc87ba19402ea8cd2aa385",
+      "target": "resources/skills/reflect/references/synthesizer.md",
+      "target_sha256": "2f76c847eb45b182dc6fbcbf7d96c8ee7e2986ecfd9e0d640fec44e3cc5a617c",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/reflect/references/tooling-reviewer.md",
+      "source_mode": "100644",
+      "source_blob": "e7fcd9e669c5a10664f4a14d8856af6978f9e535",
+      "target": "resources/skills/reflect/references/tooling-reviewer.md",
+      "target_sha256": "80a7270728edd424d335beb482181fd7250589813a31e3dbad404dc10454eabe",
+      "classification": "reference",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "- `Read` tool calls against any `SKILL.md` file (workspace `.cursor/skills/`, user-level `~/.cursor/skills/`, or plugin-installed paths under `~/.cursor/plugins/`)\n- `Task` prompts that name a skill path",
+          "to": "- reads of any `SKILL.md` file the session can reach (project skills under `.specify/pstack/skills/`, packaged skills under `.specify/extensions/pstack/resources/skills/`)\n- subagent prompts that name a skill path",
+          "reason": "skill locations are host- and project-owned, not Cursor store paths"
+        }
+      ],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/setup-pstack/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "6bf4b49a837a287fd211515d182ea31a1d091f18",
+      "target": "resources/skills/setup-pstack/SKILL.md",
+      "target_sha256": "b077f443e4b7d3dfab91de64315b9af8c399ae2223e81c624011e7a10c922c1c",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "override",
+          "from": "pstack/skills/setup-pstack/SKILL.md",
+          "reason": "writes the project role map through the runtime helper, with an explicit legacy migration"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.setup-pstack.md"
+    },
+    {
+      "source": "pstack/skills/show-me-your-work/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "6e98dd24e619a9097ddd51b2a58ffb8f92b62cbf",
+      "target": "resources/skills/show-me-your-work/SKILL.md",
+      "target_sha256": "95c3d00fb24cd81a1e91503efc40112a168f4cb958875c88533008fec927b03a",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Read this run's transcript under the active workspace's `agent-transcripts/` directory (the system prompt names the path). Don't glob across `~/.cursor/projects/*/`. That reads unrelated private chats.",
+          "to": "Read this run's transcript from this workspace's transcript directory (`pstack-native.py capability-report` says whether the host exposes it; `PSTACK_TRANSCRIPTS_DIR` carries the path). Don't search another project's store: that reads unrelated private chats.",
+          "reason": "session history location is host-reported, not a Cursor store path"
+        },
+        {
+          "op": "edit",
+          "from": "Use the helper `scripts/log.sh <logfile> <phase> <decision> <why> <evidence> <result>`.",
+          "to": "Use the helper `.specify/extensions/pstack/resources/skills/show-me-your-work/scripts/log.sh <logfile> <phase> <decision> <why> <evidence> <result>`.",
+          "reason": "the decision-log helper is invoked from its installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.show-me-your-work.md"
+    },
+    {
+      "source": "pstack/skills/show-me-your-work/references/decision-log-template.tsv",
+      "source_mode": "100644",
+      "source_blob": "db220376ecb8c582a6a4f6575a8f26469603a38d",
+      "target": "resources/skills/show-me-your-work/references/decision-log-template.tsv",
+      "target_sha256": "6779378006a2f5225e8c06deb84f1d913fb532041ebbb6e50d94600bfe3f4b76",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/show-me-your-work/scripts/log.sh",
+      "source_mode": "100755",
+      "source_blob": "523e2a74ee15bfe6528c795a347827f04ecc5e95",
+      "target": "resources/skills/show-me-your-work/scripts/log.sh",
+      "target_sha256": "1601bc18f9aba0af3f5d6375e4f2d5dc6102334d1bca935026c0e3547cdadbbf",
+      "classification": "script",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/swarm/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "5b465d3ba542703707871165b369406bbd90c7e9",
+      "target": "resources/skills/swarm/SKILL.md",
+      "target_sha256": "516f0f1ef76d48285d97cea36f53059593d7422bad6fdc2f5e568340e6ce920f",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "Fan out N parallel cloud workers. They may cover separate slices, race the same brief, or mix both.",
+          "to": "Fan out N parallel local workers. They may cover separate slices, race the same brief, or mix both.",
+          "reason": "there is no cloud worker environment here, so the opening claims none"
+        },
+        {
+          "op": "edit",
+          "from": "When a worker must start from a non-default pushed branch, pass `cloud_base_branch`.",
+          "to": "When a worker must start from a non-default branch, give it an isolated local worktree checked out at that branch. There is no cloud base-branch parameter: the worktree and the checkout are the native equivalent.",
+          "reason": "cloud_base_branch is a Cursor cloud field with no native counterpart"
+        },
+        {
+          "op": "edit",
+          "from": "4. Pick the worker model from `swarm workers` in `~/.cursor/rules/pstack-models.mdc` when present. Otherwise use `grok-4.6-fast-xhigh`. For a model race, name each arm's model up front.",
+          "to": "4. Resolve the worker model from role `swarm workers` in the project role map (`pstack-native.py role-plan --role \"swarm workers\"`). An empty role is a setup error, not a reason to pick a model yourself. For a model race, name each arm's model up front, and only `swarm workers` may carry an explicit race model: it must be concrete and already in the map's approved `pool`, and it is passed as `--race-model`, never as a free-form selector.",
+          "reason": "worker model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "edit",
+          "from": "Spawn all N workers in one message with `subagent_type: generalPurpose`, `environment: \"cloud\"`, `run_in_background: true`, and the configured model. Use `environment: \"local\"` only when the worker needs access to something on the user's computer.",
+          "to": "Spawn all N workers in one batch with the host's general-purpose subagent, dispatched in the background, on the resolved model. There is no cloud environment here: the only worker environments are this machine and an isolated local worktree, and the work stops when the machine or the process stops. Say which one each worker used.",
+          "reason": "Cursor cloud workers become native local workers, with the lost survival stated"
+        },
+        {
+          "op": "edit",
+          "from": "3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.",
+          "to": "3. Set N from the user or derive it from the shape. N is total workers, not the concurrency limit; keep the in-flight count within the role map's `parallel.max_workers`.",
+          "reason": "concurrency cap is the project role map's value, not a cloud limit"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        },
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.swarm.md"
+    },
+    {
+      "source": "pstack/skills/tdd/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "887a98b7f4ead1ec0d147ce6e5ad6844ef16ca5f",
+      "target": "resources/skills/tdd/SKILL.md",
+      "target_sha256": "011cab0ecc04a3632121efb493ae4d60aa282a9b72c66de74dd8ad7e4313e05a",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.tdd.md"
+    },
+    {
+      "source": "pstack/skills/teach/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "25369f3f554ed6b5826340ae3eee688fac0bda80",
+      "target": "resources/skills/teach/SKILL.md",
+      "target_sha256": "bd286e5a6290673be2cd28aef7af2ec7f1fb138e6bce156ea657368c7e7fc8a4",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.teach.md"
+    },
+    {
+      "source": "pstack/skills/technical-writing/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "70a477e42fc5f37c35bf602d86ff89c0f5258ecf",
+      "target": "resources/skills/technical-writing/SKILL.md",
+      "target_sha256": "d317940991f63a9088c0b4d279dc195df049cb47d5943206178908908d52f18d",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "rewrite",
+          "from": "bare pstack command invocations in active resources",
+          "to": "/speckit.pstack.<name>",
+          "reason": "active resources invoke registered native command names"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.technical-writing.md"
+    },
+    {
+      "source": "pstack/skills/typescript-best-practices/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "2c0279d9a5f800192605e47b55cae4e75a17ec27",
+      "target": "resources/skills/typescript-best-practices/SKILL.md",
+      "target_sha256": "28f9e61710e205f6f3c5476f333483cff0e988f6a5b639e2faad536344b40c5e",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.typescript-best-practices.md"
+    },
+    {
+      "source": "pstack/skills/typescript-best-practices/references/patterns.md",
+      "source_mode": "100644",
+      "source_blob": "f44d22ffe9130c5340d55a2fa57028c6959479cb",
+      "target": "resources/skills/typescript-best-practices/references/patterns.md",
+      "target_sha256": "62e9cd32d2fa066a35d0d1349aac22dce31a48ad7d5eaf142570770cfe707384",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/unslop/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "a3a7dc7baf0bed5fed4fe0f12ea7fcfe48d94c89",
+      "target": "resources/skills/unslop/SKILL.md",
+      "target_sha256": "c6d2572294d933a428211921069e9a248490e9b466ca59437cb4d9de248600ca",
+      "classification": "command",
+      "transforms": [],
+      "entrypoint": "commands/generated/speckit.pstack.unslop.md"
+    },
+    {
+      "source": "pstack/skills/why/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "53045ddba6f52fa0eec44101fd8e363d47141832",
+      "target": "resources/skills/why/SKILL.md",
+      "target_sha256": "3b859b13eb94c45aefcf6ae4e17a697beba0df54dbd705c0dd66392ff2d07a2f",
+      "classification": "command",
+      "transforms": [
+        {
+          "op": "edit",
+          "from": "make your best guess from conversation context (open files, recent edits, cursor location, what was just discussed)",
+          "to": "make your best guess from conversation context (open files, recent edits, what was just discussed)",
+          "reason": "editor cursor location is a Cursor-specific signal"
+        },
+        {
+          "op": "edit",
+          "from": "Before spawning investigators, list the available MCPs from the Cursor environment. Use the available-tools map when present. Otherwise inspect the `mcps/` directory Cursor exposes for enabled MCP servers.",
+          "to": "Before spawning investigators, list the MCP servers this session actually has. Use the host's available-tools listing when present. Otherwise read the host's MCP configuration. A source you cannot reach is reported as unavailable, not assumed.",
+          "reason": "MCP inventory is read from the live host, not a Cursor directory"
+        },
+        {
+          "op": "edit",
+          "from": "- `subagent_type`: `generalPurpose`\n- `model`: your configured why-investigators model (default `grok-4.6-fast-xhigh`)\n- `readonly`: `false` (agent mode). **Do not use readonly/Ask mode.** It strips MCP access, which disables MCP-backed investigators entirely. Investigators still shouldn't write anything.",
+          "to": "- subagent: the host's general-purpose subagent\n- `model`: role `why investigators` from the project role map (`pstack-native.py role-plan --role \"why investigators\"`); omit the model when the leg inherits the current one\n- agent mode, not read-only: read-only mode strips MCP access on hosts that make MCP conditional, which disables MCP-backed investigators entirely. Investigators still should not write anything.",
+          "reason": "investigator model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "edit",
+          "from": "- `subagent_type`: `generalPurpose`\n- `model`: your configured why-synthesizer model (default `claude-fable-5-1-thinking-max`)\n- `readonly`: `false` (agent mode). The synthesizer's quality check spot-verifies citations, which can require MCP access. Readonly/Ask mode strips MCPs and defeats that.",
+          "to": "- subagent: the host's general-purpose subagent\n- `model`: role `why synthesizer` from the project role map (`pstack-native.py role-plan --role \"why synthesizer\"`); omit the model when the leg inherits the current one\n- agent mode, not read-only: the synthesizer's quality check spot-verifies citations, which can require MCP access, and read-only mode strips MCPs on hosts that make MCP conditional.",
+          "reason": "synthesizer model comes from the project role map, not a vendor default"
+        },
+        {
+          "op": "edit",
+          "from": "Take the synthesizer's output and present it to the user. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**.",
+          "to": "Take the synthesizer's output and present it to the user. For workflow dispatch, read the complete answer from the validated report's non-empty `result`, not its evidence excerpt. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**.",
+          "reason": "research consumers read the report result channel rather than verification metadata"
+        },
+        {
+          "op": "rewrite",
+          "from": "`pstack-native\\.py ([^`\\n]+)`",
+          "to": "`.specify/extensions/pstack/runtime/pstack-native.py \\1`",
+          "reason": "the runtime helper is invoked from its exact installed extension path"
+        }
+      ],
+      "entrypoint": "commands/generated/speckit.pstack.why.md"
+    },
+    {
+      "source": "pstack/skills/why/references/epistemics.md",
+      "source_mode": "100644",
+      "source_blob": "3732bf6881b60d1337fa3498574452a85d33ba30",
+      "target": "resources/skills/why/references/epistemics.md",
+      "target_sha256": "fcc0f559c072832c869a5ada72434b4849320a637ae63c09e8ee14f7ad787059",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/investigator-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "3b56af44c589833508f4605cfdd4432b39a16739",
+      "target": "resources/skills/why/references/investigator-prompt.md",
+      "target_sha256": "6892956a7ab0b5ee6c4babaf4f793703abe89b350ea7cb9463b4a56eea1c8266",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/source-playbook.md",
+      "source_mode": "100644",
+      "source_blob": "aa3d877cd539763ff05e266ae0a02dd811441e2b",
+      "target": "resources/skills/why/references/source-playbook.md",
+      "target_sha256": "9ae9dcb9d09111c9facc68510331c5aba4aed9b1b057314ff1fc0e166ad3993a",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/code-archaeology.md",
+      "source_mode": "100644",
+      "source_blob": "32d5f97f8d2d3974c668f5f0392737b7e8e25afd",
+      "target": "resources/skills/why/references/sources/code-archaeology.md",
+      "target_sha256": "8c14aa382f0de40829b2668d43e3f54814480bb93a486c9282ada4003f6b9dbd",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/databricks.md",
+      "source_mode": "100644",
+      "source_blob": "2770763ff5d0d1ad004abcc9a0138c9537ad1978",
+      "target": "resources/skills/why/references/sources/databricks.md",
+      "target_sha256": "236ede7aab6454662a992db088a5393537a5233a4c26719c93188f9e174488f6",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/datadog.md",
+      "source_mode": "100644",
+      "source_blob": "d8363b1c1d1c7eadb15d47abd83bf70537c39620",
+      "target": "resources/skills/why/references/sources/datadog.md",
+      "target_sha256": "ebe9c07bac28e47757ee7f16fb93b0c01d427a08c501957d047f395a2f37b7e7",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/incident-postmortem.md",
+      "source_mode": "100644",
+      "source_blob": "450d6e52f25b1b41f741cb3e9c93e1c74ef858b4",
+      "target": "resources/skills/why/references/sources/incident-postmortem.md",
+      "target_sha256": "a899470f05f86029630a13a2696491cc708ca7b56a6e822a69ff6e954d6ff8cf",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/linear.md",
+      "source_mode": "100644",
+      "source_blob": "899c643c078f322afe6ae0ef78a007f8ffd356c1",
+      "target": "resources/skills/why/references/sources/linear.md",
+      "target_sha256": "01304e7f1badfcfb78babbb0edcadeb3cc8dd3f713793420cdff24ba190f907c",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/notion.md",
+      "source_mode": "100644",
+      "source_blob": "d16230a4105fd1dacf870da0950a38faeb9381e6",
+      "target": "resources/skills/why/references/sources/notion.md",
+      "target_sha256": "3bcfa695c49dfad4ac036d5d7181c12585f55ac04f1936198d16ab75a2788997",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/sentry.md",
+      "source_mode": "100644",
+      "source_blob": "2b7cf6f3098ee868547dc4e69efacfe9c255246b",
+      "target": "resources/skills/why/references/sources/sentry.md",
+      "target_sha256": "6f292bc4fb1548e956f95e1900b9481abf5134254419f1cd9edec95428c82d73",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/sources/slack.md",
+      "source_mode": "100644",
+      "source_blob": "863a527d60e4e055e680834ef8098ea04273a1ae",
+      "target": "resources/skills/why/references/sources/slack.md",
+      "target_sha256": "58fee61d024b3700b407e7acbed367944720ff05adfddb6954d36c88368f3ba7",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "pstack/skills/why/references/synthesizer-prompt.md",
+      "source_mode": "100644",
+      "source_blob": "9707dfcc2fc57ea126484a433c5cd9ee4d400ef3",
+      "target": "resources/skills/why/references/synthesizer-prompt.md",
+      "target_sha256": "733a3e9cf897b1aca56aaddeae01a3832e4bfed024c2f602db2d1bf807d7a73b",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "cursor-team-kit/LICENSE",
+      "source_mode": "100644",
+      "source_blob": "ca2bba771cd39dbef6acf96b52481133983451f3",
+      "target": "resources/dependencies/LICENSE",
+      "target_sha256": "702f5f331b56aff0e33d8c7826df5202559f894145eb70355c6477b55b5bb8a0",
+      "classification": "asset",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "cursor-team-kit/skills/control-cli/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "69289ac517e8a28380c8eca5c6692e8a601fa62c",
+      "target": "resources/dependencies/control-cli.md",
+      "target_sha256": "13ac93e595bbda2000849bdb815d5f2ca03f7c2ca63788c8335f9212b9b422a2",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "cursor-team-kit/skills/control-ui/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "68484fd5418cc893a6bf40e0db45b3001dcf5947",
+      "target": "resources/dependencies/control-ui.md",
+      "target_sha256": "410cae25bdb1e5d2323b126abc5047b0213be7fdb0195710213fa8de8a751871",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    },
+    {
+      "source": "cursor-team-kit/skills/deslop/SKILL.md",
+      "source_mode": "100644",
+      "source_blob": "1b3827c7f991182149a7abda696af43ff8f17a12",
+      "target": "resources/dependencies/deslop.md",
+      "target_sha256": "2f7b7def74af7ed11f5b44b4d32f0f91fca8c5d1f92bf2171e8d12fd33a0f810",
+      "classification": "reference",
+      "transforms": [],
+      "entrypoint": null
+    }
+  ],
+  "generated": [
+    {
+      "target": "commands/generated/speckit.pstack.architect.md",
+      "sha256": "9d5ff651c853288895c9b03757dacd842190929bc7d8340828af4fea0933ee23",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/architect/SKILL.md",
+      "command": "speckit.pstack.architect"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.arena.md",
+      "sha256": "23bf5fe7b2545db227e08116dc9e67c31e498968f672ecea8476e81993e528e1",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/arena/SKILL.md",
+      "command": "speckit.pstack.arena"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.automate-me.md",
+      "sha256": "75c84c3b37fcfda5fead382203c9067b3f65a06602b84cc8b40f207bd7bfd215",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/automate-me/SKILL.md",
+      "command": "speckit.pstack.automate-me"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.blast-radius.md",
+      "sha256": "4a0661fd04ee6b46e73fca5086939de7bf9fc9649494c5a38df26bdc2170d4f0",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/blast-radius/SKILL.md",
+      "command": "speckit.pstack.blast-radius"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.bro.md",
+      "sha256": "c3ba6859cafda80e57ef634b8041c5aadb5029d8c8856eee804071a6e802917c",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/bro/SKILL.md",
+      "command": "speckit.pstack.bro"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.create-verification-skill.md",
+      "sha256": "c6c2b5284091991b293a085de845fd7cf79beaa970447986f0cedbd9a7e2def3",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/create-verification-skill/SKILL.md",
+      "command": "speckit.pstack.create-verification-skill"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.figure-it-out.md",
+      "sha256": "13560dfa6a2db2fb028006704b62ededa7e7766f690ec45bf8d6e3cc6618e586",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/figure-it-out/SKILL.md",
+      "command": "speckit.pstack.figure-it-out"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.how.md",
+      "sha256": "339de4a55507d69fdc3620248465121ba5bdda88dba79a23b8365414ab6f7360",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/how/SKILL.md",
+      "command": "speckit.pstack.how"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.interrogate.md",
+      "sha256": "82833851d84db1e14b3b434c934847028d275adf87a0b6887166134b9c8d0ca7",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/interrogate/SKILL.md",
+      "command": "speckit.pstack.interrogate"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.maintain-verification-skill.md",
+      "sha256": "1cc88404c8664acf75687862011fcf34b872c62490ef1fdec3b36c98d53a1d16",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/maintain-verification-skill/SKILL.md",
+      "command": "speckit.pstack.maintain-verification-skill"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.make-bot-ui.md",
+      "sha256": "902e2073e8b55341f9b11c21bf3c877237ef96971702abc108b0870c9118c305",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/make-bot-ui/SKILL.md",
+      "command": "speckit.pstack.make-bot-ui"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.no-comments.md",
+      "sha256": "df8f750853667ec06efacf762a281ea09d31ae64cf9c9d02ce20112dc4b45633",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/no-comments/SKILL.md",
+      "command": "speckit.pstack.no-comments"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.poteto-mode.md",
+      "sha256": "f678c9279ace965c403c74c5288ddd48dee05894af1ffb048db1cc83881ed7cc",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/poteto-mode/SKILL.md",
+      "command": "speckit.pstack.poteto-mode"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-attack-the-premise.md",
+      "sha256": "03a16498221a1e10dc3ff2daf7cabc9128c2294006a9d10e709866448898885d",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-attack-the-premise/SKILL.md",
+      "command": "speckit.pstack.principle-attack-the-premise"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-boundary-discipline.md",
+      "sha256": "d3f6b05a36c2df6659ca560a94a019f9527de2d7866ad59411220b4332afca3f",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-boundary-discipline/SKILL.md",
+      "command": "speckit.pstack.principle-boundary-discipline"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-build-the-lever.md",
+      "sha256": "49f6d424989eba809338332c429dfb78d67b99948f3337fc41fc63f293c17de8",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-build-the-lever/SKILL.md",
+      "command": "speckit.pstack.principle-build-the-lever"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-encode-lessons-in-structure.md",
+      "sha256": "8b7c370c26eea2adf3e4ba87f2a62ac237ccc7cda61cd75b7cc9235dd3403fa8",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-encode-lessons-in-structure/SKILL.md",
+      "command": "speckit.pstack.principle-encode-lessons-in-structure"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-exhaust-the-design-space.md",
+      "sha256": "c9969aae108d811d2725a4aa8815c4c7f4aba5d583f4254ec6207ff1c5e02399",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-exhaust-the-design-space/SKILL.md",
+      "command": "speckit.pstack.principle-exhaust-the-design-space"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-experience-first.md",
+      "sha256": "52e916f9bd84efaf99851951bfb79c6ce50ba4ea567591ff93f008f7c931fb71",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-experience-first/SKILL.md",
+      "command": "speckit.pstack.principle-experience-first"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-fix-root-causes.md",
+      "sha256": "d482b5d1472d2afc11ce87bb542d118457977188aa093cc16454852a7f1a67c3",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-fix-root-causes/SKILL.md",
+      "command": "speckit.pstack.principle-fix-root-causes"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-foundational-thinking.md",
+      "sha256": "a80d8a8428fa50f80782003a0e71c8bce551a225ca70a7b73226490ca7b4eac8",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-foundational-thinking/SKILL.md",
+      "command": "speckit.pstack.principle-foundational-thinking"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-guard-the-context-window.md",
+      "sha256": "6bca496bfd5ceda786bd35a22a80d6d1ea85743e6fbe0e1b6d9ab2d795553ebe",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-guard-the-context-window/SKILL.md",
+      "command": "speckit.pstack.principle-guard-the-context-window"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-laziness-protocol.md",
+      "sha256": "5fae9e344cdbf55789bce5b1aea5fb6a55239a93248a24a46aaf65a7009fc9ae",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-laziness-protocol/SKILL.md",
+      "command": "speckit.pstack.principle-laziness-protocol"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-make-operations-idempotent.md",
+      "sha256": "3ba60f1b69ceed756163f749a527d18d8bdff392658e408a0e17a8e55fba5331",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-make-operations-idempotent/SKILL.md",
+      "command": "speckit.pstack.principle-make-operations-idempotent"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-migrate-callers-then-delete-legacy-apis.md",
+      "sha256": "0d3c4a3740ca77c76ca3735d6d5e2df0f2ecd5e354e92e88477947ca46f1c3ae",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md",
+      "command": "speckit.pstack.principle-migrate-callers-then-delete-legacy-apis"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-minimize-reader-load.md",
+      "sha256": "25f188086b5802b6f96bcac0f31be831fd57fbcf0ce7ccdf3a8849a0e3d4378f",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-minimize-reader-load/SKILL.md",
+      "command": "speckit.pstack.principle-minimize-reader-load"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-model-the-domain.md",
+      "sha256": "55d5a0d1e4e4ab797aacc5914d48bfc28544d8d02101b212ed3110ce17a13392",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-model-the-domain/SKILL.md",
+      "command": "speckit.pstack.principle-model-the-domain"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-never-block-on-the-human.md",
+      "sha256": "e01412d1b82a1a5b93bf2216c4103a5f0a77195b51acdef4a4689998863f7a17",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-never-block-on-the-human/SKILL.md",
+      "command": "speckit.pstack.principle-never-block-on-the-human"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-outcome-oriented-execution.md",
+      "sha256": "dd72252ca6341bcc4e03d9657efe60da7a8869dfb43bbbc9b49c9f1df2a4c75b",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-outcome-oriented-execution/SKILL.md",
+      "command": "speckit.pstack.principle-outcome-oriented-execution"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-prove-it-works.md",
+      "sha256": "2104b00b1b5be470bd22391c4fb43f5c2d1ffa72c6177599d2854a5bf79c8032",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-prove-it-works/SKILL.md",
+      "command": "speckit.pstack.principle-prove-it-works"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-redesign-from-first-principles.md",
+      "sha256": "ef6a952723afc142c761aec7c9f80a4b7fb272e2972f74b5ac4c4910ff38da7b",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-redesign-from-first-principles/SKILL.md",
+      "command": "speckit.pstack.principle-redesign-from-first-principles"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-separate-before-serializing-shared-state.md",
+      "sha256": "39d7817d5dfcbeb6ac5d27311a31371f0d50ddbc7a9f612830dba7289f189f34",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-separate-before-serializing-shared-state/SKILL.md",
+      "command": "speckit.pstack.principle-separate-before-serializing-shared-state"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-sequence-verifiable-units.md",
+      "sha256": "4dccfbc921b42535cb4601d82ecc21741fb6640d7ec3dcf982ac2e384a2a7f03",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-sequence-verifiable-units/SKILL.md",
+      "command": "speckit.pstack.principle-sequence-verifiable-units"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-subtract-before-you-add.md",
+      "sha256": "80156f1d86071ccce3f7ef7e6c1f24684d8be549f91cd6b18e7ced2be80b9d78",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-subtract-before-you-add/SKILL.md",
+      "command": "speckit.pstack.principle-subtract-before-you-add"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-test-behavior-not-implementation.md",
+      "sha256": "70ed33589265c0d7906434ca49c7d37b6397d99ddb39e48e84f939ce5a10df64",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-test-behavior-not-implementation/SKILL.md",
+      "command": "speckit.pstack.principle-test-behavior-not-implementation"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.principle-type-system-discipline.md",
+      "sha256": "4d99fccb3d943bf4777128b2f9ecc2d653b6c5e5aa2ceab4b229ed22ca2ddcaf",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/principle-type-system-discipline/SKILL.md",
+      "command": "speckit.pstack.principle-type-system-discipline"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.recall.md",
+      "sha256": "7f9b4003134ace55ff98d9b0d2d15790556d133b771b8ba1c8cdd1925accf756",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/recall/SKILL.md",
+      "command": "speckit.pstack.recall"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.reflect.md",
+      "sha256": "2feb49a1823b398ba0e44188ed93e5a8e94006a8057264241203cc30d36a75c4",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/reflect/SKILL.md",
+      "command": "speckit.pstack.reflect"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.setup-pstack.md",
+      "sha256": "370183f7ec17e300a159da099fcfa110c81b8c8fbb3690fbb3d8efc21228e280",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/setup-pstack/SKILL.md",
+      "command": "speckit.pstack.setup-pstack"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.show-me-your-work.md",
+      "sha256": "8c652f3f9389e63dc26e7e580ff9c69b0f87c89ed8c90e7238b657427afff378",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/show-me-your-work/SKILL.md",
+      "command": "speckit.pstack.show-me-your-work"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.swarm.md",
+      "sha256": "07b6afed331c7c6eaeb3c11efbbe948de1839e4f2a27afa923a634733ab4f9ca",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/swarm/SKILL.md",
+      "command": "speckit.pstack.swarm"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.tdd.md",
+      "sha256": "47e161f210b5e911c620532d399928eccee13cae796029b58b7f059494681473",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/tdd/SKILL.md",
+      "command": "speckit.pstack.tdd"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.teach.md",
+      "sha256": "cf8bf566073be05ac05f82c51b2dee679df6f1b010e1965016cd5bfd89460fb6",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/teach/SKILL.md",
+      "command": "speckit.pstack.teach"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.technical-writing.md",
+      "sha256": "bf24f7a539f97c2362e14eafcf064027a4925fde0bd2aa8715d22f95be27ab8c",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/technical-writing/SKILL.md",
+      "command": "speckit.pstack.technical-writing"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.typescript-best-practices.md",
+      "sha256": "3d811a9006b20d36a99f4f9993dc1c9d4fa7afddf8dfcc344c1cf34bd2e51572",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/typescript-best-practices/SKILL.md",
+      "command": "speckit.pstack.typescript-best-practices"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.unslop.md",
+      "sha256": "10fd721ab3ce6c7f48d3aa232e46f0ac284e054beec89db4be0a16774af399ba",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/unslop/SKILL.md",
+      "command": "speckit.pstack.unslop"
+    },
+    {
+      "target": "commands/generated/speckit.pstack.why.md",
+      "sha256": "78e81752016f08946d71d27121ebbb61af3fbd41aabf4760c919f653b5b7b3a3",
+      "generator": "tools/import_upstream.py:adapter",
+      "source": "pstack/skills/why/SKILL.md",
+      "command": "speckit.pstack.why"
+    }
+  ]
+}

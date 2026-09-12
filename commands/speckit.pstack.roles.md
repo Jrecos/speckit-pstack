@@ -1,23 +1,12 @@
 ---
-description: "Resolve pstack dispatch lanes: real pstack plugin roles when present, yaml fallback, else inline"
+description: "Resolve pstack dispatch lanes from the project role map and report what this host can actually dispatch"
 ---
 
 # Pstack Roles
 
-Resolve which worker each dispatch lane uses. The lane table below is the one canonical table for that mapping. The sync steps and the README refer to it and never repeat it. Precedence is per lane, three levels:
+Resolve which worker each dispatch lane uses, from this project, with no machine-global state.
 
-1. pstack present and the lane's role line is configured. Dispatch through that pstack role. The lane's yaml selector is inert while this holds.
-2. Otherwise (pstack absent, or the lane's role line unconfigured). Use the lane's `roles.<lane>` yaml selector when non-empty, dispatched as a subagent on that model by whatever mechanism the harness provides.
-3. Empty or missing. Run inline in this session, no subagent.
-
-## Canonical lane table
-
-| Lane | pstack role | Agent kind | Dispatched by |
-|---|---|---|---|
-| verify | `interrogate reviewers` | readonly | `speckit.pstack.verify` check batches |
-| swarm | `swarm workers` | poteto | `speckit.pstack.implement` `[P]` batches |
-
-Resolve a lane through the pstack agent resolution for its role, `pstack_agent {role, index, kind}` where that device exists. The verify lane is a panel role and requires an index. Use its first entry when the caller does not name one. Where the device does not exist in the session, the session's own pstack role resolution names the agent to use.
+Read the shared contract first: `.specify/extensions/pstack/runtime/host-contract.md`. It owns the 17 role labels, their meanings, the alias rules, and the dispatch paths. This command never repeats them.
 
 ## User Input
 
@@ -25,48 +14,30 @@ Resolve a lane through the pstack agent resolution for its role, `pstack_agent {
 $ARGUMENTS
 ```
 
+## Resolution order (per lane)
+
+1. **The project role map.** `.specify/extensions/pstack/pstack-models-config.yml`, resolved through `python3 .specify/extensions/pstack/runtime/pstack-native.py role-plan --role "<label>"`. This is the source of truth for every lane. The plan's `kind` says how many configured selectors the role holds: `single`, `panel`, or `choose-one`.
+2. **The host's own subagent facility**, when one exists, dispatched with the role plan's legs. A `panel` runs one worker per configured entry, indices 1-based, duplicates preserved, and only the selected leg when you passed `--index`. A `choose-one` role supplies exactly one judge chosen from its configured pool, which you inspect with `config-show` before selecting an index. A `single` role runs one worker. Resolve `--index` for a multi-selector lane only; a repeated single-selector worker's ordinal is not a selector index.
+3. **The Spec Kit workflow path**, when no native subagent facility exists and the capability report's `cli` entry is available: `specify workflow run .specify/extensions/pstack/workflows/dispatch.yml` with the request the helper builds, never a model you supply. An `inherit-parent` leg needs `--parent-model` with the concrete current model; the helper refuses an alias, an absent parent, or a model belonging to another role.
+4. **Inline in this session**, only when neither a native subagent facility nor the workflow path exists. Say so in the run's report; inline work is not independent verification.
+
+An empty role, a selector outside `pool`, or a selector the host rejects is a hard failure to report. There is no cross-family substitution and no silent default.
+
+## Canonical lane table
+
+| Lane | Role | Dispatched by |
+|---|---|---|
+| workspace assembly | `swarm workers` | `__SPECKIT_COMMAND_PSTACK_IMPLEMENT__` parallel batches |
+| independent verification | `interrogate reviewers` | `__SPECKIT_COMMAND_PSTACK_VERIFY__` check batches |
+| implementation by workload | the host contract's workload classifier | per-task work in `__SPECKIT_COMMAND_PSTACK_IMPLEMENT__` |
+| prose and release judgment | `judgment and prose` | documentation, PR and commit text, release notes |
+| hardest design and algorithms | `hardest tasks` | cross-cutting design, concurrency, subtle algorithms |
+
+The remaining roles belong to the routed skills that own them (`how`, `why`, `reflect`, `arena`, `architect`, `interrogate`). The host contract's classifier is the one canonical work-to-role mapping; this table does not replace it.
+
 ## Steps
 
-1. **Detect pstack.** The pstack plugin is present when its rule file exists (`~/.omp/agent/rules/pstack-models.md`) or the session resolves pstack roles. Check existence only. Never read or parse the file's contents. Its format is closed and parser-validated, and the sync path goes through the device instead. Whether each lane's role line is configured comes from the pstack agent resolution in this session (`pstack_agent` for the mapped role), never from the file. When the session cannot resolve a lane's role (no agent, an error, or a role the session does not know), treat that lane as unconfigured and fall through to the next precedence level.
-
-2. **Read the fallback config.** Load `.specify/extensions/pstack/pstack-config.yml`. Read `roles.verify`, `roles.swarm`, and `parallel.max_workers`. `max_workers` must be an integer of at least 1. When it is not, report it as invalid and use 3. When the file is missing, create it with exactly the content below and say so:
-
-   ```yaml
-   # pstack for spec-kit - fallback dispatch config.
-   # Installed to .specify/extensions/pstack/pstack-config.yml (edit there).
-   #
-   # Consulted when a lane's pstack role is unconfigured or pstack is absent.
-   # A non-empty selector can be pushed into the pstack role with
-   # /speckit.pstack.roles sync; that write is machine-global and gated.
-
-   roles:
-     # Fallback model selectors for harnesses with no pstack. Empty = inline.
-     verify: ""
-     swarm: ""
-
-   parallel:
-     max_workers: 3   # concurrent subagents per [P] batch
-   ```
-
-3. **Report the resolved table**, one row per lane plus the parallel row. Source is one of pstack, fallback, inline, with the worker in the last column. Keep the fenced-table shape the current file uses. No pipes inside cells.
-
-```
-| Lane     | Source                       | Worker                     |
-|----------|------------------------------|----------------------------|
-| verify   | pstack or fallback or inline | <pstack role, model, or -> |
-| swarm    | pstack or fallback or inline | <pstack role, model, or -> |
-| parallel | config                       | max_workers=<n>            |
-```
-
-Downstream dispatch in the implement and verify commands resolves through this table, and those commands tell the agent to run this command first when no table is in hand.
-
-## Sync mode
-
-Run with `sync` in `$ARGUMENTS`. `sync` moves non-empty yaml selectors into the mapped pstack roles through the pstack plugin's own writer. It never hand-edits the rule file. Only the two lanes above sync, because only they have dispatch sites.
-
-1. **Detect pstack** as in step 1. Absent: print "Nothing to sync: no pstack role rule exists on this machine. The project yaml is already the config." and stop.
-2. **Collect selectors.** From the fallback config, take `verify` and `swarm` whose selectors are non-empty. None: print "Nothing to sync: every yaml selector is empty." and stop.
-3. **Read the current map** with the `pstack_models` device, action `show`. Never parse the rule file by hand. The device is unavailable: print that reason and stop with nothing written. Tell the user to save this printed map if they want a restore reference. It is the only one this command produces.
-4. **Build the next map.** Keep every role entry and the pool exactly as shown, except the roles mapped to the collected lanes per the canonical table above. The selector replaces the role's entries. Replacing a multi-entry panel role (verify) with one selector shrinks that panel.
-5. **Gate.** Print the full next map, every role line exactly as `save` will receive it, not only the changed lines. Print one explicit line when a panel shrinks, naming the role and the entry count before and after. Print the changed roles as `role: <old> -> <new>`. State that the write is global to this machine, and that `/setup-pstack` re-derives recommendations and does not restore the previous map. The step 3 output is the restore reference. Then end the turn asking the user to reply with the single word `write` to proceed. Only a bare affirmative next user message counts as consent, and `write` is the only word that counts, because `sync` would re-invoke this command. A reply containing arguments or conditions does not count. Re-print the gate and wait again. In a non-interactive session, print the gate and stop with nothing written, saying consent is impossible here.
-6. **Save.** Call the device with action `save`, passing the full role map and the unchanged pool. Report the outcome verbatim. A selector outside the approved pool fails validation before anything is published. Report the error and stop, nothing is half-written.
+1. **Show the current map.** Run `python3 .specify/extensions/pstack/runtime/pstack-native.py config-show` and print each role with its configured selectors and the model each selector resolves to, marking empty roles as needing configuration. The role's `kind` comes from `role-plan`, which the host contract defines. Use the same `config-show` response's `pristine` flag in step 3.
+2. **Check this session.** Run `python3 .specify/extensions/pstack/runtime/pstack-native.py capability-report`, then inspect live tools or supplied harnesses for degraded surfaces. Print the observed status and reason, plus the paths block (`skills_dirs`, `runs_dir`, `instruction_file`). A static host mapping is not proof of live access.
+3. **Set or migrate.** When a role needs a value, the `speckit.pstack.setup-pstack` command owns the write path. Inspect `.specify/extensions/pstack/pstack-config.yml` whenever it exists and its `roles.verify` or `roles.swarm` hold a non-empty value, whether or not the role map already exists: those legacy selectors are the user's earlier choices and they are surfaced before anything is written. When `config-show` reports `pristine` (the map is absent or still the untouched scaffold), show the migration proposal, preserve unrelated metadata, and use the confirmed atomic write. When the map is customized, show a delta for explicit reconciliation instead, and never run migration over it. Re-running `config-migrate` with the values already applied is a byte-preserving no-op.
+4. **Report.** End with the resolved table for this machine, one line per lane naming the role, the selector or `inherit-parent`, and the dispatch path (`native subagent`, `workflow`, or `inline`). Name every lane that will run inline, because that is the run's independence limit.

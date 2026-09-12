@@ -1,0 +1,33 @@
+schema_version: "1.0"
+
+workflow:
+  id: "pstack-dispatch"
+  name: "pstack worker leg"
+  version: "1.0.0"
+  author: "Jrecos"
+  description: >-
+    Runs one pstack worker leg through a validated role and model binding.
+    One PSTACK_DISPATCH_REQUEST value names that binding, its prompt, and its only accepted report.
+
+requires:
+  speckit_version: ">=1.0.0"
+
+steps:
+  - id: preflight
+    type: shell
+    timeout: 60
+    output_format: json
+    run: python3 .specify/extensions/pstack/runtime/pstack-native.py dispatch-preflight
+
+  - id: leg
+    type: prompt
+    integration: "{{ steps.preflight.output.data.integration }}"
+    model: "{{ steps.preflight.output.data.model }}"
+    timeout: 1200
+    prompt: "{{ steps.preflight.output.data.prompt }}"
+
+  - id: report-check
+    type: shell
+    timeout: 60
+    output_format: json
+    run: python3 .specify/extensions/pstack/runtime/pstack-native.py dispatch-report-check

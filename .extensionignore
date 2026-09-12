@@ -1,0 +1,12 @@
+# Installed files are the runtime: commands, resources, runtime helpers, workflows,
+# config templates, LICENSE and README. Development-only artifacts stay out.
+.audit/
+tools/
+.git/
+.gitignore
+node_modules/
+**/node_modules/
+__pycache__/
+*.pyc
+.venv/
+REVIEW-REPORT.txt

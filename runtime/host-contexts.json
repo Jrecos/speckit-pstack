@@ -1,0 +1,94 @@
+{
+  "_source": "Project instruction files come from the installed Spec Kit CLI: agent-context-defaults.json maps each integration key to its instruction file. Skills directories are the discovery paths the host itself searches: for OMP, the globs `.claude/skills/*/SKILL.md` and `.github/skills/*/SKILL.md` are read from the OMP binary's own skill discovery, and its user-level managed store is ~/.omp/agent/managed-skills; for Claude and Codex, the directories are the ones the installed Spec Kit integration registrar writes. A generated project skill is written into exactly one of the listed directories, never duplicated; the fallback for a host that lists none is .specify/pstack/skills/, which nothing discovers automatically. Regenerate this file when the installed Spec Kit version or the host's discovery changes, and never guess a path at runtime.",
+  "capabilities": {
+    "project_context": {
+      "reason": "project bootstrap needs a mapped instruction file in this project"
+    },
+    "browser": {
+      "reason": "local UI verification drives a real browser on this machine"
+    },
+    "terminal": {
+      "reason": "CLI and TUI verification drives a real terminal on this machine"
+    },
+    "forge": {
+      "reason": "PR status and merge come from gh or origin"
+    },
+    "scheduler": {
+      "reason": "a durable wakeup needs a scheduler the host actually provides"
+    },
+    "transcripts": {
+      "reason": "recall, eval, and trail checks read this workspace's session history"
+    },
+    "external_automation": {
+      "reason": "an external webhook automation needs a user-supplied endpoint and credential"
+    }
+  },
+  "agents": {
+    "omp": {
+      "name": "Oh My Pi",
+      "instruction_file": "AGENTS.md",
+      "skills_dirs": [".claude/skills", ".github/skills"],
+      "skills_dir_evidence": "OMP's own skill discovery reads `.claude/skills/*/SKILL.md` and `.github/skills/*/SKILL.md` from the project; its user-level managed store is ~/.omp/agent/managed-skills",
+      "commands_dir": ".omp/commands",
+      "skills_dir_note": "OMP registers extension commands under .omp/commands. A generated project skill goes in exactly one of these project globs, .claude/skills first unless the user names another, or in the user-level managed store; .specify/pstack/skills/ is only the fallback for a host that discovers no project skills at all.",
+      "discovery_check": "start a fresh session and confirm the skill is listed (OMP prints loaded skills on startup; `omp --skills=<glob>` narrows them). Do not report the skill as active before that.",
+      "cli": ["omp"],
+      "capabilities": {
+        "browser": "degraded",
+        "terminal": "degraded",
+        "scheduler": "unavailable",
+        "scheduler_reason": "OMP has no durable scheduler; a long run is a supervised local process that stops with the machine",
+        "transcripts": "degraded",
+        "transcripts_reason": "verify access to this workspace's history through a live host tool or a supplied PSTACK_TRANSCRIPTS_DIR; the helper cannot inspect session tools",
+        "external_automation": "unavailable",
+        "external_automation_reason": "no webhook automation service is wired in by default; supply an endpoint and a server-side credential, or skip that step",
+        "browser_reason": "OMP supports browser tools, but this helper cannot prove one is loaded or usable in the current session",
+        "terminal_reason": "OMP supports shell and PTY tools; inspect the live tools and prove the required interaction"
+      }
+    },
+    "claude": {
+      "name": "Claude Code",
+      "instruction_file": "CLAUDE.md",
+      "skills_dirs": [".claude/skills"],
+      "skills_dir_evidence": "the installed Spec Kit Claude integration registers commands and skills under .claude/skills",
+      "commands_dir": ".claude/skills",
+      "skills_dir_note": "Claude Code discovers project skills at .claude/skills/<name>/SKILL.md. Write a generated skill there and nowhere else; .specify/pstack/skills/ is only the fallback for a host that discovers no project skills.",
+      "discovery_check": "start a fresh session and confirm the skill appears in the skill list before calling it active.",
+      "cli": ["claude"],
+      "capabilities": {
+        "browser": "degraded",
+        "browser_reason": "Claude Code ships no browser driver; drive one through a local harness such as Playwright or CDP, or an MCP browser tool",
+        "terminal": "degraded",
+        "scheduler": "unavailable",
+        "scheduler_reason": "Claude Code has no durable scheduler; a long run is a supervised local process",
+        "transcripts": "degraded",
+        "transcripts_reason": "Claude Code stores session transcripts outside the project; set PSTACK_TRANSCRIPTS_DIR to that directory for recall, eval, and trail checks",
+        "external_automation": "unavailable",
+        "external_automation_reason": "no webhook automation service is wired in by default; supply an endpoint and a server-side credential, or skip that step",
+        "terminal_reason": "Claude Code supports shell tools; inspect the live tools and prove the required interaction"
+      }
+    },
+    "codex": {
+      "name": "Codex CLI",
+      "instruction_file": "AGENTS.md",
+      "skills_dirs": [".agents/skills"],
+      "skills_dir_evidence": "the installed Spec Kit Codex integration registers commands and skills under .agents/skills",
+      "commands_dir": ".agents/skills",
+      "skills_dir_note": "Codex discovers project skills at .agents/skills/<name>/SKILL.md. Write a generated skill there and nowhere else; .specify/pstack/skills/ is only the fallback for a host that discovers no project skills.",
+      "discovery_check": "start a fresh session and confirm the skill appears in the skill list before calling it active.",
+      "cli": ["codex"],
+      "capabilities": {
+        "browser": "degraded",
+        "browser_reason": "Codex ships no browser driver; drive one through a local harness such as Playwright or CDP, or an MCP browser tool",
+        "terminal": "degraded",
+        "scheduler": "unavailable",
+        "scheduler_reason": "Codex has no durable scheduler; a long run is a supervised local process",
+        "transcripts": "degraded",
+        "transcripts_reason": "Codex stores session transcripts outside the project; set PSTACK_TRANSCRIPTS_DIR to that directory for recall, eval, and trail checks",
+        "external_automation": "unavailable",
+        "external_automation_reason": "no webhook automation service is wired in by default; supply an endpoint and a server-side credential, or skip that step",
+        "terminal_reason": "Codex supports shell tools; inspect the live tools and prove the required interaction"
+      }
+    }
+  }
+}
