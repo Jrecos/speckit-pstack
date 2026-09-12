@@ -1,0 +1,17 @@
+# pstack for spec-kit - fallback dispatch config.
+# Copied to .specify/extensions/pstack/pstack-config.yml on install (edit there).
+#
+# Consulted when the pstack plugin is absent (or a lane's pstack role is
+# unconfigured). Non-empty selectors can also be pushed into the pstack rule
+# with `/speckit.pstack.roles sync`; that write is global to the machine and
+# confirmed first.
+
+roles:
+  # Fallback model selectors for agents with no pstack. Empty = inline.
+  tasks:      ""
+  implement:  ""
+  verify:     ""
+  swarm:      ""
+
+parallel:
+  max_workers: 3   # concurrent subagents during implement

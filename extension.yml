@@ -1,0 +1,40 @@
+schema_version: "1.0"
+
+extension:
+  id: pstack
+  name: "Pstack Workflow"
+  version: "0.1.0"
+  description: "Enforces pstack rigor on spec-kit: verifiable-unit tasks, principle-driven implementation, evidence-gated verification, subagent fan-out"
+  author: jreco
+  repository: https://github.com/jreco/speckit-pstack
+  license: MIT
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  commands:
+    - name: speckit.pstack.roles
+      file: commands/speckit.pstack.roles.md
+      description: "Resolve pstack dispatch lanes: plugin roles, yaml fallback, inline; sync via the pstack writer"
+    - name: speckit.pstack.tasks
+      file: commands/speckit.pstack.tasks.md
+      description: "Apply the pstack task contract to tasks.md: verifiable units, data-shape-first, honest parallel markers"
+    - name: speckit.pstack.implement
+      file: commands/speckit.pstack.implement.md
+      description: "Implement tasks.md with pstack rigor: data shape first, subagent fan-out for independent tasks, evidence-gated completion"
+    - name: speckit.pstack.verify
+      file: commands/speckit.pstack.verify.md
+      description: "Re-prove every completed task from live artifacts and uncheck phantom completions"
+
+  config:
+    - name: pstack-config.yml
+      template: pstack-config.template.yml
+      description: "Role-to-model mapping for subagent dispatch"
+      required: false
+
+tags:
+  - "workflow"
+  - "quality"
+  - "verification"
+  - "parallelism"
