@@ -44,6 +44,8 @@ Uninstall needs one step first: `/speckit.pstack.poteto-mode off`. `specify exte
 
 ## What you get
 
+<img src="assets/native-field-kit.png" alt="Vintage field kit with cards for playbooks, principles, and model roles. Spec Kit structure, pstack practice." width="100%"/>
+
 | Entry point | What it is |
 |---|---|
 | 47 `speckit.pstack.*` commands | Every upstream skill, translated: the 23 principle leaves, `poteto-mode`, the routed workflows (`how`, `why`, `arena`, `swarm`, `architect`, `interrogate`, `reflect`), the support skills (`recall`, `tdd`, `unslop`, `no-comments`, `technical-writing`, `blast-radius`, `bro`, `teach`, `figure-it-out`, `automate-me`, `make-bot-ui`, `create-verification-skill`, `maintain-verification-skill`, and the rest) |
@@ -165,6 +167,8 @@ before-phase hooks use the same readiness check and no-op when project mode is
 off. Installing pstack does not make OMP intercept unrelated commands globally.
 
 ## The task contract
+
+<img src="assets/verification-press.png" alt="Vintage proof desk with task, artifact, and evidence sheets. Show the work, keep the proof." width="100%"/>
 
 `/speckit.pstack.tasks` audits and repairs `tasks.md`:
 

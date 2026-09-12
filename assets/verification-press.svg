@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="plateTwoTitle plateTwoDesc">
+  <title id="plateTwoTitle">Show the work. Keep the proof.</title>
+  <desc id="plateTwoDesc">Vintage editorial plate on warm ivory paper. A proof sheet with corner registration marks, a stamped impression and a loupe carries three ticked lines labelled TASK, ARTIFACT and EVIDENCE, with a wooden-handled rubber stamp standing beside it. The serif title reads "Show the work. Keep the proof." above the mono subtitle "Checks re-run against the live artifact."</desc>
+
+  <defs>
+    <linearGradient id="paperGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="440">
+      <stop offset="0" stop-color="#F8F1E4"/>
+      <stop offset="0.55" stop-color="#F3E9D8"/>
+      <stop offset="1" stop-color="#EBDFC9"/>
+    </linearGradient>
+    <radialGradient id="vignetteGrad" gradientUnits="userSpaceOnUse" cx="600" cy="220" r="770">
+      <stop offset="0.5" stop-color="#B49B72" stop-opacity="0"/>
+      <stop offset="1" stop-color="#B49B72" stop-opacity="0.24"/>
+    </radialGradient>
+    <pattern id="fibreTex" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.7" cy="1.6" r="0.5" fill="#3A3227" fill-opacity="0.07"/>
+      <circle cx="5.2" cy="4.7" r="0.42" fill="#3A3227" fill-opacity="0.055"/>
+      <circle cx="3.5" cy="6.3" r="0.36" fill="#3A3227" fill-opacity="0.05"/>
+    </pattern>
+    <pattern id="fleckTex" width="43" height="37" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="9" r="0.95" fill="#8A7554" fill-opacity="0.13"/>
+      <circle cx="29" cy="27" r="0.8" fill="#8A7554" fill-opacity="0.11"/>
+      <circle cx="18" cy="34" r="0.6" fill="#8A7554" fill-opacity="0.09"/>
+    </pattern>
+  </defs>
+
+  <!-- paper -->
+  <rect x="0" y="0" width="1200" height="440" fill="url(#paperGrad)"/>
+  <rect x="0" y="0" width="1200" height="440" fill="url(#fibreTex)"/>
+  <rect x="0" y="0" width="1200" height="440" fill="url(#fleckTex)"/>
+  <rect x="0" y="0" width="1200" height="440" fill="url(#vignetteGrad)"/>
+
+  <!-- printed frame -->
+  <rect x="28" y="28" width="1144" height="384" fill="none" stroke="#2A2622" stroke-opacity="0.5" stroke-width="1"/>
+  <rect x="34" y="34" width="1132" height="372" fill="none" stroke="#2A2622" stroke-opacity="0.2" stroke-width="0.8"/>
+  <g fill="#C08A45" fill-opacity="0.9">
+    <rect x="25.75" y="25.75" width="4.5" height="4.5"/>
+    <rect x="1169.75" y="25.75" width="4.5" height="4.5"/>
+    <rect x="25.75" y="409.75" width="4.5" height="4.5"/>
+    <rect x="1169.75" y="409.75" width="4.5" height="4.5"/>
+  </g>
+
+  <!-- plate lettering -->
+  <rect x="76" y="86.8" width="36" height="2.4" fill="#C08A45"/>
+  <text x="76" y="116" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace" font-size="11" letter-spacing="3.4" fill="#2A2622" fill-opacity="0.58">PLATE II</text>
+  <g font-family="Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'DejaVu Serif', 'Liberation Serif', 'Times New Roman', serif">
+    <text x="76" y="192" font-size="45" letter-spacing="-0.4" fill="#241F1B">Show the work.</text>
+    <text x="76" y="242" font-size="45" letter-spacing="-0.4" fill="#241F1B">Keep the proof.</text>
+  </g>
+  <rect x="76" y="263.5" width="60" height="1" fill="#2A2622" fill-opacity="0.3"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace" font-size="12.5" letter-spacing="1" fill="#2A2622" fill-opacity="0.64">
+    <text x="76" y="290">Checks re-run against</text>
+    <text x="76" y="311">the live artifact.</text>
+  </g>
+  <rect x="76" y="345.5" width="114" height="1" fill="#2A2622" fill-opacity="0.3"/>
+  <text x="76" y="364" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace" font-size="11" letter-spacing="2.2" fill="#2A2622" fill-opacity="0.6">TASK CONTRACT · VERIFICATION</text>
+
+  <!-- proof sheet -->
+  <g transform="rotate(-2.2 812 216)">
+    <rect x="640" y="100" width="360" height="248" rx="4" fill="#3A3227" fill-opacity="0.06"/>
+    <rect x="636" y="96" width="360" height="248" rx="4" fill="#3A3227" fill-opacity="0.09"/>
+    <rect x="632" y="92" width="360" height="248" rx="4" fill="#FDFAF3" stroke="#2A2622" stroke-opacity="0.55" stroke-width="1.2"/>
+
+    <!-- registration brackets -->
+    <g fill="none" stroke="#2A2622" stroke-opacity="0.3" stroke-width="1">
+      <path d="M648 130 V108 H670"/>
+      <path d="M954 108 H976 V130"/>
+      <path d="M648 302 V324 H670"/>
+      <path d="M954 324 H976 V302"/>
+    </g>
+
+    <!-- masthead -->
+    <rect x="672" y="120" width="8" height="8" fill="#C08A45" fill-opacity="0.85"/>
+    <rect x="688" y="121" width="58" height="7" fill="#2A2622" fill-opacity="0.18"/>
+    <line x1="672" y1="142" x2="958" y2="142" stroke="#2A2622" stroke-opacity="0.34" stroke-width="1.4"/>
+
+    <!-- proofed lines -->
+    <g fill="none" stroke="#2A2622" stroke-opacity="0.12" stroke-width="1">
+      <line x1="672" y1="196" x2="958" y2="196"/>
+      <line x1="672" y1="236" x2="958" y2="236"/>
+      <line x1="672" y1="276" x2="958" y2="276"/>
+    </g>
+    <g fill="none" stroke="#2A2622" stroke-opacity="0.4" stroke-width="1.1">
+      <rect x="672" y="172" width="17" height="17" rx="2"/>
+      <rect x="672" y="212" width="17" height="17" rx="2"/>
+      <rect x="672" y="252" width="17" height="17" rx="2"/>
+    </g>
+    <g fill="none" stroke="#6F7F5E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M675.5 180.5 l4 4.5 l8.5 -10"/>
+      <path d="M675.5 220.5 l4 4.5 l8.5 -10"/>
+      <path d="M675.5 260.5 l4 4.5 l8.5 -10"/>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace" font-size="12" letter-spacing="1.1" fill="#2A2622" fill-opacity="0.88">
+      <text x="702" y="186">TASK</text>
+      <text x="702" y="226">ARTIFACT</text>
+      <text x="702" y="266">EVIDENCE</text>
+    </g>
+
+    <!-- stamped impression -->
+    <g transform="rotate(8 900 308)">
+      <g fill="none" stroke="#A9691F">
+        <rect x="852" y="288" width="96" height="40" rx="5" stroke-opacity="0.7" stroke-width="1.6"/>
+        <rect x="857" y="293" width="86" height="30" rx="3" stroke-opacity="0.45" stroke-width="1"/>
+      </g>
+      <path d="M877 299 L878.53 304.30 L883.36 301.64 L880.70 306.47 L886 308 L880.70 309.53 L883.36 314.36 L878.53 311.70 L877 317 L875.47 311.70 L870.64 314.36 L873.30 309.53 L868 308 L873.30 306.47 L870.64 301.64 L875.47 304.30 Z" fill="none" stroke="#A9691F" stroke-opacity="0.62" stroke-width="1.1" stroke-linejoin="round"/>
+      <rect x="893" y="302" width="48" height="4" fill="#A9691F" fill-opacity="0.45"/>
+      <rect x="893" y="312" width="32" height="4" fill="#A9691F" fill-opacity="0.32"/>
+    </g>
+
+    <!-- loupe -->
+    <circle cx="690" cy="304" r="24" fill="#B3A6D4" fill-opacity="0.24"/>
+    <path d="M708.4 319.4 L728 336" stroke="#3A3630" stroke-width="13" stroke-linecap="round"/>
+    <path d="M712 321.5 L724 331" stroke="#6E675C" stroke-opacity="0.45" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="690" cy="304" r="24" fill="none" stroke="#2A2622" stroke-opacity="0.75" stroke-width="4"/>
+    <circle cx="690" cy="304" r="21.4" fill="none" stroke="#2A2622" stroke-opacity="0.14" stroke-width="1"/>
+    <path d="M673.1 297.8 A18 18 0 0 1 683.8 287.1" fill="none" stroke="#FBF6EC" stroke-opacity="0.5" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- rubber stamp, standing -->
+  <rect x="1036" y="306" width="76" height="15" rx="4" fill="#3A3227" fill-opacity="0.1"/>
+  <rect x="1042" y="312" width="66" height="9" rx="3" fill="#3A3227" fill-opacity="0.06"/>
+  <rect x="1032" y="286" width="72" height="20" rx="3" fill="#3A3630"/>
+  <rect x="1032" y="286" width="72" height="4" fill="#4E473E"/>
+  <rect x="1040" y="262" width="56" height="24" rx="2" fill="#ADA396"/>
+  <g stroke="#2A2622" stroke-opacity="0.18" stroke-width="1">
+    <line x1="1040" y1="268" x2="1096" y2="268"/>
+    <line x1="1040" y1="280" x2="1096" y2="280"/>
+  </g>
+  <path d="M1053 262 V244 C1053 236, 1031 226, 1031 204 C1031 184, 1047 174, 1068 174 C1089 174, 1105 184, 1105 204 C1105 226, 1083 236, 1083 244 V262 Z" fill="#C08A45"/>
+  <path d="M1068 174 C1089 174, 1105 184, 1105 204 C1105 226, 1083 236, 1083 244 V262 H1068 Z" fill="#A87340" fill-opacity="0.35"/>
+  <g fill="none" stroke="#2A2622" stroke-opacity="0.16" stroke-width="1.2">
+    <path d="M1036 202 Q1068 214 1100 202"/>
+    <path d="M1041 222 Q1068 233 1095 222"/>
+  </g>
+  <path d="M1044 190 C1036 198, 1034 208, 1036 216" fill="none" stroke="#FBF6EC" stroke-opacity="0.35" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M1053 262 V244 C1053 236, 1031 226, 1031 204 C1031 184, 1047 174, 1068 174 C1089 174, 1105 184, 1105 204 C1105 226, 1083 236, 1083 244 V262 Z" fill="none" stroke="#2A2622" stroke-opacity="0.55" stroke-width="1.1"/>
+</svg>
