@@ -4,7 +4,7 @@ description: "Apply the pstack task contract: rewrite tasks.md so every task is 
 
 # Pstack Tasks Contract
 
-Audit and repair the current feature's `tasks.md` against the pstack contract. This command runs after task generation (manually, or as an `after_tasks` hook if the user opts in) and before any implementation. It does not design the feature; it makes the task list executable under rigor.
+Audit and repair the current feature's `tasks.md` against the pstack contract. This command runs after task generation and before any implementation. It does not design the feature; it makes the task list executable under rigor.
 
 ## User Input
 
@@ -25,7 +25,7 @@ $ARGUMENTS
 
 **R3 Data shape first.** Tasks that introduce a type, schema, table, interface, or config shape come before tasks that consume that shape, and each consuming task names the shape it consumes. If implementation order would force consumers to exist before producers, re-order.
 
-**R4 Honest parallel markers.** A task gets `[P]` only when its acceptance check can pass while every other `[P]` task in the same phase also runs: no shared file writes, no shared migration, no ordering assumption. Stolen `[P]` markers are the direct cause of merge garbage in fan-out runs; when in doubt, remove the marker.
+**R4 Honest parallel markers.** A task gets `[P]` only when its acceptance check can pass while every other `[P]` task in the same phase also runs. The marker is earned with data, not assertion: the task lists every file it will write on a `**Writes:**` line, and no two `[P]` tasks in the same phase list the same file. A shared file, a shared migration, or an ordering assumption means no marker. When in doubt, remove the marker.
 
 **R5 No silent scope.** A task that imports a library, adds a dependency, or changes the public surface of an existing module names that explicitly in its own text. If it cannot, split the dependency decision into its own task.
 
@@ -35,9 +35,11 @@ $ARGUMENTS
 
 2. **Repair.** Rewrite tasks.md in place to satisfy the contract:
    - Split or merge tasks (R1), preserving the original ids where a task is unchanged.
+   - When a task splits, its parts take suffix ids (T012 becomes T012a and T012b) so evidence stays addressable; unchanged tasks keep their ids.
    - Add or sharpen `**Check:**` lines (R2) deriving the proof from the task's own text plus plan.md; never invent a check the plan does not support.
    - Re-order so shape producers precede consumers (R3).
    - Strip or add `[P]` markers per R4.
+   - Add or complete `**Writes:**` lines on every `[P]` task and remove the marker where the file set is not known.
    - Surface dependency/surface changes as explicit tasks (R5).
    - Keep the file's existing section structure and checkbox format intact; change as few lines as each fix requires.
 
