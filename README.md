@@ -210,8 +210,10 @@ Generated project skills (verification skills, a personal mode) are written into
 - `python3` on a POSIX host for the runtime helper. Its compare-and-swap writes
   require `fcntl.flock` and `O_NOFOLLOW`. Linux, macOS, and WSL qualify; native
   Windows does not.
-- `node` for `check-plan.mjs`, `bun` for `orch` and `watch-pr`, and a POSIX shell
-  for shell helpers.
+- `node` for `check-plan.mjs`, `bun` for `orch` and `watch-pr`, `ripgrep`
+  (`rg`) and `jq` for `worktree-audit.sh`, and a POSIX shell for shell helpers.
+  A missing `rg` makes the audit report `review-no-transcripts` instead of
+  guessing; a missing `jq` leaves the PR column `-`.
 - `gh` or `origin` for forge work.
 - No scheduler or cloud runner ships with pstack. A supplied scheduler or bot
   runner may drive Benny only when it provides documented inspect, create,
@@ -221,6 +223,11 @@ Generated project skills (verification skills, a personal mode) are written into
   user supplied. Missing external capabilities stop that step.
 
 ## Proof
+
+Parity is defined against one pinned upstream revision, not a branch head:
+`cursor/plugins@889ec4b68fa5aab0e867dad71ec3fdf386ae48f3` (recorded in
+`source-manifest.json` and enforced by the checker). To re-verify, check out
+that commit first; the checker fails when the checkout does not contain it.
 
 The extension is generated, and both tools are re-runnable:
 
