@@ -1,6 +1,7 @@
 # Installed files are the runtime: commands, resources, runtime helpers, workflows,
 # config templates, LICENSE and README. Development-only artifacts stay out.
 .audit/
+.github/
 tools/
 .git/
 .gitignore
