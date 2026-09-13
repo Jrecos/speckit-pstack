@@ -49,7 +49,7 @@ jobs:
             candidate=$!
             sleep 1
             if kill -0 "$candidate" 2>/dev/null && curl -fsS "http://127.0.0.1:$port/" >/dev/null 2>&1; then server=$candidate; break; fi
-            kill "$candidate" 2>/dev/null
+            kill "$candidate" 2>/dev/null || true
           done
           test -n "$server" || { echo "no free localhost port for the archive server"; exit 1; }
           trap 'kill $server 2>/dev/null' EXIT
