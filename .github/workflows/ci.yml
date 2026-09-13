@@ -51,7 +51,9 @@ jobs:
       - uses: astral-sh/setup-uv@v10.1.0
 
       - name: Install the spec-kit CLI
-        run: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+        run: |
+          # spec-kit v1.0.4, the release this port is verified against.
+          uv tool install specify-cli --from "git+https://github.com/github/spec-kit.git@cb610277fdea781fcfa83d20522c2db37c94068d"
 
       - name: Scaffold a project and install the extension
         run: |

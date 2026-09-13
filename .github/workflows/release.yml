@@ -39,7 +39,8 @@ jobs:
 
       - name: Install the archive the way the README documents
         run: |
-          uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+          # spec-kit v1.0.4, the release this port is verified against.
+          uv tool install specify-cli --from "git+https://github.com/github/spec-kit.git@cb610277fdea781fcfa83d20522c2db37c94068d"
           mkdir "$RUNNER_TEMP/project"
           cd "$RUNNER_TEMP/project"
           specify init --here --force --non-interactive --integration omp --ignore-agent-tools
@@ -48,7 +49,7 @@ jobs:
             python3 -m http.server "$port" --bind 127.0.0.1 --directory "$RUNNER_TEMP/artifacts" >/dev/null 2>&1 &
             candidate=$!
             sleep 1
-            if kill -0 "$candidate" 2>/dev/null && curl -fsS "http://127.0.0.1:$port/" >/dev/null 2>&1; then server=$candidate; break; fi
+            if kill -0 "$candidate" 2>/dev/null && curl -fsS -o /dev/null "http://127.0.0.1:$port/speckit-pstack-$PSTACK_VERSION.zip"; then server=$candidate; break; fi
             kill "$candidate" 2>/dev/null || true
           done
           test -n "$server" || { echo "no free localhost port for the archive server"; exit 1; }
