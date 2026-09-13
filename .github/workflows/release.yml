@@ -36,6 +36,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/artifacts"
           git archive --format=zip --prefix="speckit-pstack-$PSTACK_VERSION/" -o "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" HEAD
+          cp "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" "$RUNNER_TEMP/artifacts/speckit-pstack.zip"
 
       - name: Install the archive the way the README documents
         run: |
@@ -62,4 +63,19 @@ jobs:
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" --title "speckit-pstack $PSTACK_VERSION" --generate-notes
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" \
+            "$RUNNER_TEMP/artifacts/speckit-pstack.zip" \
+            --title "speckit-pstack $PSTACK_VERSION" --generate-notes
+
+      - name: Check the documented install URL
+        run: |
+          url="https://github.com/$GITHUB_REPOSITORY/releases/latest/download/speckit-pstack.zip"
+          for attempt in 1 2 3 4 5; do
+            if curl -fsSL -o /dev/null "$url"; then echo "$url serves the published archive"; exit 0; fi
+            echo "attempt $attempt: not serving yet"
+            sleep 15
+          done
+          echo "$url did not serve the published archive"
+          exit 1
