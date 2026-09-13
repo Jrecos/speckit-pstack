@@ -23,6 +23,12 @@ The extension includes Poteto mode, playbooks, and principles as native Spec Kit
 Install the latest release:
 
 ```bash
+specify extension add pstack --from https://github.com/Jrecos/speckit-pstack/releases/latest/download/speckit-pstack.zip
+```
+
+That URL always serves the newest release. To pin one, use its tag:
+
+```bash
 specify extension add pstack --from https://github.com/Jrecos/speckit-pstack/releases/download/v0.2.0/speckit-pstack-0.2.0.zip
 ```
 
