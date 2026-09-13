@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    name: Publish the release
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v10.1.0
+
+      - name: Match the tag to the manifest version
+        run: |
+          python3 -m pip install --quiet pyyaml
+          version="$(python3 -c 'import yaml; print(yaml.safe_load(open("extension.yml"))["extension"]["version"])')"
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME does not match manifest version v$version"; exit 1; }
+          echo "PSTACK_VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Build the release archive
+        run: |
+          mkdir -p "$RUNNER_TEMP/artifacts"
+          git archive --format=zip --prefix="speckit-pstack-$PSTACK_VERSION/" -o "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" HEAD
+
+      - name: Install the archive the way the README documents
+        run: |
+          uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+          mkdir "$RUNNER_TEMP/project"
+          cd "$RUNNER_TEMP/project"
+          specify init --here --force --non-interactive --integration omp --ignore-agent-tools
+          server=""
+          for port in 8765 8766 8767 8876; do
+            python3 -m http.server "$port" --bind 127.0.0.1 --directory "$RUNNER_TEMP/artifacts" >/dev/null 2>&1 &
+            candidate=$!
+            sleep 1
+            if kill -0 "$candidate" 2>/dev/null && curl -fsS "http://127.0.0.1:$port/" >/dev/null 2>&1; then server=$candidate; break; fi
+            kill "$candidate" 2>/dev/null || true
+          done
+          test -n "$server" || { echo "no free localhost port for the archive server"; exit 1; }
+          trap 'kill $server 2>/dev/null' EXIT
+          yes | specify extension add pstack --from "http://127.0.0.1:$port/speckit-pstack-$PSTACK_VERSION.zip"
+          test -f .specify/extensions/pstack/extension.yml || { echo "archive install left no extension"; exit 1; }
+          test ! -e .specify/extensions/pstack/tools || { echo "archive shipped development tools"; exit 1; }
+          test ! -e .specify/extensions/pstack/.github || { echo "archive shipped CI workflows"; exit 1; }
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "$RUNNER_TEMP/artifacts/speckit-pstack-$PSTACK_VERSION.zip" --title "speckit-pstack $PSTACK_VERSION" --generate-notes

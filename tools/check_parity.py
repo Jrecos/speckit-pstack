@@ -102,6 +102,8 @@ HAND_WRITTEN_FILES = {
     "workflows/dispatch.yml",
     "resources/dependencies/create-skill.md",
     "assets/banner.png",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
     "assets/native-field-kit.svg",
     "assets/verification-press.svg",
     "assets/native-field-kit.png",

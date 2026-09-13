@@ -5,6 +5,8 @@
 **full pstack for [spec-kit](https://github.com/github/spec-kit)**
 
 [![spec-kit](https://img.shields.io/badge/spec--kit-%3E%3D1.0.0-blue)](https://github.com/github/spec-kit)
+[![CI](https://github.com/Jrecos/speckit-pstack/actions/workflows/ci.yml/badge.svg)](https://github.com/Jrecos/speckit-pstack/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/Jrecos/speckit-pstack)](https://github.com/Jrecos/speckit-pstack/releases)
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![extension](https://img.shields.io/badge/type-spec--kit%20extension-8250df)](https://github.com/github/spec-kit/blob/main/extensions/EXTENSION-DEVELOPMENT-GUIDE.md)
 
@@ -12,13 +14,21 @@
 
 ---
 
-Spec Kit decides what to build. This extension supplies pstack's task contract, model routing, Poteto mode, playbooks, and principles as ordinary Spec Kit commands. The runtime validates configuration, paths, and worker reports; agents apply the task and review procedures.
+Bring [pstack](https://github.com/cursor/plugins/tree/main/pstack)'s development practices to [Spec Kit](https://github.com/github/spec-kit). Configure models for different roles, turn generated tasks into verifiable work, and check the results before calling them done.
 
-Version `0.2.0` is the first release of the full port. `0.1.0` carried only the task contract: four commands, no mode, no playbooks, no model routing.
+The extension includes Poteto mode, playbooks, and principles as native Spec Kit commands. No separate pstack plugin is required.
 
 ## Install
 
-From a local checkout, which is the supported path until a release archive exists:
+Install the latest release:
+
+```bash
+specify extension add pstack --from https://github.com/Jrecos/speckit-pstack/releases/download/v0.2.0/speckit-pstack-0.2.0.zip
+```
+
+The installer shows the external source and asks you to confirm before it continues.
+
+For development, install from a local checkout:
 
 ```bash
 specify extension add --dev /path/to/speckit-pstack
@@ -30,8 +40,6 @@ Or from a directory copy:
 specify extension add . --force
 ```
 
-There is no `v0.2.0` tag archive, so the URL form (`specify extension add pstack --from https://github.com/Jrecos/speckit-pstack/archive/refs/tags/v0.2.0.zip`) is not advertised until that tag exists.
-
 Prepare a project:
 
 ```bash
@@ -41,6 +49,34 @@ specify extension list                 # pstack should be listed and enabled
 ```
 
 Uninstall needs one step first: `/speckit.pstack.poteto-mode off`. `specify extension remove pstack` deletes the extension directory and cannot edit your instruction file, so a leftover mode block would point at a missing extension. The block detects that and says so instead of pretending the mode loaded.
+
+## A normal feature workflow
+
+After project setup, follow this path for each feature:
+
+```text
+/speckit.specify
+    ↓ Describe the feature and its acceptance criteria
+/speckit.plan
+    ↓ Choose the technical approach
+/speckit.tasks
+    ↓ Generate tasks.md
+/speckit.pstack.tasks
+    ↓ Add explicit checks, file ownership, and safe parallel groups
+/speckit.analyze
+    ↓ Check consistency across the spec, plan, and tasks
+/speckit.pstack.implement
+    ↓ Execute the tasks and collect evidence
+/speckit.pstack.verify
+    ↓ Re-run the checks against the actual results
+Review → PR → merge
+```
+
+For example, start with `/speckit.specify Add CSV export to the activity page, respecting the current filters`, then follow the commands above. Resolve any findings from `analyze` before implementation and any failed checks from `verify` before merging.
+
+If requirements are unclear, run `/speckit.clarify` between `specify` and `plan`. For a new project, establish its rules with `/speckit.constitution` before starting the feature.
+
+**Core Spec Kit creates the task list; pstack makes it verifiable and executes it.** Run `/speckit.pstack.tasks` after `/speckit.tasks`, not instead of it. Use `/speckit.pstack.implement` instead of the core `/speckit.implement` in this workflow. Review, PR creation, and merge remain separate steps; verification does not publish your changes.
 
 ## What you get
 
@@ -226,14 +262,11 @@ Generated project skills (verification skills, a personal mode) are written into
 - Webhook, Slack, and tracker actions need endpoints, credentials, and tools the
   user supplied. Missing external capabilities stop that step.
 
-## Proof
+## Development
 
-Parity is defined against one pinned upstream revision, not a branch head:
-`cursor/plugins@889ec4b68fa5aab0e867dad71ec3fdf386ae48f3` (recorded in
-`source-manifest.json` and enforced by the checker). To re-verify, check out
-that commit first; the checker fails when the checkout does not contain it.
+The packaged skills come from [cursor/plugins](https://github.com/cursor/plugins). Source provenance and regeneration details are recorded in [source-manifest.json](source-manifest.json).
 
-The extension is generated, and both tools are re-runnable:
+To regenerate resources or check a contribution, use an upstream checkout containing the revision recorded in that manifest:
 
 ```bash
 python3 tools/import_upstream.py --upstream /path/to/cursor-plugins   # regenerate resources, adapters, manifest
@@ -241,9 +274,15 @@ python3 tools/check_parity.py --upstream /path/to/cursor-plugins      # verify t
 python3 -m unittest discover -s tools -p 'test_*.py'                  # CLI and script regressions
 ```
 
-`check_parity.py` verifies the pinned blobs against the upstream checkout, every packaged target hash, the 47 adapters and their registration, the 23 playbooks, both agent contracts, the three dormant benny skills, link and script closure, the undefined-command scan, the forbidden host-token scan, the role-label callers, the seven-key dispatch contract and its role kinds, the task writes rule, the command-invocation tokens, the one-location skill contract, the migration no-op, the report contract, and the mode protocol. A mutated resource, a renamed command, a broken link, an unexplained transform, or a translated token left behind fails it.
+The parity checker checks source provenance, packaged resources, command registration, links, and runtime contracts. The regression tests cover the CLI and bundled scripts. Development tools are not included in extension installs.
 
-`tools/` is development-only: `.extensionignore` keeps it, the review notes, and local outputs out of the installed extension, while every runtime resource is packaged.
+### Continuous integration
+
+Every pull request and every push to `main` runs [the CI workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/ci.yml). It fetches the pinned upstream revision, runs the parity checker and the regression suite, then scaffolds a throwaway project with the spec-kit CLI, installs the extension, and exercises the installed runtime.
+
+### Releases
+
+Pushing a `v*` tag publishes a GitHub release through [the release workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/release.yml). The workflow re-runs the full verification, checks that the tag matches the `extension.yml` version, and attaches `speckit-pstack-<version>.zip` for the install command above.
 
 ## Layout
 
@@ -261,4 +300,6 @@ tools/                            importer, parity checker, edit tables, overrid
 
 ## Credits
 
-Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto) (Lauren Tan), MIT licensed, part of the [cursor/plugins](https://github.com/cursor/plugins) collection. The translation covers pstack at commit `889ec4b68fa5aab0e867dad71ec3fdf386ae48f3`, plus the `control-cli`, `control-ui`, and `deslop` references from `cursor-team-kit` in the same repository. See [LICENSE](LICENSE) and `resources/LICENSE`.
+Based on [pstack](https://github.com/cursor/plugins/tree/main/pstack) by [poteto](https://github.com/poteto) (Lauren Tan), part of the [cursor/plugins](https://github.com/cursor/plugins) collection. Also includes references from [cursor-team-kit](https://github.com/cursor/plugins/tree/main/cursor-team-kit).
+
+Upstream work is MIT licensed. See [LICENSE](LICENSE) and the [upstream license](resources/LICENSE).

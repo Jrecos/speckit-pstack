@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Parity and regressions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install the checker dependency
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Fetch the pinned upstream checkout
+        run: |
+          pin="$(python3 -c 'import json; print(json.load(open("source-manifest.json"))["commit"])')"
+          git init "$RUNNER_TEMP/upstream"
+          git -C "$RUNNER_TEMP/upstream" remote add origin https://github.com/cursor/plugins
+          git -C "$RUNNER_TEMP/upstream" fetch --depth 1 origin "$pin"
+          git -C "$RUNNER_TEMP/upstream" checkout --detach FETCH_HEAD
+          echo "PSTACK_UPSTREAM=$RUNNER_TEMP/upstream" >> "$GITHUB_ENV"
+
+      - name: Check source parity
+        run: python3 tools/check_parity.py --upstream "$PSTACK_UPSTREAM"
+
+      - name: Run the regression suite
+        run: python3 -m unittest discover -s tools -p 'test_*.py'
+
+  install:
+    name: Install smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v10.1.0
+
+      - name: Install the spec-kit CLI
+        run: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
+      - name: Scaffold a project and install the extension
+        run: |
+          mkdir "$RUNNER_TEMP/project"
+          cd "$RUNNER_TEMP/project"
+          specify init --here --force --non-interactive --integration omp --ignore-agent-tools
+          specify extension add --dev "$GITHUB_WORKSPACE"
+          specify extension list
+
+      - name: Install the smoke-test dependency
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Assert the installed extension
+        working-directory: ${{ runner.temp }}/project
+        run: |
+          installed=.specify/extensions/pstack
+          test ! -e "$installed/tools" || { echo "development tools must not be installed"; exit 1; }
+          test ! -e "$installed/.audit" || { echo "review notes must not be installed"; exit 1; }
+          test ! -e "$installed/.gitignore" || { echo "development ignores must not be installed"; exit 1; }
+          test ! -e "$installed/.github" || { echo "CI workflows must not be installed"; exit 1; }
+          python3 -c 'import pathlib,yaml; root=pathlib.Path(".specify/extensions/pstack"); commands=yaml.safe_load((root/"extension.yml").read_text())["provides"]["commands"]; missing=[c["file"] for c in commands if not (root/c["file"]).is_file()]; assert not missing, missing; print(f"{len(commands)} declared command files present")'
+          declared="$(python3 -c 'import pathlib,yaml; print(len(yaml.safe_load(pathlib.Path(".specify/extensions/pstack/extension.yml").read_text())["provides"]["commands"]))')"
+          rendered="$(find .omp/commands -name 'speckit.pstack.*.md' | wc -l)"
+          test "$rendered" -eq "$declared" || { echo "rendered $rendered commands, manifest declares $declared"; exit 1; }
+
+      - name: Exercise the installed runtime
+        working-directory: ${{ runner.temp }}/project
+        run: |
+          python3 .specify/extensions/pstack/runtime/pstack-native.py --project-root . --integration omp config-show > config-show.json
+          python3 -c 'import json; data=json.load(open("config-show.json")); assert data["pristine"] is True, data; print("fresh project reports a pristine role map")'
+          python3 .specify/extensions/pstack/runtime/pstack-native.py --project-root . --integration omp paths > paths.json
+          python3 -c 'import json; data=json.load(open("paths.json")); assert data["skills_dirs"], data; print(data["skills_dirs"])'
