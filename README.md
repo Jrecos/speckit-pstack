@@ -278,11 +278,11 @@ The parity checker checks source provenance, packaged resources, command registr
 
 ### Continuous integration
 
-Every pull request and every push to `main` runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It fetches the pinned upstream revision, runs the parity checker and the regression suite, then scaffolds a throwaway project with the spec-kit CLI, installs the extension, and exercises the installed runtime.
+Every pull request and every push to `main` runs [the CI workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/ci.yml). It fetches the pinned upstream revision, runs the parity checker and the regression suite, then scaffolds a throwaway project with the spec-kit CLI, installs the extension, and exercises the installed runtime.
 
 ### Releases
 
-Pushing a `v*` tag publishes a GitHub release through [`.github/workflows/release.yml`](.github/workflows/release.yml). The workflow re-runs the full verification, checks that the tag matches the `extension.yml` version, and attaches `speckit-pstack-<version>.zip` for the install command above.
+Pushing a `v*` tag publishes a GitHub release through [the release workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/release.yml). The workflow re-runs the full verification, checks that the tag matches the `extension.yml` version, and attaches `speckit-pstack-<version>.zip` for the install command above.
 
 ## Layout
 

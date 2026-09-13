@@ -43,13 +43,15 @@ jobs:
           mkdir "$RUNNER_TEMP/project"
           cd "$RUNNER_TEMP/project"
           specify init --here --force --non-interactive --integration omp --ignore-agent-tools
+          server=""
           for port in 8765 8766 8767 8876; do
             python3 -m http.server "$port" --bind 127.0.0.1 --directory "$RUNNER_TEMP/artifacts" >/dev/null 2>&1 &
-            server=$!
+            candidate=$!
             sleep 1
-            if kill -0 "$server" 2>/dev/null && curl -fsS "http://127.0.0.1:$port/" >/dev/null 2>&1; then break; fi
-            kill "$server" 2>/dev/null
+            if kill -0 "$candidate" 2>/dev/null && curl -fsS "http://127.0.0.1:$port/" >/dev/null 2>&1; then server=$candidate; break; fi
+            kill "$candidate" 2>/dev/null
           done
+          test -n "$server" || { echo "no free localhost port for the archive server"; exit 1; }
           trap 'kill $server 2>/dev/null' EXIT
           yes | specify extension add pstack --from "http://127.0.0.1:$port/speckit-pstack-$PSTACK_VERSION.zip"
           test -f .specify/extensions/pstack/extension.yml || { echo "archive install left no extension"; exit 1; }
