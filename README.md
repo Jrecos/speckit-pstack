@@ -288,7 +288,7 @@ Every pull request and every push to `main` runs [the CI workflow](https://githu
 
 ### Releases
 
-Pushing a `v*` tag publishes a GitHub release through [the release workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/release.yml). The workflow re-runs the full verification, checks that the tag matches the `extension.yml` version, and attaches `speckit-pstack-<version>.zip` for the install command above.
+Pushing a `v*` tag publishes a GitHub release through [the release workflow](https://github.com/Jrecos/speckit-pstack/blob/main/.github/workflows/release.yml). The workflow re-runs the full verification, checks that the tag matches the `extension.yml` version, and attaches two copies of the same archive: `speckit-pstack-<version>.zip` for a pinned download, and `speckit-pstack.zip` for the version-free URL the install command above uses.
 
 ## Layout
 
